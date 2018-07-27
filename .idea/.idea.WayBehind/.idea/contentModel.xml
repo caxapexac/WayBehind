@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\caxap\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_WayBehind.-486027187.00" t="ExcludeRecursive" />
+    <e p="D:\A work\Accel_2018\Unity projects\WayBehind" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Libs" t="Include">
+          <e p="ecs-develop" t="Include">
+            <e p="Core" t="Include">
+              <e p="EcsSystems.cs" t="Include" />
+              <e p="EcsWorld.cs" t="Include" />
+            </e>
+            <e p="Utils" t="Include">
+              <e p="EcsComponentMask.cs" t="Include" />
+              <e p="EcsComponentPool.cs" t="Include" />
+              <e p="EcsFilter.cs" t="Include" />
+              <e p="EcsHelpers.cs" t="Include" />
+              <e p="EcsInjections.cs" t="Include" />
+              <e p="EcsMultiThreading.cs" t="Include" />
+              <e p="EcsWorldStats.cs" t="Include" />
+            </e>
+          </e>
+          <e p="ecs-unityintegration-develop" t="Include">
+            <e p="Editor" t="Include">
+              <e p="EcsEntity.cs" t="Include" />
+              <e p="EcsSystems.cs" t="Include" />
+              <e p="EcsWorld.cs" t="Include" />
+              <e p="Inspectors" t="Include">
+                <e p="Quaternion.cs" t="Include" />
+                <e p="Vector3.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Runtime" t="Include">
+              <e p="EditorHelpers.cs" t="Include" />
+              <e p="UnityPrefabComponent.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Leo-Collections" t="Include">
+            <e p="FastList.cs" t="Include" />
+            <e p="FastStack.cs" t="Include" />
+          </e>
+          <e p="Leo-Common" t="Include">
+            <e p="MonoBehaviourBase.cs" t="Include" />
+            <e p="ResourceCache.cs" t="Include" />
+            <e p="ScreenManager.cs" t="Include" />
+            <e p="Service.cs" t="Include" />
+            <e p="StringCache.cs" t="Include" />
+            <e p="UnityExtensions.cs" t="Include" />
+            <e p="Yields.cs" t="Include" />
+          </e>
+          <e p="Leo-Math" t="Include">
+            <e p="Bounds2i.cs" t="Include" />
+            <e p="MathExtensions.cs" t="Include" />
+            <e p="MathFast.cs" t="Include" />
+            <e p="Rng.cs" t="Include" />
+            <e p="RngFast.cs" t="Include" />
+          </e>
+          <e p="Leo-Pooling" t="Include">
+            <e p="PoolContainer.cs" t="Include" />
+            <e p="PoolObject.cs" t="Include" />
+            <e p="RecycleAfterTime.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Plugins" t="Include">
+          <e p="Editor" t="Include">
+            <e p="JetBrains" t="Include">
+              <e p="Unity3DRider.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="ScriptableObjects" t="Include">
+          <e p="SettingsObject.cs" t="Include" />
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Components" t="Include">
+            <e p="EnemyComponent.cs" t="Include" />
+            <e p="HexBackgroundComponent.cs" t="Include" />
+            <e p="HexForegroundComponent.cs" t="Include" />
+            <e p="PlayerComponent.cs" t="Include" />
+            <e p="WorldComponent.cs" t="Include" />
+          </e>
+          <e p="Events" t="Include">
+            <e p="CollisionEvent.cs" t="Include" />
+            <e p="TriggerEvent.cs" t="Include" />
+          </e>
+          <e p="Misc" t="Include">
+            <e p="GameStartup.cs" t="Include" />
+            <e p="HexList4D.cs" t="Include" />
+            <e p="MapGenRandomNeighbours.cs" t="Include" />
+            <e p="Utils.cs" t="Include" />
+          </e>
+          <e p="MonoBehviours" t="Include">
+            <e p="PlayerColliderEvent.cs" t="Include" />
+            <e p="PlayerFeetColliderEvent.cs" t="Include" />
+          </e>
+          <e p="Systems" t="Include">
+            <e p="CameraSystem.cs" t="Include" />
+            <e p="FAISystem.cs" t="Include" />
+            <e p="FMovePlayerSystem.cs" t="Include" />
+            <e p="FWorldGenSystem.cs" t="Include" />
+            <e p="InputKeyboardSystem.cs" t="Include" />
+            <e p="InputStickSystem.cs" t="Include" />
+            <e p="PlayerInitSystem.cs" t="Include" />
+          </e>
+          <e p="Temporary" t="Include">
+            <e p="EXComponent.cs" t="Include" />
+            <e p="EXSystem.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Leopotam.Ecs.csproj" t="IncludeRecursive" />
+      <e p="Leopotam.Ecs.UnityIntegration.csproj" t="IncludeRecursive" />
+      <e p="Leopotam.Ecs.UnityIntegration.Editor.csproj" t="IncludeRecursive" />
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+      <e p="WayBehind.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>
