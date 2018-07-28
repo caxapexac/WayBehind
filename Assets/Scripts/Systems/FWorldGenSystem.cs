@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using Components;
 using Leopotam.Ecs;
 using LeopotamGroup.Collections;
@@ -14,11 +15,13 @@ namespace Systems
 	{
 		Grass,
 		Water,
-		Forest
+		Forest,
+		Boloto
 	}
 
 	public enum ForegroundTypes
 	{
+		Empty,
 		Player,
 		Enemy,
 		Diamond,
@@ -30,12 +33,14 @@ namespace Systems
 	{
 		public float HexSize;
 		public int Fow;
-		public GameObject Player;
-		public Sprite Hexagon;
+		public Sprite Player;
+		public Sprite Enemy;
+		public Sprite Diamond;
 		public Sprite Obstacle;
 		public Sprite Water;
 		public Sprite Grass;
 		public Sprite Boloto;
+		public Sprite Forest;
 
 		private CubeCoords lastCoords;
 		
@@ -54,19 +59,18 @@ namespace Systems
 			_poolForeground = PoolContainer.CreatePool(Utils.ForePrefabPath);
 			_backgroundMap = MapGenRandomNeighbours.GenerateBackground(64);
 			_foregroundMap = MapGenRandomNeighbours.GenerateForeground(_backgroundMap);
-			RenderFull(new CubeCoords(0, 0), Fow + 1);
+			RenderFull(new CubeCoords(0, 0), Fow);
 		}
 
 		public void Run()
 		{
 			CubeCoords playerCoords = HexMath.Pix2Hex(_playerFilter.Components1[0].Transform.localPosition.x,
 				                                      _playerFilter.Components1[0].Transform.localPosition.y, HexSize);
-			if (HexMath.HexDistance(lastCoords.x, playerCoords.x, lastCoords.y, playerCoords.y) > Fow / 2)
+			if (lastCoords.x != playerCoords.x || lastCoords.y != playerCoords.y)
 			{
-				RenderNext(playerCoords, Fow);
-				lastCoords = playerCoords;
-				//UnrenderRing(playerCoords, Fow + 2);
-				//RenderNext(playerCoords, Fow + 1);
+				UnrenderRing(lastCoords, Fow+1);
+			    RenderRing(playerCoords, Fow);
+                lastCoords = playerCoords;
 			}
 		}
 
@@ -74,7 +78,7 @@ namespace Systems
 		{
 			RenderHexBackground(playerCoords);
 			RenderHexForeground(playerCoords);
-			for (int i = 0; i < radius; i++)
+			for (int i = 1; i <= radius; i++)
 			{
 				RenderRing(playerCoords, i);
 			}
@@ -104,79 +108,12 @@ namespace Systems
 				{
 					coords.x += HexMath.Directions[i, 0];
 					coords.y += HexMath.Directions[i, 1];
-					HideHex(coords);
-				}
-			}
-		}
-
-		private void RenderNext(CubeCoords playerCoords, int radius)
-		{
-			CubeCoords coords = new CubeCoords(playerCoords.x, playerCoords.y + radius);
-			CubeCoords difference = new CubeCoords(playerCoords.x - lastCoords.x, playerCoords.y - lastCoords.y);
-			if (difference.x == 0)
-			{
-				for (int i = 0; i < 6; i++)
-				{
-					for (int j = 0; j < radius; j++)
+					if (HexMath.HexDistance(playerCoords.x, playerCoords.y, coords.x, coords.y) >= Fow)
 					{
-						coords.x += HexMath.Directions[i, 0];
-						coords.y += HexMath.Directions[i, 1];
-						if (Mathf.Sign(coords.y) == Mathf.Sign(difference.y) 
-						    || Mathf.Sign(coords.z) == Mathf.Sign(difference.z))
-						{
-							RenderHexBackground(coords);
-							RenderHexForeground(coords);
-						}
-						else
-						{
-							//HideHex(coords);
-						}
+						HideHex(coords);
 					}
 				}
 			}
-			else if (difference.y == 0)
-			{
-				for (int i = 0; i < 6; i++)
-				{
-					for (int j = 0; j < radius; j++)
-					{
-						coords.x += HexMath.Directions[i, 0];
-						coords.y += HexMath.Directions[i, 1];
-					    if (Mathf.Sign(coords.x) == Mathf.Sign(difference.x) 
-					        || Mathf.Sign(coords.z) == Mathf.Sign(difference.z))
-						{
-							RenderHexBackground(coords);
-							RenderHexForeground(coords);
-						}
-					    else
-					    {
-						    //HideHex(coords);
-					    }
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < 6; i++)
-				{
-					for (int j = 0; j < radius; j++)
-					{
-						coords.x += HexMath.Directions[i, 0];
-						coords.y += HexMath.Directions[i, 1];
-						if (Mathf.Sign(coords.x) == Mathf.Sign(difference.x) 
-						    || Mathf.Sign(coords.y) == Mathf.Sign(difference.y))
-						{
-							RenderHexBackground(coords);
-							RenderHexForeground(coords);
-						}
-						else
-						{
-							//HideHex(coords);
-						}
-					}
-				}	
-			}
-			
 		}
 
 		public void RenderHexBackground(CubeCoords coords)
@@ -186,19 +123,26 @@ namespace Systems
 				MapGenRandomNeighbours.GenerateHex(coords, _backgroundMap, _foregroundMap);
 			}
 			HexBackgroundComponent hexComponent = _backgroundMap[coords.x, coords.y];
-			//if (hexComponent.Parent != null) _poolBackground.Recycle(hexComponent.Parent);
+			if (hexComponent.Parent != null) return; //_poolBackground.Recycle(hexComponent.Parent);
 			hexComponent.Parent = _poolBackground.Get();
 			hexComponent.Parent.PoolTransform.localPosition = HexMath.Hex2Pix(coords, HexSize);
 			switch (hexComponent.GroundType)
 			{
 				case BackroundTypes.Grass:
 					hexComponent.Parent.PoolTransform.GetComponent<SpriteRenderer>().sprite = Grass;
+					hexComponent.SpeedDown = 1;
 					break;
 				case BackroundTypes.Water:
 					hexComponent.Parent.PoolTransform.GetComponent<SpriteRenderer>().sprite = Water;
+					hexComponent.SpeedDown = 0.1f;
+					break;
+				case BackroundTypes.Boloto:
+					hexComponent.Parent.PoolTransform.GetComponent<SpriteRenderer>().sprite = Boloto;
+					hexComponent.SpeedDown = 0.02f;
 					break;
 				case BackroundTypes.Forest:
-					//todo
+					hexComponent.Parent.PoolTransform.GetComponent<SpriteRenderer>().sprite = Forest;
+					hexComponent.SpeedDown = 0.5f;
 					break;
 				default:
 					throw new Exception("Null ground type");
@@ -210,32 +154,42 @@ namespace Systems
 		{
 			if (!_foregroundMap.ExistAt(coords) || _foregroundMap[coords.x, coords.y].IsNew) return;
 		    HexForegroundComponent foregroundHexComponent = _foregroundMap[coords.x, coords.y];
-			//if (foregroundHexComponent.Parent != null) _poolForeground.Recycle(foregroundHexComponent.Parent);
+			if (foregroundHexComponent.ObjectType == ForegroundTypes.Empty) return;
+			if (foregroundHexComponent.Parent != null) return; //_poolForeground.Recycle(foregroundHexComponent.Parent);
 			foregroundHexComponent.Parent = _poolForeground.Get();
 			foregroundHexComponent.Parent.PoolTransform.localPosition = HexMath.Hex2Pix(coords, HexSize);
 			switch (foregroundHexComponent.ObjectType)
 			{
+				case ForegroundTypes.Empty:
+					return;
 				case ForegroundTypes.Enemy:
-					//todo
+					foregroundHexComponent.Parent.PoolTransform.GetComponent<SpriteRenderer>().sprite = Enemy;
+					foregroundHexComponent.Parent.PoolTransform.GetComponent<Collider2D>().enabled = true;
+					foregroundHexComponent.Parent.PoolTransform.GetComponent<Collider2D>().isTrigger = false;
 					break;
 				case ForegroundTypes.Obstacle:
 					foregroundHexComponent.Parent.PoolTransform.GetComponent<SpriteRenderer>().sprite = Obstacle;
+					foregroundHexComponent.Parent.PoolTransform.GetComponent<Collider2D>().enabled = true;
 					foregroundHexComponent.Parent.PoolTransform.GetComponent<Collider2D>().isTrigger = false;
 					break;
 				case ForegroundTypes.Diamond:
-					//todo
+					foregroundHexComponent.Parent.PoolTransform.GetComponent<SpriteRenderer>().sprite = Diamond;
+					foregroundHexComponent.Parent.PoolTransform.GetComponent<Collider2D>().enabled = true;
+					foregroundHexComponent.Parent.PoolTransform.GetComponent<Collider2D>().isTrigger = true;
 					break;
 				case ForegroundTypes.Player:
+					//spawn point, dunno why
 					foregroundHexComponent.Parent.PoolTransform.GetComponent<SpriteRenderer>().sprite = null;
-					foregroundHexComponent.Parent.PoolTransform.GetComponent<Collider2D>().isTrigger = true;
+					foregroundHexComponent.Parent.PoolTransform.GetComponent<Collider2D>().enabled = false;
 					break;
 				default:
 					throw new Exception("Null object type");
 			}
+			
 			foregroundHexComponent.Parent.PoolTransform.gameObject.SetActive(true);
 		}
 
-		public void HideHex(CubeCoords coords)
+		private void HideHex(CubeCoords coords)
 		{
 			if (!_backgroundMap.ExistAt(coords)) return;
 			HexBackgroundComponent hexComponent = _backgroundMap[coords.x, coords.y];

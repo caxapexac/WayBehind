@@ -203,7 +203,11 @@ namespace Misc
                 }
             }
         }
-
+        public void Add(CubeCoords coords, T item)
+        {
+            Add(coords.x, coords.y, item);
+        }
+        
         public void RemoveAt(int x, int y)
         {
             try
@@ -264,23 +268,26 @@ namespace Misc
                 }
             }
         }
-
         public bool ExistAt(CubeCoords coords)
         {
             return ExistAt(coords.x, coords.y);
         }
 
-        public FastList<T> NeighboursOf(int x, int y)
+        public FastList<CubeCoords> NeighboursOf(int x, int y)
         {
             int z = -x - y;
-            FastList<T> neighbours = new FastList<T>(6);
-            if (ExistAt(x + 1, y)) neighbours.Add(this[x + 1, y]);
-            if (ExistAt(x + 1, y - 1)) neighbours.Add(this[x + 1, y - 1]);
-            if (ExistAt(x, y + 1)) neighbours.Add(this[x, y + 1]);
-            if (ExistAt(x, y - 1)) neighbours.Add(this[x, y - 1]);
-            if (ExistAt(x - 1, y + 1)) neighbours.Add(this[x - 1, y + 1]);
-            if (ExistAt(x - 1, y)) neighbours.Add(this[x - 1, y]);
+            FastList<CubeCoords> neighbours = new FastList<CubeCoords>(6);
+            if (ExistAt(x + 1, y)) neighbours.Add(new CubeCoords(x + 1, y)); //this[x + 1, y]);
+            if (ExistAt(x + 1, y - 1)) neighbours.Add(new CubeCoords(x + 1, y - 1)); //this[x + 1, y - 1]);
+            if (ExistAt(x, y + 1)) neighbours.Add(new CubeCoords(x, y + 1)); //this[x, y + 1]);
+            if (ExistAt(x, y - 1)) neighbours.Add(new CubeCoords(x, y - 1)); //this[x, y - 1]);
+            if (ExistAt(x - 1, y + 1)) neighbours.Add(new CubeCoords(x - 1, y + 1)); //this[x - 1, y + 1]);
+            if (ExistAt(x - 1, y)) neighbours.Add(new CubeCoords(x - 1, y)); //this[x - 1, y]);
             return neighbours;
+        }
+        public FastList<CubeCoords> NeighboursOf(CubeCoords coords)
+        {
+            return NeighboursOf(coords.x, coords.y);
         }
     }
 }

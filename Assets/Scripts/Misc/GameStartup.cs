@@ -39,12 +39,14 @@ namespace Misc
 				{
 					Fow = Settings.FieldOfView,
 					HexSize = Settings.HexSize,
-					Player = Settings.PlayerPrefab,
-					Hexagon = Settings.Hexagon,
+					Player = Settings.Player,
+					Enemy = Settings.Enemy,
+					Diamond = Settings.Diamond,
 					Obstacle = Settings.Obstacle,
 					Water = Settings.Water,
 					Grass = Settings.Grass,
-					Boloto = Settings.Boloto
+					Boloto = Settings.Boloto,
+					Forest = Settings.Forest
 				})
 				.Add(new FAISystem());
 			_updateSystems.Initialize();

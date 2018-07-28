@@ -5,12 +5,14 @@ namespace Scriptable
     [CreateAssetMenu]
     public class SettingsObject : ScriptableObject
     {
-        public Sprite Hexagon;
+        public Sprite Player;
+        public Sprite Enemy;
+        public Sprite Diamond;
         public Sprite Obstacle;
         public Sprite Water;
         public Sprite Grass;
         public Sprite Boloto;
-        public GameObject PlayerPrefab;
+        public Sprite Forest;
         public int FieldOfView = 8;
         public float HexSize = 2;
         public float SpeedMultipiler = 1f;

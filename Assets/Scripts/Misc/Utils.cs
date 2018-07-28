@@ -57,10 +57,10 @@ namespace Misc
 
         public static int HexDistance(int x1, int y1, int x2, int y2)
         {
-            int x = MathFast.Abs(x2 - x1);
-            int y = MathFast.Abs(y2 - y1);
-            int z = MathFast.Abs(-x - y);
-            return MathFast.Max(x, MathFast.Max(y, z));
+            int x = x2 - x1;
+            int y = y2 - y1;
+            int z = -x - y;
+            return MathFast.Max(MathFast.Abs(x), MathFast.Max(MathFast.Abs(y), MathFast.Abs(z)));
         }
 
         public static float LinearDistance(int x1, int y1, int x2, int y2)

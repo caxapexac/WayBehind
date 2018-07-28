@@ -11,14 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77436a2e451305c419cdebefe5c01f8e, type: 3}
   m_Name: SettingsDefault
   m_EditorClassIdentifier: 
-  Hexagon: {fileID: 21300000, guid: 97117e56d6c74a24891b7f559b24eb7d, type: 3}
+  Player: {fileID: 21300000, guid: a12b9a8f47ec7174588275a4b6228ce1, type: 3}
+  Enemy: {fileID: 21300000, guid: d018e9b26e0968a4e90d760b5b52afb7, type: 3}
+  Diamond: {fileID: 21300000, guid: 53cadf5c74c028949bad446539c45aa6, type: 3}
   Obstacle: {fileID: 21300000, guid: 634a7bcf1e1dd364ab71c7c82b94adb5, type: 3}
   Water: {fileID: 21300000, guid: a65be495946bd1846920c6d89fdb0ed6, type: 3}
   Grass: {fileID: 21300000, guid: 5aec56d1326bd574db3f1a5932cf4bf2, type: 3}
   Boloto: {fileID: 21300000, guid: 855229380353ad143ba3cc04f66bcad5, type: 3}
-  PlayerPrefab: {fileID: 1006894093068076, guid: df93f97d5ecf47446a37aefeec2ca382,
-    type: 2}
-  FieldOfView: 4
+  Forest: {fileID: 21300000, guid: 701f81109db812f4e934981ed9fa8d48, type: 3}
+  FieldOfView: 16
   HexSize: 0.64
   SpeedMultipiler: 0.2
   CameraDistance: 2
