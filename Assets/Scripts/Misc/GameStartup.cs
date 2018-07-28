@@ -6,73 +6,66 @@ using UnityEngine;
 
 namespace Misc
 {
-	public class GameStartup : MonoBehaviour
-	{
-		public SettingsObject Settings;
-		
-		private EcsWorld _world;
-		private EcsSystems _updateSystems;
-		private EcsSystems _fixedUpdateSystems;
+    public class GameStartup : MonoBehaviour
+    {
+        public SettingsObject Settings;
 
-		void OnEnable()
-		{
-			_world = new EcsWorld();
+        private EcsWorld _world;
+        private EcsSystems _updateSystems;
+
+        void OnEnable()
+        {
+            _world = new EcsWorld();
 #if UNITY_EDITOR
-			Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create (_world);
-#endif  
-			_updateSystems = new EcsSystems(_world)
-				.Add(new PlayerInitSystem())
-				.Add(new InputKeyboardSystem())
-				.Add(new InputStickSystem())
-				.Add(new CameraSystem()
-				{
-					CameraDistance = Settings.CameraDistance,
-					CameraSpeed = Settings.CameraSpeed
-				});
-			//
-			_fixedUpdateSystems = new EcsSystems(_world)
-				.Add(new FMovePlayerSystem()
-				{
-					SpeedMultipiler = Settings.SpeedMultipiler
-				})
-				.Add(new FWorldGenSystem()
-				{
-					PlayerPrefab = Settings.PlayerPrefab,
-					Fow = Settings.FieldOfView,
-					HexSize = Settings.HexSize,
-					MapSize = Settings.MapSize,
-					MapSeed = Settings.MapSeed,
-					Spawn = Settings.Spawn,
-					Enemy = Settings.Enemy,
-					Diamond = Settings.Diamond,
-					Obstacle = Settings.Obstacle,
-					Water = Settings.Water,
-					Grass = Settings.Grass,
-					Swamp = Settings.Swamp,
-					Forest = Settings.Forest
-				})
-				.Add(new FAISystem());
-			_updateSystems.Initialize();
-			_fixedUpdateSystems.Initialize();
-#if UNITY_EDITOR
-			Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create (_updateSystems);
+            Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
 #endif
-		}
-	
-		void Update () 
-		{
-			_updateSystems.Run ();
-		}
+            _updateSystems = new EcsSystems(_world)
+                .Add(new PlayerInitSystem())
+                .Add(new FMovePlayerSystem()
+                {
+                    SpeedMultipiler = Settings.SpeedMultipiler
+                })
+                .Add(new CameraSystem()
+                {
+                    CameraDistance = Settings.CameraDistance,
+                    CameraSpeed = Settings.CameraSpeed
+                })
+                .Add(new InputKeyboardSystem())
+                .Add(new InputStickSystem())
+                .Add(new FWorldGenSystem()
+                {
+                    PlayerPrefab = Settings.PlayerPrefab,
+                    Fow = Settings.FieldOfView,
+                    HexSize = Settings.HexSize,
+                    MapSize = Settings.MapSize,
+                    MapSeed = Settings.MapSeed,
+                    Spawn = Settings.Spawn,
+                    Enemy = Settings.Enemy,
+                    Diamond = Settings.Diamond,
+                    Obstacle = Settings.Obstacle,
+                    Water = Settings.Water,
+                    Grass = Settings.Grass,
+                    Swamp = Settings.Swamp,
+                    Forest = Settings.Forest
+                })
+                .Add(new FAISystem());
 
-		private void FixedUpdate()
-		{
-			_fixedUpdateSystems.Run();
-		}
 
-		private void OnDisable()
-		{
-			_updateSystems.Destroy ();
-			_fixedUpdateSystems.Destroy();
-		}
-	}
+            //
+            _updateSystems.Initialize();
+#if UNITY_EDITOR
+            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_updateSystems);
+#endif
+        }
+
+        void Update()
+        {
+            _updateSystems.Run();
+        }
+
+        private void OnDisable()
+        {
+            _updateSystems.Destroy();
+        }
+    }
 }
