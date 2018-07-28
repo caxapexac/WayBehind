@@ -1,5 +1,6 @@
 ﻿using System;
 using LeopotamGroup.Collections;
+using LeopotamGroup.Math;
 using UnityEditor;
 using UnityEngine;
 
@@ -135,6 +136,21 @@ namespace Misc
             return Mathf.Min(PP.Capacity, PN.Capacity, NP.Capacity, NN.Capacity);
         }
 
+        //todo hexagonal
+        public void Fill(int radius)
+        {
+            for (int i = -radius; i < radius; i++)
+            {
+                for (int j = -radius; j < radius; j++)
+                {
+                    if (MathFast.Abs(HexMath.GetZ(i, j)) <= radius)
+                    {
+                        Add(i, j, new T());
+                    }
+                }
+            }
+        }
+
         public void Add(int x, int y, T item)
         {
             if (x >= 0)
@@ -208,16 +224,20 @@ namespace Misc
             Add(coords.x, coords.y, item);
         }
         
-        public void RemoveAt(int x, int y)
+        public void ClearAt(int x, int y)
         {
             try
             {
-                this[x, y] = null;
+                this[x, y] = new T();
             }
             catch (Exception e)
             {
                 return;
             }
+        }
+        public void ClearAt(CubeCoords coords)
+        {
+            ClearAt(coords.x, coords.y);
         }
 
         public bool ExistAt(int x, int y)

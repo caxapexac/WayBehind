@@ -1,205 +1,190 @@
-﻿using System.Xml.Linq;
+﻿using System;
 using Systems;
 using Components;
 using LeopotamGroup.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Misc
 {
     public static class MapGenRandomNeighbours
     {
-        public static HexList4D<HexBackgroundComponent> GenerateBackground(int capacity)
+        public static void GenerateMap(out HexList4D<HexBackgroundComponent> background,
+            out HexList4D<HexForegroundComponent> foreground, int radius, int seed)
         {
-            HexList4D<HexBackgroundComponent> back = new HexList4D<HexBackgroundComponent>(capacity);
-            for (int i = -100; i < 100; i++)
+            Random.InitState(seed);
+            background = new HexList4D<HexBackgroundComponent>();
+            foreground = new HexList4D<HexForegroundComponent>();
+            HexBackgroundComponent backgroundHex = new HexBackgroundComponent();
+            HexForegroundComponent foregroundHex = new HexForegroundComponent();
+            background.Fill(radius);
+            foreground.Fill(radius);
+            foreground.Add(0, 0, new HexForegroundComponent()
             {
-                for (int j = -100; j < 100; j++)
-                {
-                    back.Add(i, j, new HexBackgroundComponent()
-                    {
-                        GroundType = BackroundTypes.Grass,
-                        IsNew = false
-                    });
-                }
-            }
-
-            int waterCount = Mathf.RoundToInt(Random.Range(0.2f, 1f) * 130);
-            int bolotoCount = Mathf.RoundToInt(Random.Range(0.2f, 1f) * 70);
-            int forestCount = Mathf.RoundToInt(Random.Range(0.2f, 1f) * 20);
-            
-            for (int i = 0; i < waterCount; i++)
-            {
-                CubeCoords coords = new CubeCoords(Mathf.RoundToInt(Random.Range(-1f, 1f) * 100), Mathf.RoundToInt(Random.Range(-1f, 1f) * 100));
-                GenerateWater(back, coords, 1f);
-            }
-            for (int i = 0; i < bolotoCount; i++)
-            {
-                CubeCoords coords = new CubeCoords(Mathf.RoundToInt(Random.Range(-1f, 1f) * 100), Mathf.RoundToInt(Random.Range(-1f, 1f) * 100));
-                GenerateBoloto(back, coords, 1f);
-            }
-            for (int i = 0; i < forestCount; i++)
-            {
-                CubeCoords coords = new CubeCoords(Mathf.RoundToInt(Random.Range(-1f, 1f) * 100), Mathf.RoundToInt(Random.Range(-1f, 1f) * 100));
-                GenerateForest(back, coords, 1f);
-            }
-            
-            return back;
-        }
-
-        private static void GenerateWater(HexList4D<HexBackgroundComponent> back ,CubeCoords coords, float chance)
-        {
-            back.Add(coords, new HexBackgroundComponent()
-            {
-                GroundType = BackroundTypes.Water,
+                ForegroundType = ForegroundTypes.Spawn,
                 IsNew = false
             });
-            FastList<CubeCoords> neighbours = back.NeighboursOf(coords);
+            GenerateBackgroundStructure(background, radius, BackroundTypes.Water, BackroundTypes.Grass, 70, 1f, 0.1f);
+            GenerateBackgroundStructure(background, radius, BackroundTypes.Swamp, BackroundTypes.Grass, 50, 1f, 0.2f);
+            GenerateBackgroundStructure(background, radius, BackroundTypes.Forest, BackroundTypes.Grass, 30, 1f, 0.03f);
+            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Obstacle, ForegroundTypes.Empty, 50, 100, 1f, 0.2f);
+            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Obstacle, ForegroundTypes.Empty, 50, 70, 1f, 0.4f);
+            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Diamond, ForegroundTypes.Empty, 10, 100, 0f, 0f);
+            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Diamond, ForegroundTypes.Obstacle, 10, 100, 1f, 0.3f);
+            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Enemy, ForegroundTypes.Empty, 100, 100, 0.01f, 0.01f);
+        }
+
+        private static void GenerateBackgroundStructure(HexList4D<HexBackgroundComponent> background, int radius,
+            BackroundTypes type, BackroundTypes badType, int count, float chance, float diffChance)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                GenerateRecursiveB(background, type, badType, HexMath.RandomPosition(radius), chance, diffChance);
+            }
+        }
+
+        private static void GenerateRecursiveB(HexList4D<HexBackgroundComponent> background,
+            BackroundTypes type, BackroundTypes badType, CubeCoords coords, float chance, float diffChange)
+        {
+            background.Add(coords, new HexBackgroundComponent()
+            {
+                BackgroundType = type,
+                IsNew = false
+            });
+            FastList<CubeCoords> neighbours = background.NeighboursOf(coords);
             for (int j = 0; j < neighbours.Count; j++)
             {
-                HexBackgroundComponent hexComponent = back[neighbours[j].x, neighbours[j].y];
-                if (hexComponent.GroundType == BackroundTypes.Grass && Random.Range(0f,1f) < chance)
+                HexBackgroundComponent hexComponent = background[neighbours[j].x, neighbours[j].y];
+                if (hexComponent.BackgroundType == badType && Random.Range(0f, 1f) < chance)
                 {
-                    GenerateWater(back, neighbours[j], chance - 0.05f);
+                    GenerateRecursiveB(background, type, badType, neighbours[j], chance - diffChange, diffChange);
                 }
             }
         }
         
-        private static void GenerateBoloto(HexList4D<HexBackgroundComponent> back ,CubeCoords coords, float chance)
+        private static void GenerateForegroundStructure(HexList4D<HexForegroundComponent> foreground, int radius,
+            ForegroundTypes type, ForegroundTypes badType, int value, int count, float chance, float diffChance)
         {
-            back.Add(coords, new HexBackgroundComponent()
+            for (int i = 0; i < count; i++)
             {
-                GroundType = BackroundTypes.Boloto,
-                IsNew = false
+                GenerateRecursiveF(foreground, type, badType, HexMath.RandomPosition(radius), value, chance, diffChance);
+            }
+        }
+
+        private static void GenerateRecursiveF(HexList4D<HexForegroundComponent> background,
+            ForegroundTypes type, ForegroundTypes badType, CubeCoords coords, int value, float chance, float diffChange)
+        {
+            background.Add(coords, new HexForegroundComponent()
+            {
+                ForegroundType = type,
+                IsNew = false,
+                Value = value
             });
-            FastList<CubeCoords> neighbours = back.NeighboursOf(coords);
+            FastList<CubeCoords> neighbours = background.NeighboursOf(coords);
             for (int j = 0; j < neighbours.Count; j++)
             {
-                HexBackgroundComponent hexComponent = back[neighbours[j].x, neighbours[j].y];
-                if ((hexComponent.GroundType == BackroundTypes.Grass || hexComponent.GroundType == BackroundTypes.Water) 
-                    && Random.Range(0f,1f) < chance)
+                HexForegroundComponent hexComponent = background[neighbours[j].x, neighbours[j].y];
+                if (hexComponent.ForegroundType == badType && Random.Range(0f, 1f) < chance)
                 {
-                    GenerateBoloto(back, neighbours[j], chance - 0.1f);
+                    GenerateRecursiveF(background, type, badType, neighbours[j], value, chance - diffChange, diffChange);
                 }
             }
         }
         
-        private static void GenerateForest(HexList4D<HexBackgroundComponent> back ,CubeCoords coords, float chance)
-        {
-            back.Add(coords, new HexBackgroundComponent()
-            {
-                GroundType = BackroundTypes.Forest,
-                IsNew = false
-            });
-            FastList<CubeCoords> neighbours = back.NeighboursOf(coords);
-            for (int j = 0; j < neighbours.Count; j++)
-            {
-                HexBackgroundComponent hexComponent = back[neighbours[j].x, neighbours[j].y];
-                if (hexComponent.GroundType == BackroundTypes.Grass && Random.Range(0f,1f) < chance)
-                {
-                    GenerateForest(back, neighbours[j], chance - 0.02f);
-                }
-            }
-        }
-
-            
-            
-            
-            
-        public static HexList4D<HexForegroundComponent> GenerateForeground(HexList4D<HexBackgroundComponent> back)
-        {
-            HexList4D<HexForegroundComponent> fore = new HexList4D<HexForegroundComponent>(back.CapacityMin());
-            for (int i = -100; i < 100; i++)
-            {
-                for (int j = -100; j < 100; j++)
-                {
-                    fore.Add(i, j, new HexForegroundComponent()
-                    {
-                        ObjectType = ForegroundTypes.Empty,
-                        IsNew = false
-                    });
-                }
-            }
-            fore.Add(0, 0, new HexForegroundComponent()
-            {
-                ObjectType = ForegroundTypes.Player,
-                IsNew = false
-            });
-            int obstacleCount = Mathf.RoundToInt(Random.Range(0.2f, 1f) * 100);
-            int enemyCount = Mathf.RoundToInt(Random.Range(0.2f, 1f) * 100);
-            int diamondCount = Mathf.RoundToInt(Random.Range(0.2f, 1f) * 100);
-            for (int i = 0; i < obstacleCount; i++)
-            {
-                CubeCoords coords = new CubeCoords(Mathf.RoundToInt(Random.Range(-1f, 1f) * 100), Mathf.RoundToInt(Random.Range(-1f, 1f) * 100));
-                GenerateObstacle(back, fore, coords, 1f);
-                coords = new CubeCoords(Mathf.RoundToInt(Random.Range(-1f, 1f) * 100), Mathf.RoundToInt(Random.Range(-1f, 1f) * 100));
-                GenerateSingleObstacle(back, fore, coords);
-            }
-            for (int i = 0; i < enemyCount; i++)
-            {
-                //todo
-            }
-            for (int i = 0; i < diamondCount; i++)
-            {
-                CubeCoords coords = new CubeCoords(Mathf.RoundToInt(Random.Range(-1f, 1f) * 100), Mathf.RoundToInt(Random.Range(-1f, 1f) * 100));
-                GenerateDiamond(back, fore, coords, 0.5f);
-            }
-            return fore;
-        }
-
-        private static void GenerateDiamond(HexList4D<HexBackgroundComponent> back, HexList4D<HexForegroundComponent> fore,
-            CubeCoords coords, float chance)
-        {
-            fore.Add(coords, new HexForegroundComponent()
-            {
-                ObjectType = ForegroundTypes.Diamond,
-                IsNew = false
-            });
-            FastList<CubeCoords> neighbours = fore.NeighboursOf(coords);
-            for (int j = 0; j < neighbours.Count; j++)
-            {
-                HexForegroundComponent hexComponent = fore[neighbours[j].x, neighbours[j].y];
-                if (hexComponent.ObjectType == ForegroundTypes.Empty && Random.Range(0f,1f) < chance)
-                {
-                    GenerateObstacle(back, fore, neighbours[j], chance - 0.2f);
-                }
-            }
-        }
-
-        private static void GenerateObstacle(HexList4D<HexBackgroundComponent> back, HexList4D<HexForegroundComponent> fore,
-            CubeCoords coords, float chance)
-        {
-            fore.Add(coords, new HexForegroundComponent()
-            {
-                ObjectType = ForegroundTypes.Obstacle,
-                IsNew = false
-            });
-            FastList<CubeCoords> neighbours = fore.NeighboursOf(coords);
-            for (int j = 0; j < neighbours.Count; j++)
-            {
-                HexForegroundComponent hexComponent = fore[neighbours[j].x, neighbours[j].y];
-                if (hexComponent.ObjectType == ForegroundTypes.Empty && Random.Range(0f,1f) < chance)
-                {
-                    GenerateObstacle(back, fore, neighbours[j], chance - 0.3f);
-                }
-            }
-        }
-        
-        private static void GenerateSingleObstacle(HexList4D<HexBackgroundComponent> back, HexList4D<HexForegroundComponent> fore,
-            CubeCoords coords)
-        {
-            fore.Add(coords, new HexForegroundComponent()
-            {
-                ObjectType = ForegroundTypes.Obstacle,
-                IsNew = false
-            });
-        }
-
         public static void GenerateHex(CubeCoords coords,
-            HexList4D<HexBackgroundComponent> back, HexList4D<HexForegroundComponent> fore)
+            HexList4D<HexBackgroundComponent> background, HexList4D<HexForegroundComponent> foreground)
         {
-            back.Add(coords.x, coords.y, new HexBackgroundComponent()
+            FastList<CubeCoords> neighbours = background.NeighboursOf(coords);
+            int grass = 0;
+            int water = 0;
+            int swamp = 0;
+            int forest = 0;
+            for (int i = 0; i < neighbours.Count; i++)
             {
-                GroundType = BackroundTypes.Boloto,
+                switch (background[neighbours[i].x, neighbours[i].y].BackgroundType)
+                {
+                    case BackroundTypes.Grass:
+                        grass++;
+                        break;
+                    case BackroundTypes.Water:
+                        water++;
+                        break;
+                    case BackroundTypes.Swamp:
+                        swamp++;
+                        break;
+                    case BackroundTypes.Forest:
+                        forest++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            int max = Mathf.Max(grass, water, swamp, forest);
+            BackroundTypes TypeB;
+            if (Random.Range(0f, 1f) > 0.3f)
+            {
+                if (max == grass) TypeB = BackroundTypes.Grass;
+                else if (max == water) TypeB = BackroundTypes.Water;
+                else if (max == swamp) TypeB = BackroundTypes.Swamp;
+                else TypeB = BackroundTypes.Forest;
+            }
+            else
+            {
+                Array values = Enum.GetValues(typeof(BackroundTypes));
+                TypeB = (BackroundTypes)values.GetValue((int)Mathf.Round(Random.Range(0f, 1f) * (values.Length - 1)));
+            }
+            background.Add(coords, new HexBackgroundComponent()
+            {
+                BackgroundType = TypeB,
+                Parent = null,
+                SpeedDown = 1f,
+                IsNew = false
+            });
+            //foreground
+            neighbours = foreground.NeighboursOf(coords);
+            int empty = 0;
+            int obstacle = 0;
+            int enemy = 0;
+            int diamond = 0;
+            for (int i = 0; i < neighbours.Count; i++)
+            {
+                switch (foreground[neighbours[i].x, neighbours[i].y].ForegroundType)
+                {
+                    case ForegroundTypes.Empty:
+                        empty++;
+                        break;
+                    case ForegroundTypes.Obstacle:
+                        obstacle++;
+                        break;
+                    case ForegroundTypes.Enemy:
+                        enemy++;
+                        break;
+                    case ForegroundTypes.Diamond:
+                        diamond++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            max = Mathf.Max(empty, obstacle, enemy, diamond);
+            ForegroundTypes typeF;
+            if (Random.Range(0f, 1f) > 0.2f)
+            {
+                if (max == obstacle) typeF = ForegroundTypes.Obstacle;
+                else if (max == enemy) typeF = ForegroundTypes.Empty;
+                else if (max == diamond) typeF = ForegroundTypes.Empty;
+                else typeF = ForegroundTypes.Empty;
+            }
+            else
+            {
+                Array values = Enum.GetValues(typeof(ForegroundTypes));
+                typeF = (ForegroundTypes)values.GetValue((int)Mathf.Round(Random.Range(0f, 1f) * (values.Length - 1)));
+                if (typeF == ForegroundTypes.Spawn) typeF = ForegroundTypes.Diamond;
+            }
+            foreground.Add(coords, new HexForegroundComponent()
+            {
+                ForegroundType = typeF,
+                Parent = null,
                 IsNew = false
             });
         }

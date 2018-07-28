@@ -1,5 +1,6 @@
 ﻿using Events;
 using Leopotam.Ecs;
+using Misc;
 using UnityEngine;
 
 namespace MonoBehviours
@@ -16,11 +17,17 @@ namespace MonoBehviours
         private void OnTriggerEnter2D(Collider2D other)
         {
             //Debug.Log("TOUCH");
-            CollisionEvent collisionEvent = new CollisionEvent()
+            if (other.CompareTag(Utils.BackgroundTag))
             {
-                ObstacleTransform = other.transform
-            };
-            _world.CreateEntityWith(out collisionEvent);
+                TriggerBackgroundEvent triggerEvent = _world.CreateEntityWith<TriggerBackgroundEvent>();
+                triggerEvent.ObstacleTransform = other.transform;
+            }
+            else
+            {
+                TriggerForegroundEvent triggerEvent = _world.CreateEntityWith<TriggerForegroundEvent>();
+                triggerEvent.ObstacleTransform = other.transform;
+            }
+            
         }
 
 

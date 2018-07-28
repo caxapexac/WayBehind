@@ -39,6 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4717373820110786}
   - component: {fileID: 58067829293716796}
+  - component: {fileID: 114363580727328860}
   m_Layer: 0
   m_Name: Feet
   m_TagString: Untagged
@@ -132,6 +133,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e156406a7a9b014a92085921662f736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114363580727328860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1830874431788052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd62c12df8245108402bc4afee88bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212556648315839380

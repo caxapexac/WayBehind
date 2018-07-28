@@ -37,15 +37,18 @@ namespace Misc
 				})
 				.Add(new FWorldGenSystem()
 				{
+					PlayerPrefab = Settings.PlayerPrefab,
 					Fow = Settings.FieldOfView,
 					HexSize = Settings.HexSize,
-					Player = Settings.Player,
+					MapSize = Settings.MapSize,
+					MapSeed = Settings.MapSeed,
+					Spawn = Settings.Spawn,
 					Enemy = Settings.Enemy,
 					Diamond = Settings.Diamond,
 					Obstacle = Settings.Obstacle,
 					Water = Settings.Water,
 					Grass = Settings.Grass,
-					Boloto = Settings.Boloto,
+					Swamp = Settings.Swamp,
 					Forest = Settings.Forest
 				})
 				.Add(new FAISystem());

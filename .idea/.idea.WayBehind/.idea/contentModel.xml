@@ -78,12 +78,13 @@
             <e p="EnemyComponent.cs" t="Include" />
             <e p="HexBackgroundComponent.cs" t="Include" />
             <e p="HexForegroundComponent.cs" t="Include" />
+            <e p="MapComponent.cs" t="Include" />
             <e p="PlayerComponent.cs" t="Include" />
-            <e p="WorldComponent.cs" t="Include" />
           </e>
           <e p="Events" t="Include">
             <e p="CollisionEvent.cs" t="Include" />
-            <e p="TriggerEvent.cs" t="Include" />
+            <e p="TriggerBackgroundEvent.cs" t="Include" />
+            <e p="TriggerForegroundEvent.cs" t="Include" />
           </e>
           <e p="Misc" t="Include">
             <e p="GameStartup.cs" t="Include" />

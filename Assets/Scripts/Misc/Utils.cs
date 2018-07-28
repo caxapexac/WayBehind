@@ -8,7 +8,8 @@ namespace Misc
         public static string CameraTag = "MainCamera";
         public static string PlayerTag = "Player";
         public static string EnemyTag = "Enemy";
-        public static string GroundTag = "Ground";
+        public static string BackgroundTag = "Background";
+        public static string ForegroundTag = "Foreground";
         public static string BackPrefabPath = "Prefabs/BackgroundPrefab";
         public static string ForePrefabPath = "Prefabs/ForegroundPrefab";
     }
@@ -104,6 +105,21 @@ namespace Misc
         public static Vector2 Hex2Pix(CubeCoords coords, float hexSize)
         {
             return Hex2Pix(coords.x, coords.y, hexSize);
+        }
+
+        public static CubeCoords RandomPosition(int radius)
+        {
+            int x = Random.Range(-radius, radius);
+            int y;
+            if (x > 0 )
+            {
+                y = Mathf.RoundToInt(Random.Range(-radius, radius - x));
+            }
+            else
+            {
+                y = Mathf.RoundToInt(Random.Range(-radius + x, radius));
+            }
+            return new CubeCoords(x, y);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Events
 {
-    sealed class TriggerEvent
+    sealed class TriggerBackgroundEvent
     {
         public Transform ObstacleTransform;
     }
