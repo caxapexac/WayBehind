@@ -20,18 +20,6 @@ namespace Misc
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
 #endif
             _updateSystems = new EcsSystems(_world)
-                .Add(new PlayerInitSystem())
-                .Add(new FMovePlayerSystem()
-                {
-                    SpeedMultipiler = Settings.SpeedMultipiler
-                })
-                .Add(new CameraSystem()
-                {
-                    CameraDistance = Settings.CameraDistance,
-                    CameraSpeed = Settings.CameraSpeed
-                })
-                .Add(new InputKeyboardSystem())
-                .Add(new InputStickSystem())
                 .Add(new FWorldGenSystem()
                 {
                     PlayerPrefab = Settings.PlayerPrefab,
@@ -48,9 +36,21 @@ namespace Misc
                     Swamp = Settings.Swamp,
                     Forest = Settings.Forest
                 })
+                .Add(new FMovePlayerSystem()
+                {
+                    SpeedMultipiler = Settings.SpeedMultipiler
+                })
+                .Add(new CameraSystem()
+                {
+                    CameraDistance = Settings.CameraDistance,
+                    CameraSpeed = Settings.CameraSpeed
+                })
+#if UNITY_EDITOR
+                .Add(new InputKeyboardSystem())
+#else
+                .Add(new InputStickSystem())
+#endif
                 .Add(new FAISystem());
-
-
             //
             _updateSystems.Initialize();
 #if UNITY_EDITOR

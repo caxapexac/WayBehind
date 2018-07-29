@@ -25,10 +25,11 @@ namespace Systems
 	
 		public void Run()
 		{
-			if (Vector2.Distance(_cameraTransform.position, _playerTransform.position) > CameraDistance)
+			float distance = Vector2.Distance(_cameraTransform.position, _playerTransform.position);
+			if (distance > CameraDistance)
 			{
 				_cameraTransform.Translate(new Vector2(_playerTransform.position.x - _cameraTransform.position.x,
-					_playerTransform.position.y - _cameraTransform.position.y) * CameraSpeed * Time.deltaTime);
+					_playerTransform.position.y - _cameraTransform.position.y) * distance * CameraSpeed * Time.deltaTime);
 			}
 		}
 	

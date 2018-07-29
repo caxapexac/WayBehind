@@ -80,9 +80,9 @@ namespace Misc
             float rX = Mathf.Round(hexX);
             float rY = Mathf.Round(hexY);
             float rZ = Mathf.Round(hexZ);
-            float xDiff = Mathf.Abs(rX - hexX);
-            float yDiff = Mathf.Abs(rY - hexY);
-            float zDiff = Mathf.Abs(rZ - hexZ);
+            float xDiff = MathFast.Abs(rX - hexX);
+            float yDiff = MathFast.Abs(rY - hexY);
+            float zDiff = MathFast.Abs(rZ - hexZ);
             //Debug.Log(rX + " " + rY + " " + rZ);
             if (xDiff > yDiff && xDiff > zDiff) return new CubeCoords((int)(-rY - rZ), (int) rY);
             if (yDiff > zDiff) return new CubeCoords((int) rX, (int) (-rX - rZ));

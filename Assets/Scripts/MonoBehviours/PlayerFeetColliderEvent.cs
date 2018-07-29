@@ -16,7 +16,6 @@ namespace MonoBehviours
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            //Debug.Log("TOUCH");
             if (other.CompareTag(Utils.BackgroundTag))
             {
                 TriggerBackgroundEvent triggerEvent = _world.CreateEntityWith<TriggerBackgroundEvent>();
