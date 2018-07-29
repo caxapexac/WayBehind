@@ -24,6 +24,8 @@ namespace Systems
 
         private EcsFilter<CollisionEvent> _collisionFilter = null;
         
+        private List<int> _removedEntities = new List<int>();
+
         public void Run()
         {
             for (int i = 0; i < _playerFilter.EntitiesCount; i++)
@@ -38,10 +40,15 @@ namespace Systems
                 //
                 for (int j = 0; j < _collisionFilter.EntitiesCount; j++)
                 {
-                    _collisionFilter.Components1[j].ObstacleTransform = null;
-                    _world.RemoveEntity(_collisionFilter.Entities[j]);
+                    //исправил баг с множественными ентитями дублирующимися
+                    var entity = _collisionFilter.Entities[i];
+                    if (_removedEntities.Contains(entity)) return;
+                    _removedEntities.Add(entity);
+                    _collisionFilter.Components1[i].ObstacleTransform = null;
+                    _world.RemoveEntity(_collisionFilter.Entities[i]);
                     //Debug.Log(_collisionFilter.Components1[j]);
                 }
+                _removedEntities.Clear();
             }
         }
     }

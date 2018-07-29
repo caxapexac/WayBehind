@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\rhanz\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_waybehind.518604016.00" t="ExcludeRecursive" />
-    <e p="F:\Projects\WayBehind" t="IncludeRecursive">
+    <e p="C:\Users\caxap\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_WayBehind.-486027187.00" t="ExcludeRecursive" />
+    <e p="D:\A work\Accel_2018\Unity projects\WayBehind" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Libs" t="Include">
@@ -108,6 +109,90 @@
           <e p="Temporary" t="Include">
             <e p="EXComponent.cs" t="Include" />
             <e p="EXSystem.cs" t="Include" />
+          </e>
+        </e>
+        <e p="TouchJoysticks" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="DualJoystickPlayerController.cs" t="Include" />
+            <e p="DualJoystickTouchContoller.cs" t="Include" />
+            <e p="LeftJoystick.cs" t="Include" />
+            <e p="LeftJoystickPlayerController.cs" t="Include" />
+            <e p="LeftJoystickTouchContoller.cs" t="Include" />
+            <e p="RightJoystick.cs" t="Include" />
+            <e p="RightJoystickPlayerController.cs" t="Include" />
+            <e p="RightJoystickTouchContoller.cs" t="Include" />
+            <e p="SingleJoystick.cs" t="Include" />
+            <e p="SingleJoystickPlayerController.cs" t="Include" />
+            <e p="SingleJoystickTouchController.cs" t="Include" />
+          </e>
+        </e>
+        <e p="VictorsAssets" t="Include">
+          <e p="TouchControlsKit-Lite" t="Include">
+            <e p="Content" t="Include">
+              <e p="FirstPersonExample" t="Include">
+                <e p="ReadMeToo.txt" t="Include" />
+                <e p="Scripts" t="Include">
+                  <e p="API_Demo.cs" t="Include" />
+                  <e p="FirstPersonExample.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="Scripts" t="Include">
+              <e p="Editor" t="Include">
+                <e p="CustomInspectors" t="Include">
+                  <e p="Controllers" t="Include">
+                    <e p="Base" t="Include">
+                      <e p="AxesBasedControllerEditor.cs" t="Include" />
+                      <e p="ControllerBaseEditor.cs" t="Include" />
+                    </e>
+                    <e p="TCKButtonEditor.cs" t="Include" />
+                    <e p="TCKJoystickEditor.cs" t="Include" />
+                    <e p="TCKTouchpadEditor.cs" t="Include" />
+                  </e>
+                </e>
+                <e p="Extensions" t="Include">
+                  <e p="SerializedPropertyExtensions.cs" t="Include" />
+                </e>
+                <e p="Initialize" t="Include">
+                  <e p="TCKInitialize.cs" t="Include" />
+                </e>
+                <e p="Utils" t="Include">
+                  <e p="TCKEditorChangeCheck.cs" t="Include" />
+                  <e p="TCKEditorHelper.cs" t="Include" />
+                  <e p="TCKEditorLayout.cs" t="Include" />
+                  <e p="TCKEditorStyle.cs" t="Include" />
+                  <e p="TCKPrefabCreator.cs" t="Include" />
+                </e>
+                <e p="Windows" t="Include">
+                  <e p="Tabs" t="Include">
+                    <e p="TCKAboutTab.cs" t="Include" />
+                  </e>
+                  <e p="TCKWindow.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Runtime" t="Include">
+                <e p="Attributes" t="Include">
+                  <e p="ApplyMethodAttribute.cs" t="Include" />
+                  <e p="LabelAttribute.cs" t="Include" />
+                  <e p="LogicLabelAttribute.cs" t="Include" />
+                </e>
+                <e p="Camera" t="Include">
+                  <e p="GuiCamera.cs" t="Include" />
+                </e>
+                <e p="Controllers" t="Include">
+                  <e p="BaseData" t="Include">
+                    <e p="AxesBasedController.cs" t="Include" />
+                    <e p="ControllerBase.cs" t="Include" />
+                    <e p="Enums.cs" t="Include" />
+                  </e>
+                  <e p="TCKButton.cs" t="Include" />
+                  <e p="TCKJoystick.cs" t="Include" />
+                  <e p="TCKTouchpad.cs" t="Include" />
+                </e>
+                <e p="TCKInput.cs" t="Include" />
+              </e>
+            </e>
+            <e p="TCK_Changelog.txt" t="Include" />
           </e>
         </e>
       </e>
