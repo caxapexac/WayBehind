@@ -25,6 +25,6 @@ MonoBehaviour:
   MapSize: 100
   MapSeed: 4
   HexSize: 0.64
-  SpeedMultipiler: 0.2
+  SpeedMultipiler: 15
   CameraDistance: 2
-  CameraSpeed: 0.08
+  CameraSpeed: 4
