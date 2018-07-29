@@ -28,7 +28,7 @@ namespace Systems
 			if (Vector2.Distance(_cameraTransform.position, _playerTransform.position) > CameraDistance)
 			{
 				_cameraTransform.Translate(new Vector2(_playerTransform.position.x - _cameraTransform.position.x,
-					_playerTransform.position.y - _cameraTransform.position.y) * CameraSpeed);
+					_playerTransform.position.y - _cameraTransform.position.y) * CameraSpeed * Time.deltaTime);
 			}
 		}
 	
