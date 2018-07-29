@@ -127,12 +127,12 @@ GameObject:
   - component: {fileID: 293393341}
   - component: {fileID: 293393340}
   m_Layer: 5
-  m_Name: _TCKCanvas
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &293393340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,122 +217,15 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 610890790}
-  - {fileID: 382927956}
   - {fileID: 1591713929}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &382927955
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1564652765386846, guid: bc0880a4fd2640c4c80695e6238fedab,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 382927956}
-  - component: {fileID: 382927959}
-  - component: {fileID: 382927958}
-  - component: {fileID: 382927957}
-  m_Layer: 5
-  m_Name: Touchpad
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &382927956
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 224601388189390356, guid: bc0880a4fd2640c4c80695e6238fedab,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 382927955}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 293393344}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5, y: -104}
-  m_SizeDelta: {x: 1, y: -208}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &382927957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114955030288083814, guid: bc0880a4fd2640c4c80695e6238fedab,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 382927955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60526d02b6fa60847a64bab878042138, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateMode: 0
-  baseRect: {fileID: 382927956}
-  baseImage: {fileID: 382927958}
-  identifier: Touchpad
-  baseImageColor:
-    serializedVersion: 2
-    rgba: 2785017855
-  enable: 1
-  active: 1
-  visible: 1
-  sensitivity: 1
-  axesLag: 1
-  axesLagSpeed: 15
-  axisX:
-    enabled: 1
-    inverse: 0
-  axisY:
-    enabled: 1
-    inverse: 0
-  showTouchZone: 1
---- !u!114 &382927958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114281190803459386, guid: bc0880a4fd2640c4c80695e6238fedab,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 382927955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.64705884}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3bfb280c14ab2614e937e8ebb7d77083, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &382927959
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 222413251271254504, guid: bc0880a4fd2640c4c80695e6238fedab,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 382927955}
-  m_CullTransparentMesh: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +274,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -422,7 +315,7 @@ GameObject:
   - component: {fileID: 610890788}
   - component: {fileID: 610890789}
   m_Layer: 0
-  m_Name: _guiCamera
+  m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -715,7 +608,7 @@ RectTransform:
   m_Children:
   - {fileID: 703488887}
   m_Father: {fileID: 293393344}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -759,7 +652,7 @@ MonoBehaviour:
   joystickRT: {fileID: 1179246577}
   backgroundRT: {fileID: 703488887}
   isStatic: 0
-  borderSize: 4.85
+  borderSize: 2
   smoothReturn: 1
   smoothFactor: 7
   joystickImageColor:
@@ -804,45 +697,3 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1591713928}
   m_CullTransparentMesh: 0
---- !u!1001 &1695438631
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4050639002678526, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050639002678526, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050639002678526, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050639002678526, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050639002678526, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050639002678526, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050639002678526, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050639002678526, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: df93f97d5ecf47446a37aefeec2ca382, type: 2}
-  m_IsPrefabAsset: 0

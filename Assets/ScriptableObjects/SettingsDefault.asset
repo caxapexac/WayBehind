@@ -21,10 +21,10 @@ MonoBehaviour:
   Grass: {fileID: 21300000, guid: 5aec56d1326bd574db3f1a5932cf4bf2, type: 3}
   Swamp: {fileID: 21300000, guid: 855229380353ad143ba3cc04f66bcad5, type: 3}
   Forest: {fileID: 21300000, guid: 701f81109db812f4e934981ed9fa8d48, type: 3}
-  FieldOfView: 20
-  MapSize: 100
-  MapSeed: 4
+  FieldOfView: 120
+  MapSize: 90
+  MapSeed: 7
   HexSize: 0.64
-  SpeedMultipiler: 15
-  CameraDistance: 2
-  CameraSpeed: 4
+  SpeedMultipiler: 10
+  CameraDistance: 0.7
+  CameraSpeed: 2

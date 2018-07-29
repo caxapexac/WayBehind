@@ -1,5 +1,7 @@
-﻿using LeopotamGroup.Math;
+﻿using System;
+using LeopotamGroup.Math;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Misc
 {
@@ -30,8 +32,19 @@ namespace Misc
             get { return -x - y; }
         }
     }
-    
-    
+
+    public static class RandomEnum
+    {
+        /// <summary>
+        /// Gives you random enum value from T
+        /// </summary>
+        /// <returns></returns>
+        public static T Value<T>() where T : struct, IConvertible
+        {
+            Array values = Enum.GetValues(typeof(T));
+            return (T)values.GetValue((int)Mathf.Round(Random.value * (values.Length - 1)));
+        }
+    }
 
     public static class HexMath
     {
@@ -117,7 +130,7 @@ namespace Misc
             }
             else
             {
-                y = Mathf.RoundToInt(Random.Range(-radius + x, radius));
+                y = Mathf.RoundToInt(Random.Range(-radius - x, radius));
             }
             return new CubeCoords(x, y);
         }

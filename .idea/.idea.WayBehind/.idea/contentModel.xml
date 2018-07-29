@@ -63,21 +63,6 @@
             <e p="PoolObject.cs" t="Include" />
             <e p="RecycleAfterTime.cs" t="Include" />
           </e>
-          <e p="TouchJoysticks" t="Include">
-            <e p="Scripts" t="Include">
-              <e p="DualJoystickPlayerController.cs" t="Include" />
-              <e p="DualJoystickTouchContoller.cs" t="Include" />
-              <e p="LeftJoystick.cs" t="Include" />
-              <e p="LeftJoystickPlayerController.cs" t="Include" />
-              <e p="LeftJoystickTouchContoller.cs" t="Include" />
-              <e p="RightJoystick.cs" t="Include" />
-              <e p="RightJoystickPlayerController.cs" t="Include" />
-              <e p="RightJoystickTouchContoller.cs" t="Include" />
-              <e p="SingleJoystick.cs" t="Include" />
-              <e p="SingleJoystickPlayerController.cs" t="Include" />
-              <e p="SingleJoystickTouchController.cs" t="Include" />
-            </e>
-          </e>
           <e p="VictorsAssets" t="Include">
             <e p="TouchControlsKit-Lite" t="Include">
               <e p="Scripts" t="Include">
@@ -135,7 +120,6 @@
                   <e p="TCKInput.cs" t="Include" />
                 </e>
               </e>
-              <e p="TCK_Changelog.txt" t="Include" />
             </e>
           </e>
         </e>

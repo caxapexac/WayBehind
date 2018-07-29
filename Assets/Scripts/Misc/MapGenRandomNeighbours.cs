@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Systems;
 using Components;
 using LeopotamGroup.Collections;
@@ -15,8 +16,6 @@ namespace Misc
             Random.InitState(seed);
             background = new HexList4D<HexBackgroundComponent>();
             foreground = new HexList4D<HexForegroundComponent>();
-            HexBackgroundComponent backgroundHex = new HexBackgroundComponent();
-            HexForegroundComponent foregroundHex = new HexForegroundComponent();
             background.Fill(radius);
             foreground.Fill(radius);
             foreground.Add(0, 0, new HexForegroundComponent()
@@ -24,55 +23,56 @@ namespace Misc
                 ForegroundType = ForegroundTypes.Spawn,
                 IsNew = false
             });
-            GenerateBackgroundStructure(background, radius, BackroundTypes.Water, BackroundTypes.Grass, 70, 1f, 0.1f);
-            GenerateBackgroundStructure(background, radius, BackroundTypes.Swamp, BackroundTypes.Grass, 50, 1f, 0.2f);
-            GenerateBackgroundStructure(background, radius, BackroundTypes.Forest, BackroundTypes.Grass, 30, 1f, 0.03f);
-            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Obstacle, ForegroundTypes.Empty, 50, 100, 1f, 0.2f);
-            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Obstacle, ForegroundTypes.Empty, 50, 70, 1f, 0.4f);
-            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Diamond, ForegroundTypes.Empty, 10, 100, 0f, 0f);
-            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Diamond, ForegroundTypes.Obstacle, 10, 100, 1f, 0.3f);
-            GenerateForegroundStructure(foreground, radius, ForegroundTypes.Enemy, ForegroundTypes.Empty, 100, 100, 0.01f, 0.01f);
+            GenerateBackStruct(background, radius, BackroundTypes.Water, BackroundTypes.Grass, 70, 2, 1f, 0.2f);
+            GenerateBackStruct(background, radius, BackroundTypes.Swamp, BackroundTypes.Grass, 50, 2, 1f, 0.4f);
+            GenerateBackStruct(background, radius, BackroundTypes.Forest, BackroundTypes.Grass, 30, 2, 1f, 0.1f);
+            GenerateForeStruct(foreground, radius, ForegroundTypes.Obstacle, ForegroundTypes.Empty, 10, 1, 100, 1f, 0.3f);
+            GenerateForeStruct(foreground, radius, ForegroundTypes.Obstacle, ForegroundTypes.Empty, 20, 1, 70, 0.5f, 0.2f);
+            GenerateForeStruct(foreground, radius, ForegroundTypes.Obstacle, ForegroundTypes.Empty, 100, 2, 70, 0.1f, 0.1f);
+            GenerateForeStruct(foreground, radius, ForegroundTypes.Diamond, ForegroundTypes.Empty, 10, 1, 100, 0f, 0f);
+            GenerateForeStruct(foreground, radius, ForegroundTypes.Diamond, ForegroundTypes.Obstacle, 10, 1, 100, 0.6f, 0.3f);
+            GenerateForeStruct(foreground, radius, ForegroundTypes.Enemy, ForegroundTypes.Empty, 100, 1, 100, 0.01f, 0.01f);
         }
 
-        private static void GenerateBackgroundStructure(HexList4D<HexBackgroundComponent> background, int radius,
-            BackroundTypes type, BackroundTypes badType, int count, float chance, float diffChance)
+        private static void GenerateBackStruct(HexList4D<HexBackgroundComponent> background, int radius,
+            BackroundTypes type, BackroundTypes badType, int count, int near, float chance, float diffChance)
         {
             for (int i = 0; i < count; i++)
             {
-                GenerateRecursiveB(background, type, badType, HexMath.RandomPosition(radius), chance, diffChance);
+                GenerateRecursiveB(background, type, badType, HexMath.RandomPosition(radius), near, chance, diffChance);
             }
         }
 
         private static void GenerateRecursiveB(HexList4D<HexBackgroundComponent> background,
-            BackroundTypes type, BackroundTypes badType, CubeCoords coords, float chance, float diffChange)
+            BackroundTypes type, BackroundTypes badType, CubeCoords coords, int near, float chance, float diffChange)
         {
             background.Add(coords, new HexBackgroundComponent()
             {
                 BackgroundType = type,
                 IsNew = false
             });
-            FastList<CubeCoords> neighbours = background.NeighboursOf(coords);
+            FastList<CubeCoords> neighbours = background.NeighboursOf(coords, near);
             for (int j = 0; j < neighbours.Count; j++)
             {
                 HexBackgroundComponent hexComponent = background[neighbours[j].x, neighbours[j].y];
-                if (hexComponent.BackgroundType == badType && Random.Range(0f, 1f) < chance)
+                if (hexComponent.BackgroundType == badType && Random.value < chance)
                 {
-                    GenerateRecursiveB(background, type, badType, neighbours[j], chance - diffChange, diffChange);
+                    GenerateRecursiveB(background, type, badType, neighbours[j], near, chance - diffChange, diffChange);
                 }
             }
         }
         
-        private static void GenerateForegroundStructure(HexList4D<HexForegroundComponent> foreground, int radius,
-            ForegroundTypes type, ForegroundTypes badType, int value, int count, float chance, float diffChance)
+        private static void GenerateForeStruct(HexList4D<HexForegroundComponent> foreground, int radius, ForegroundTypes type,
+            ForegroundTypes badType, int value, int near, int count, float chance, float diffChance)
         {
             for (int i = 0; i < count; i++)
             {
-                GenerateRecursiveF(foreground, type, badType, HexMath.RandomPosition(radius), value, chance, diffChance);
+                GenerateRecursiveF(foreground, type, badType, HexMath.RandomPosition(radius), value, near, chance, diffChance);
             }
         }
 
-        private static void GenerateRecursiveF(HexList4D<HexForegroundComponent> background,
-            ForegroundTypes type, ForegroundTypes badType, CubeCoords coords, int value, float chance, float diffChange)
+        private static void GenerateRecursiveF(HexList4D<HexForegroundComponent> background, ForegroundTypes type,
+            ForegroundTypes badType, CubeCoords coords, int value, int near, float chance, float diffChange)
         {
             background.Add(coords, new HexForegroundComponent()
             {
@@ -80,13 +80,13 @@ namespace Misc
                 IsNew = false,
                 Value = value
             });
-            FastList<CubeCoords> neighbours = background.NeighboursOf(coords);
+            FastList<CubeCoords> neighbours = background.NeighboursOf(coords, near);
             for (int j = 0; j < neighbours.Count; j++)
             {
                 HexForegroundComponent hexComponent = background[neighbours[j].x, neighbours[j].y];
-                if (hexComponent.ForegroundType == badType && Random.Range(0f, 1f) < chance)
+                if (hexComponent.ForegroundType == badType && Random.value < chance)
                 {
-                    GenerateRecursiveF(background, type, badType, neighbours[j], value, chance - diffChange, diffChange);
+                    GenerateRecursiveF(background, type, badType, neighbours[j], value, near, chance - diffChange, diffChange);
                 }
             }
         }
@@ -94,44 +94,36 @@ namespace Misc
         public static void GenerateHex(CubeCoords coords,
             HexList4D<HexBackgroundComponent> background, HexList4D<HexForegroundComponent> foreground)
         {
-            FastList<CubeCoords> neighbours = background.NeighboursOf(coords);
-            int grass = 0;
+            //island-type generation:
+            
+            //background
+            FastList<CubeCoords> neighbours = background.NeighboursOf(coords, 2);
             int water = 0;
-            int swamp = 0;
-            int forest = 0;
             for (int i = 0; i < neighbours.Count; i++)
             {
-                switch (background[neighbours[i].x, neighbours[i].y].BackgroundType)
-                {
-                    case BackroundTypes.Grass:
-                        grass++;
-                        break;
-                    case BackroundTypes.Water:
-                        water++;
-                        break;
-                    case BackroundTypes.Swamp:
-                        swamp++;
-                        break;
-                    case BackroundTypes.Forest:
-                        forest++;
-                        break;
-                    default:
-                        break;
-                }
+                CubeCoords neighbour = neighbours[i];
+                if (background[neighbour.x, neighbour.y].BackgroundType == BackroundTypes.Water) water++;
             }
-            int max = Mathf.Max(grass, water, swamp, forest);
             BackroundTypes TypeB;
-            if (Random.Range(0f, 1f) > 0.3f)
+            if (water > 9)
             {
-                if (max == grass) TypeB = BackroundTypes.Grass;
-                else if (max == water) TypeB = BackroundTypes.Water;
-                else if (max == swamp) TypeB = BackroundTypes.Swamp;
-                else TypeB = BackroundTypes.Forest;
+                TypeB = BackroundTypes.Water;
+            }
+            else if (water > 6)
+            {
+                TypeB = Random.value > 0.9999f ? BackroundTypes.Grass : BackroundTypes.Water;
+            }
+            else if (water > 3)
+            {
+                TypeB = Random.value > 0.999f ? BackroundTypes.Grass : BackroundTypes.Water;
+            }
+            else if (water > 2)
+            {
+                TypeB = Random.value > 0.99f ? BackroundTypes.Grass : BackroundTypes.Water;
             }
             else
             {
-                Array values = Enum.GetValues(typeof(BackroundTypes));
-                TypeB = (BackroundTypes)values.GetValue((int)Mathf.Round(Random.Range(0f, 1f) * (values.Length - 1)));
+                TypeB = Random.value > 0.05f ? BackroundTypes.Grass : BackroundTypes.Water;
             }
             background.Add(coords, new HexBackgroundComponent()
             {
@@ -140,46 +132,40 @@ namespace Misc
                 SpeedDown = 1f,
                 IsNew = false
             });
+            
             //foreground
-            neighbours = foreground.NeighboursOf(coords);
-            int empty = 0;
-            int obstacle = 0;
-            int enemy = 0;
-            int diamond = 0;
+            
+            neighbours = foreground.NeighboursOf(coords, 2);
+            int notEmpty = 0;
             for (int i = 0; i < neighbours.Count; i++)
             {
-                switch (foreground[neighbours[i].x, neighbours[i].y].ForegroundType)
-                {
-                    case ForegroundTypes.Empty:
-                        empty++;
-                        break;
-                    case ForegroundTypes.Obstacle:
-                        obstacle++;
-                        break;
-                    case ForegroundTypes.Enemy:
-                        enemy++;
-                        break;
-                    case ForegroundTypes.Diamond:
-                        diamond++;
-                        break;
-                    default:
-                        break;
-                }
+                CubeCoords neighbour = neighbours[i];
+                if (foreground[neighbour.x, neighbour.y].ForegroundType != ForegroundTypes.Empty) notEmpty++;
             }
-            max = Mathf.Max(empty, obstacle, enemy, diamond);
             ForegroundTypes typeF;
-            if (Random.Range(0f, 1f) > 0.2f)
+            if (notEmpty == 0 && TypeB != BackroundTypes.Water)
             {
-                if (max == obstacle) typeF = ForegroundTypes.Obstacle;
-                else if (max == enemy) typeF = ForegroundTypes.Empty;
-                else if (max == diamond) typeF = ForegroundTypes.Empty;
-                else typeF = ForegroundTypes.Empty;
+                float r = Random.value;
+                if (r > 0.99f)
+                {
+                    typeF = ForegroundTypes.Obstacle;
+                }
+                else if (r > 0.98f)
+                {
+                    typeF = ForegroundTypes.Enemy;
+                }
+                else if (r > 0.95f)
+                {
+                    typeF = ForegroundTypes.Diamond;
+                }
+                else
+                {
+                    typeF = ForegroundTypes.Empty;
+                }
             }
             else
             {
-                Array values = Enum.GetValues(typeof(ForegroundTypes));
-                typeF = (ForegroundTypes)values.GetValue((int)Mathf.Round(Random.Range(0f, 1f) * (values.Length - 1)));
-                if (typeF == ForegroundTypes.Spawn) typeF = ForegroundTypes.Diamond;
+                typeF = ForegroundTypes.Empty;
             }
             foreground.Add(coords, new HexForegroundComponent()
             {
@@ -187,6 +173,7 @@ namespace Misc
                 Parent = null,
                 IsNew = false
             });
+            
         }
     }
 }

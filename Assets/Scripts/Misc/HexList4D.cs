@@ -293,21 +293,88 @@ namespace Misc
             return ExistAt(coords.x, coords.y);
         }
 
-        public FastList<CubeCoords> NeighboursOf(int x, int y)
+        private FastList<CubeCoords> NeighboursOf(int xo, int yo, int x, int y, int radius = 1)
         {
-            int z = -x - y;
+            if (radius == 0) return new FastList<CubeCoords>(){new CubeCoords(x, y)};
             FastList<CubeCoords> neighbours = new FastList<CubeCoords>(6);
-            if (ExistAt(x + 1, y)) neighbours.Add(new CubeCoords(x + 1, y)); //this[x + 1, y]);
-            if (ExistAt(x + 1, y - 1)) neighbours.Add(new CubeCoords(x + 1, y - 1)); //this[x + 1, y - 1]);
-            if (ExistAt(x, y + 1)) neighbours.Add(new CubeCoords(x, y + 1)); //this[x, y + 1]);
-            if (ExistAt(x, y - 1)) neighbours.Add(new CubeCoords(x, y - 1)); //this[x, y - 1]);
-            if (ExistAt(x - 1, y + 1)) neighbours.Add(new CubeCoords(x - 1, y + 1)); //this[x - 1, y + 1]);
-            if (ExistAt(x - 1, y)) neighbours.Add(new CubeCoords(x - 1, y)); //this[x - 1, y]);
+            FastList<CubeCoords> nextNeighbours;
+            if (ExistAt(x + 1, y))
+            {
+                nextNeighbours = NeighboursOf(xo, yo, x + 1, y, radius - 1);
+                for (int i = 0; i < nextNeighbours.Count; i++)
+                {
+                    if (!neighbours.Contains(nextNeighbours[i]) && (nextNeighbours[i].x != xo || nextNeighbours[i].y != yo))
+                    {
+                        neighbours.Add(nextNeighbours[i]);
+                    }
+                }
+            }
+            if (ExistAt(x + 1, y - 1))
+            {
+                nextNeighbours = NeighboursOf(xo, yo, x + 1, y - 1, radius - 1);
+                for (int i = 0; i < nextNeighbours.Count; i++)
+                {
+                    if (!neighbours.Contains(nextNeighbours[i]) && (nextNeighbours[i].x != xo || nextNeighbours[i].y != yo))
+                    {
+                        neighbours.Add(nextNeighbours[i]);
+                    }
+                }
+            }
+            if (ExistAt(x, y + 1))
+            {
+                nextNeighbours = NeighboursOf(xo, yo, x, y + 1, radius - 1);
+                for (int i = 0; i < nextNeighbours.Count; i++)
+                {
+                    if (!neighbours.Contains(nextNeighbours[i]) && (nextNeighbours[i].x != xo || nextNeighbours[i].y != yo))
+                    {
+                        neighbours.Add(nextNeighbours[i]);
+                    }
+                }
+            }
+            if (ExistAt(x, y - 1))
+            {
+                nextNeighbours = NeighboursOf(xo, yo, x, y - 1, radius - 1);
+                for (int i = 0; i < nextNeighbours.Count; i++)
+                {
+                    if (!neighbours.Contains(nextNeighbours[i]) && (nextNeighbours[i].x != xo || nextNeighbours[i].y != yo))
+                    {
+                        neighbours.Add(nextNeighbours[i]);
+                    }
+                }
+            }
+            if (ExistAt(x - 1, y + 1))
+            {
+                nextNeighbours = NeighboursOf(xo, yo, x - 1, y + 1, radius - 1);
+                for (int i = 0; i < nextNeighbours.Count; i++)
+                {
+                    if (!neighbours.Contains(nextNeighbours[i]) && (nextNeighbours[i].x != xo || nextNeighbours[i].y != yo))
+                    {
+                        neighbours.Add(nextNeighbours[i]);
+                    }
+                }
+            }
+            if (ExistAt(x - 1, y))
+            {
+                nextNeighbours = NeighboursOf(xo, yo, x - 1, y, radius - 1);
+                for (int i = 0; i < nextNeighbours.Count; i++)
+                {
+                    if (!neighbours.Contains(nextNeighbours[i]) && (nextNeighbours[i].x != xo || nextNeighbours[i].y != yo))
+                    {
+                        neighbours.Add(nextNeighbours[i]);
+                    }
+                }
+            }
             return neighbours;
         }
-        public FastList<CubeCoords> NeighboursOf(CubeCoords coords)
+        public FastList<CubeCoords> NeighboursOf(int x, int y, int radius = 1)
         {
-            return NeighboursOf(coords.x, coords.y);
+            return NeighboursOf(x, y, x, y, radius);
+            
         }
+        public FastList<CubeCoords> NeighboursOf(CubeCoords coords, int radius = 1)
+        {
+            return NeighboursOf(coords.x, coords.y, radius);
+        }
+        
     }
 }
