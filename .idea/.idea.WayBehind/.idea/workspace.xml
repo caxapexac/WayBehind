@@ -2,128 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="acbe007c-6e4e-4f0e-b1b8-8fbcf455f256" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WayBehind/.idea/contentModel.xml" afterPath="$PROJECT_DIR$/.idea/.idea.WayBehind/.idea/contentModel.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/DualJoystickTouchContoller.cs.meta" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystick.cs.meta" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystickPlayerController.cs.meta" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystickTouchContoller.cs.meta" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/RightJoystick.cs.meta" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/RightJoystickPlayerController.cs.meta" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WayBehind/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/.idea.WayBehind/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/MobileTouchFloatingJoysticksDoc_v1.0.pdf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/MobileTouchFloatingJoysticksDoc_v1.0.pdf.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/Pistol05.FBX" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/Pistol05.FBX.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolMaterials.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolMaterials/Pistol0501.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolMaterials/Pistol0501.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolMaterials/Pistol0502.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolMaterials/Pistol0502.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolMaterials/Pistol0503.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolMaterials/Pistol0503.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0501_D.tga" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0501_D.tga.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0501_N.tga" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0501_N.tga.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0502_D.tga" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0502_D.tga.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0502_N.tga" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0502_N.tga.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0503_D.tga" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0503_D.tga.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0503_N.tga" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PistolModel/PistolTextures/Pistol0503_N.tga.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/body normal.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/body normal.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/body_color_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/body_color_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/body_specular_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/body_specular_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/eyes_color_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/eyes_color_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/eyes_specular_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/eyes_specular_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/face normal.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/face normal.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/face_color_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbm/face_color_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbx" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/DefaultAvatar.fbx.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/Materials.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/Materials/DefaultAvatar-body.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/Materials/DefaultAvatar-body.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/Materials/DefaultAvatar-eyes.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/Materials/DefaultAvatar-eyes.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/Materials/DefaultAvatar-face.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/Materials/DefaultAvatar-face.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerMaterials.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerMaterials/DefaultAvatar-body.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerMaterials/DefaultAvatar-body.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerMaterials/DefaultAvatar-eyes.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerMaterials/DefaultAvatar-eyes.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerMaterials/DefaultAvatar-face.mat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerMaterials/DefaultAvatar-face.mat.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/body normal.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/body normal.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/body_color_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/body_color_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/body_specular_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/body_specular_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/eyes_color_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/eyes_color_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/eyes_specular_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/eyes_specular_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/face normal.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/face normal.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/face_color_map.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/PlayerModel/PlayerTextures/face_color_map.png.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/DualJoystickPlayerController.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/DualJoystickPlayerController.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/DualJoystickTouchContoller.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/DualJoystickTouchContoller.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystick.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystick.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystickPlayerController.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystickPlayerController.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystickTouchContoller.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/LeftJoystickTouchContoller.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/RightJoystick.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/RightJoystick.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/RightJoystickPlayerController.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/RightJoystickPlayerController.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/RightJoystickTouchContoller.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/RightJoystickTouchContoller.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/Single Joystick Canvas.prefab" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/Single Joystick Canvas.prefab.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/Single Joystick Touch Controller.prefab" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/Single Joystick Touch Controller.prefab.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/SingleJoystick.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/SingleJoystick.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/SingleJoystickPlayerController.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/SingleJoystickPlayerController.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/SingleJoystickTouchController.cs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/TouchJoysticks/Scripts/SingleJoystickTouchController.cs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/VictorsAssets/TouchControlsKit-Lite/TCK_Changelog.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/VictorsAssets/TouchControlsKit-Lite/TCK_Changelog.txt.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/VictorsAssets/TouchControlsKit-Lite/TCK_Manual.pdf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/VictorsAssets/TouchControlsKit-Lite/TCK_Manual.pdf.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/VictorsAssets/TouchControlsKit-Lite/TCK_README.pdf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Libs/VictorsAssets/TouchControlsKit-Lite/TCK_README.pdf.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/WorldScene.unity" afterPath="$PROJECT_DIR$/Assets/Scenes/WorldScene.unity" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/SettingsDefault.asset" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/SettingsDefault.asset" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/HexList4D.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/HexList4D.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/MapGenRandomNeighbours.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/MapGenRandomNeighbours.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/Utils.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/Utils.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/TouchJoysticks/Scripts.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Content/FirstPersonExample/Scripts.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Editor/CustomInspectors/Controllers/Base.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Editor/Extensions.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Editor/Initialize.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Editor/Utils.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Editor/Windows/Tabs.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Runtime/Attributes.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Runtime/Controllers/BaseData.meta" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchJoysticks.meta" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Content/FirstPersonExample.meta" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Editor/CustomInspectors/Controllers.meta" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Editor/Windows.meta" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Assets/VictorsAssets/TouchControlsKit-Lite/Scripts/Runtime/Controllers.meta" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -137,11 +27,10 @@
       <file leaf-file-name="GameStartup.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Misc/GameStartup.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="912">
               <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
               <folding>
                 <marker date="1532885898152" expanded="false" signature="6:88" ph="..." />
-                <marker date="1532885898152" expanded="true" signature="104:2043" ph="{...}" />
                 <marker date="1532885898152" expanded="true" signature="151:2041" ph="{...}" />
                 <marker date="1532885898152" expanded="true" signature="299:1866" ph="{...}" />
                 <marker date="1532885898152" expanded="true" signature="557:1189" ph="{...}" />
@@ -171,10 +60,9 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Misc/MapGenRandomNeighbours.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="494">
-              <caret line="122" column="13" lean-forward="true" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
+              <caret line="122" column="13" lean-forward="false" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
               <folding>
                 <marker date="1532898244712" expanded="false" signature="6:158" ph="..." />
-                <marker date="1532898244712" expanded="true" signature="174:7591" ph="{...}" />
                 <marker date="1532898244712" expanded="true" signature="223:7589" ph="{...}" />
                 <marker date="1532898244712" expanded="true" signature="402:1926" ph="{...}" />
                 <marker date="1532898244712" expanded="true" signature="729:830" ph="{...}" />
@@ -215,11 +103,10 @@
       <file leaf-file-name="Utils.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Misc/Utils.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
+            <state relative-caret-position="665">
               <caret line="35" column="34" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
               <folding>
                 <marker date="1532893369210" expanded="true" signature="6:93" ph="..." />
-                <marker date="1532893369210" expanded="true" signature="109:4187" ph="{...}" />
                 <marker date="1532893369210" expanded="true" signature="141:574" ph="{...}" />
                 <marker date="1532893369210" expanded="true" signature="604:846" ph="{...}" />
                 <marker date="1532893369210" expanded="true" signature="650:718" ph="{...}" />
@@ -247,11 +134,10 @@
       <file leaf-file-name="HexList4D.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Misc/HexList4D.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="849">
+            <state relative-caret-position="6821">
               <caret line="363" column="21" lean-forward="false" selection-start-line="363" selection-start-column="21" selection-end-line="363" selection-end-column="21" />
               <folding>
                 <marker date="1532895864545" expanded="false" signature="6:110" ph="..." />
-                <marker date="1532895864545" expanded="true" signature="126:11555" ph="{...}" />
                 <marker date="1532895864545" expanded="true" signature="181:11553" ph="{...}" />
                 <marker date="1532895864545" expanded="true" signature="427:631" ph="{...}" />
                 <marker date="1532895864545" expanded="true" signature="671:907" ph="{...}" />
@@ -364,11 +250,10 @@
       <file leaf-file-name="FMovePlayerSystem.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Systems/FMovePlayerSystem.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="583">
+            <state relative-caret-position="608">
               <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
               <folding>
                 <marker date="1532882607409" expanded="false" signature="6:116" ph="..." />
-                <marker date="1532882607409" expanded="true" signature="135:1449" ph="{...}" />
                 <marker date="1532882607409" expanded="true" signature="154:214" ph="{...}" />
                 <marker date="1532882607409" expanded="true" signature="282:1447" ph="{...}" />
                 <marker date="1532882607409" expanded="true" signature="536:1441" ph="{...}" />
@@ -382,11 +267,10 @@
       <file leaf-file-name="FWorldGenSystem.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Systems/FWorldGenSystem.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2204">
+            <state relative-caret-position="2717">
               <caret line="149" column="21" lean-forward="false" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
               <folding>
                 <marker date="1532885622641" expanded="false" signature="6:125" ph="..." />
-                <marker date="1532885622641" expanded="true" signature="144:10357" ph="{...}" />
                 <marker date="1532885622641" expanded="true" signature="177:249" ph="{...}" />
                 <marker date="1532885622641" expanded="true" signature="282:373" ph="{...}" />
                 <marker date="1532885622641" expanded="true" signature="455:10355" ph="{...}" />
@@ -530,7 +414,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1400" />
@@ -561,70 +445,6 @@
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
               <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Libs" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="ScriptableObjects" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Components" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Misc" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="MonoBehviours" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="WayBehind (6 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Systems" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
           </expand>
           <select />
@@ -672,12 +492,13 @@
       <workItem from="1532771317805" duration="13758000" />
       <workItem from="1532815058484" duration="4958000" />
       <workItem from="1532879183238" duration="74000" />
-      <workItem from="1532881170438" duration="16082000" />
+      <workItem from="1532881170438" duration="16251000" />
+      <workItem from="1532928378912" duration="6000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104232000" />
+    <option name="totallyTimeSpent" value="104407000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -689,7 +510,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1060" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -854,15 +675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="18" column="71" lean-forward="false" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="71" />
-          <folding>
-            <marker date="1532880934243" expanded="false" signature="6:52" ph="..." />
-            <marker date="1532880934243" expanded="true" signature="77:548" ph="{...}" />
-            <marker date="1532880934243" expanded="true" signature="129:546" ph="{...}" />
-            <marker date="1532880934243" expanded="true" signature="176:213" ph="{...}" />
-            <marker date="1532880934243" expanded="true" signature="259:414" ph="{...}" />
-            <marker date="1532880934243" expanded="true" signature="467:478" ph="{...}" />
-            <marker date="1532880934243" expanded="true" signature="531:543" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -870,10 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="22" lean-forward="false" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-          <folding>
-            <marker date="1532625093554" expanded="true" signature="20:69" ph="{...}" />
-            <marker date="1532625093554" expanded="true" signature="54:67" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -881,11 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" column="35" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-          <folding>
-            <marker date="1532630915031" expanded="true" signature="6:33" ph="..." />
-            <marker date="1532630915031" expanded="true" signature="55:256" ph="{...}" />
-            <marker date="1532630915031" expanded="true" signature="90:254" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -893,7 +696,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -901,17 +703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <marker date="1532881417652" expanded="false" signature="6:64" ph="..." />
-            <marker date="1532881417652" expanded="true" signature="89:994" ph="{...}" />
-            <marker date="1532881417652" expanded="true" signature="148:992" ph="{...}" />
-            <marker date="1532881417652" expanded="true" signature="209:267" ph="{...}" />
-            <marker date="1532881417652" expanded="true" signature="324:827" ph="{...}" />
-            <marker date="1532881417652" expanded="true" signature="389:588" ph="{...}" />
-            <marker date="1532881417652" expanded="true" signature="605:804" ph="{...}" />
-            <marker date="1532881417652" expanded="true" signature="887:907" ph="{...}" />
-            <marker date="1532881417652" expanded="true" signature="966:986" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -919,7 +710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,11 +717,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding>
-            <marker date="1532773329118" expanded="false" signature="6:40" ph="..." />
-            <marker date="1532773329118" expanded="true" signature="62:377" ph="{...}" />
-            <marker date="1532773329118" expanded="true" signature="94:375" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -939,14 +724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <marker date="1532880934243" expanded="false" signature="6:80" ph="..." />
-            <marker date="1532880934243" expanded="true" signature="99:564" ph="{...}" />
-            <marker date="1532880934243" expanded="true" signature="162:562" ph="{...}" />
-            <marker date="1532880934243" expanded="true" signature="239:558" ph="{...}" />
-            <marker date="1532880934243" expanded="true" signature="326:378" ph="/* if (new Vector2(x, y).sqrMagnitude &gt; 0.01f) ... */" />
-            <marker date="1532880934243" expanded="true" signature="435:547" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -954,15 +731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
           <caret line="31" column="89" lean-forward="false" selection-start-line="31" selection-start-column="89" selection-end-line="31" selection-end-column="89" />
-          <folding>
-            <marker date="1532883563376" expanded="false" signature="6:68" ph="..." />
-            <marker date="1532883563376" expanded="true" signature="87:1015" ph="{...}" />
-            <marker date="1532883563376" expanded="true" signature="161:1013" ph="{...}" />
-            <marker date="1532883563376" expanded="true" signature="421:596" ph="{...}" />
-            <marker date="1532883563376" expanded="true" signature="618:972" ph="{...}" />
-            <marker date="1532883563376" expanded="true" signature="748:968" ph="{...}" />
-            <marker date="1532883563376" expanded="true" signature="998:1010" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -979,11 +747,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Misc/GameStartup.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="912">
           <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
           <folding>
             <marker date="1532885898152" expanded="false" signature="6:88" ph="..." />
-            <marker date="1532885898152" expanded="true" signature="104:2043" ph="{...}" />
             <marker date="1532885898152" expanded="true" signature="151:2041" ph="{...}" />
             <marker date="1532885898152" expanded="true" signature="299:1866" ph="{...}" />
             <marker date="1532885898152" expanded="true" signature="557:1189" ph="{...}" />
@@ -997,11 +764,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Systems/FMovePlayerSystem.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
+        <state relative-caret-position="608">
           <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
           <folding>
             <marker date="1532882607409" expanded="false" signature="6:116" ph="..." />
-            <marker date="1532882607409" expanded="true" signature="135:1449" ph="{...}" />
             <marker date="1532882607409" expanded="true" signature="154:214" ph="{...}" />
             <marker date="1532882607409" expanded="true" signature="282:1447" ph="{...}" />
             <marker date="1532882607409" expanded="true" signature="536:1441" ph="{...}" />
@@ -1015,13 +781,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding>
-            <marker date="1532812328770" expanded="false" signature="6:62" ph="..." />
-            <marker date="1532812328770" expanded="true" signature="84:811" ph="{...}" />
-            <marker date="1532812328770" expanded="true" signature="133:809" ph="{...}" />
-            <marker date="1532812328770" expanded="true" signature="179:328" ph="{...}" />
-            <marker date="1532812328770" expanded="true" signature="399:625" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1029,7 +788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1037,109 +795,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <marker date="1527506026000" expanded="true" signature="0:313" ph="/* ---------------------------------------------------------------------------- ... */" />
-            <marker date="1527506026000" expanded="false" signature="321:388" ph="..." />
-            <marker date="1527506026000" expanded="true" signature="426:13397" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="432:563" ph="/// List class replacement without additional checks and public access to internal array data. ... " />
-            <marker date="1527506026000" expanded="true" signature="623:13395" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="633:698" ph="/// Get items count. ... " />
-            <marker date="1527506026000" expanded="true" signature="760:833" ph="/// Get collection capacity. ... " />
-            <marker date="1527506026000" expanded="true" signature="901:1031" ph="/// Get / set item at specified index. ... " />
-            <marker date="1527506026000" expanded="true" signature="1066:1456" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="1084:1256" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="1123:1204" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="1273:1446" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="1312:1393" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="1692:1761" ph="/// Default constructor. ... " />
-            <marker date="1527506026000" expanded="true" signature="1816:2000" ph="/// Constructor with comparer initialization. ... " />
-            <marker date="1527506026000" expanded="true" signature="2101:2347" ph="/// Constructor with capacity initialization. ... " />
-            <marker date="1527506026000" expanded="true" signature="2424:2732" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="2742:2874" ph="/// Add new item to end of collection. ... " />
-            <marker date="1527506026000" expanded="true" signature="2908:3323" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="2947:3256" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="2984:3040" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="3333:3463" ph="/// Add items to end of this collection. ... " />
-            <marker date="1527506026000" expanded="true" signature="3515:4188" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="3547:3620" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="3703:3973" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="3782:3829" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="4036:4164" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="4081:4146" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="4198:4382" ph="/// Set internal data, use it on your own risk! ... " />
-            <marker date="1527506026000" expanded="true" signature="4436:4662" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="4468:4541" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="4672:4790" ph="/// Clear collection without release memory for performance optimization. ... " />
-            <marker date="1527506026000" expanded="true" signature="4820:4858" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="4868:5149" ph="/// Clear collection without release memory for performance optimization. ... " />
-            <marker date="1527506026000" expanded="true" signature="5205:5429" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="5261:5395" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="5317:5381" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="5439:5580" ph="/// Is collection contains specified item. ... " />
-            <marker date="1527506026000" expanded="true" signature="5619:5671" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="5681:5915" ph="/// Copy collection to array and insert from specified index. ... " />
-            <marker date="1527506026000" expanded="true" signature="5971:6045" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="6055:6463" ph="/// Add new items with default values to end of collection. ... " />
-            <marker date="1527506026000" expanded="true" signature="6576:6834" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="6607:6646" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="6681:6724" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="6844:7025" ph="/// Get index of specified item. ... " />
-            <marker date="1527506026000" expanded="true" signature="7062:7746" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="7138:7339" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="7190:7325" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="7253:7307" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="7386:7610" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="7442:7592" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="7508:7570" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="7756:7956" ph="/// Insert new item at specified position of collection. ... " />
-            <marker date="1527506026000" expanded="true" signature="8004:8304" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="8051:8124" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="8314:8415" ph="/// Is collection readonly (for compatibility to IList). ... " />
-            <marker date="1527506026000" expanded="true" signature="8482:8721" ph="/// Get internal data, use it on your own risk! ... " />
-            <marker date="1527506026000" expanded="true" signature="8752:8790" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="8800:9102" ph="/// Get internal data, use it on your own risk! ... " />
-            <marker date="1527506026000" expanded="true" signature="9146:9212" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="9222:9359" ph="/// Never ever - use for-loop for iterations! ... " />
-            <marker date="1527506026000" expanded="true" signature="9407:9466" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="9517:9576" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="9586:9719" ph="/// Try to remove specified item. ... " />
-            <marker date="1527506026000" expanded="true" signature="9756:9929" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="9821:9866" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="9939:10087" ph="/// Remove item from collection at index. ... " />
-            <marker date="1527506026000" expanded="true" signature="10126:10305" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="10168:10207" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="10315:10643" ph="/// Try to remove last item in collection. ... " />
-            <marker date="1527506026000" expanded="true" signature="10711:10946" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="10742:10787" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="10849:10910" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="10956:11430" ph="/// Reserve the specified amount of items, absolute or relative. Items amount not changed! ... " />
-            <marker date="1527506026000" expanded="true" signature="11533:12272" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="11564:11603" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="11736:12086" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="11774:11839" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="11885:11941" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="12126:12262" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="12184:12248" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="12282:12365" ph="/// Reverse items order in collection. ... " />
-            <marker date="1527506026000" expanded="true" signature="12397:12711" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="12428:12467" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="12553:12701" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="12721:12801" ph="/// Copy collection items to array. ... " />
-            <marker date="1527506026000" expanded="true" signature="12832:13009" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="12903:12971" ph="{...}" />
-            <marker date="1527506026000" expanded="true" signature="13019:13276" ph="/// Set usage state of special (fastest) inlined comparer for nullable types in Contains method. ... " />
-            <marker date="1527506026000" expanded="true" signature="13334:13389" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Systems/FWorldGenSystem.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2204">
+        <state relative-caret-position="2717">
           <caret line="149" column="21" lean-forward="false" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
           <folding>
             <marker date="1532885622641" expanded="false" signature="6:125" ph="..." />
-            <marker date="1532885622641" expanded="true" signature="144:10357" ph="{...}" />
             <marker date="1532885622641" expanded="true" signature="177:249" ph="{...}" />
             <marker date="1532885622641" expanded="true" signature="282:373" ph="{...}" />
             <marker date="1532885622641" expanded="true" signature="455:10355" ph="{...}" />
@@ -1188,11 +852,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Misc/Utils.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
+        <state relative-caret-position="665">
           <caret line="35" column="34" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
           <folding>
             <marker date="1532893369210" expanded="true" signature="6:93" ph="..." />
-            <marker date="1532893369210" expanded="true" signature="109:4187" ph="{...}" />
             <marker date="1532893369210" expanded="true" signature="141:574" ph="{...}" />
             <marker date="1532893369210" expanded="true" signature="604:846" ph="{...}" />
             <marker date="1532893369210" expanded="true" signature="650:718" ph="{...}" />
@@ -1218,11 +881,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Misc/HexList4D.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="849">
+        <state relative-caret-position="6821">
           <caret line="363" column="21" lean-forward="false" selection-start-line="363" selection-start-column="21" selection-end-line="363" selection-end-column="21" />
           <folding>
             <marker date="1532895864545" expanded="false" signature="6:110" ph="..." />
-            <marker date="1532895864545" expanded="true" signature="126:11555" ph="{...}" />
             <marker date="1532895864545" expanded="true" signature="181:11553" ph="{...}" />
             <marker date="1532895864545" expanded="true" signature="427:631" ph="{...}" />
             <marker date="1532895864545" expanded="true" signature="671:907" ph="{...}" />
@@ -1318,10 +980,9 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Misc/MapGenRandomNeighbours.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
-          <caret line="122" column="13" lean-forward="true" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
+          <caret line="122" column="13" lean-forward="false" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
           <folding>
             <marker date="1532898244712" expanded="false" signature="6:158" ph="..." />
-            <marker date="1532898244712" expanded="true" signature="174:7591" ph="{...}" />
             <marker date="1532898244712" expanded="true" signature="223:7589" ph="{...}" />
             <marker date="1532898244712" expanded="true" signature="402:1926" ph="{...}" />
             <marker date="1532898244712" expanded="true" signature="729:830" ph="{...}" />
