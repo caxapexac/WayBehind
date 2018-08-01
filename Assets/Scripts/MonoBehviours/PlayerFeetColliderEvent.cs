@@ -16,19 +16,9 @@ namespace MonoBehviours
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag(Utils.BackgroundTag))
-            {
-                TriggerBackgroundEvent triggerEvent = _world.CreateEntityWith<TriggerBackgroundEvent>();
-                triggerEvent.ObstacleTransform = other.transform;
-            }
-            else
-            {
-                TriggerForegroundEvent triggerEvent = _world.CreateEntityWith<TriggerForegroundEvent>();
-                triggerEvent.ObstacleTransform = other.transform;
-            }
-            
+            TriggerEvent triggerEvent = _world.CreateEntityWith<TriggerEvent>();
+            triggerEvent.OtherTransform = other.transform;
         }
-
 
         private void OnCollisionStay2D(Collision2D other)
         {

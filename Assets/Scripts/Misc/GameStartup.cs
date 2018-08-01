@@ -8,8 +8,7 @@ namespace Misc
 {
     public class GameStartup : MonoBehaviour
     {
-        public SettingsObject Settings;
-
+        [SerializeField] private SettingsObject _settings;
         private EcsWorld _world;
         private EcsSystems _updateSystems;
 
@@ -20,37 +19,31 @@ namespace Misc
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
 #endif
             _updateSystems = new EcsSystems(_world)
-                .Add(new FWorldGenSystem()
+                .Add(new WorldGenSystem()
                 {
-                    PlayerPrefab = Settings.PlayerPrefab,
-                    Fow = Settings.FieldOfView,
-                    HexSize = Settings.HexSize,
-                    MapSize = Settings.MapSize,
-                    MapSeed = Settings.MapSeed,
-                    Spawn = Settings.Spawn,
-                    Enemy = Settings.Enemy,
-                    Diamond = Settings.Diamond,
-                    Obstacle = Settings.Obstacle,
-                    Water = Settings.Water,
-                    Grass = Settings.Grass,
-                    Swamp = Settings.Swamp,
-                    Forest = Settings.Forest
+                    PlayerPrefab = _settings.PlayerPrefab,
+                    Fow = _settings.FieldOfView,
+                    HexSize = _settings.HexSize,
+                    MapSize = _settings.MapSize,
+                    MapSaeed = _settings.MapSaeed,
+                    Enemies = _settings.Enemies
                 })
-                .Add(new FMovePlayerSystem()
+                .Add(new MovePlayerSystem()
                 {
-                    SpeedMultipiler = Settings.SpeedMultipiler
+                    SpeedMultipiler = _settings.SpeedMultipiler
                 })
                 .Add(new CameraSystem()
                 {
-                    CameraDistance = Settings.CameraDistance,
-                    CameraSpeed = Settings.CameraSpeed
+                    CameraSize = _settings.CameraSize,
+                    CameraDistance = _settings.CameraDistance,
+                    CameraSpeed = _settings.CameraSpeed
                 })
 #if UNITY_EDITOR
                 .Add(new InputKeyboardSystem())
 #else
                 .Add(new InputStickSystem())
 #endif
-                .Add(new FAISystem());
+                .Add(new AISystem());
             //
             _updateSystems.Initialize();
 #if UNITY_EDITOR

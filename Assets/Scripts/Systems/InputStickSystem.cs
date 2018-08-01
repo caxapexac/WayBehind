@@ -5,24 +5,28 @@ using UnityEngine;
 
 namespace Systems
 {
-	[EcsInject]
-	public class InputStickSystem : IEcsRunSystem 
-	{
-		EcsFilter<PlayerComponent> _playerFilter = null;
-		
-		public void Run()
-		{
-			Vector2 move = TCKInput.GetAxis( "Joystick" ); // NEW func since ver 1.5.5
+    [EcsInject]
+    public class InputStickSystem : IEcsInitSystem, IEcsRunSystem
+    {
+        private PlayerComponent _player;
 
-			//if (new Vector2(x, y).sqrMagnitude > 0.01f)
-			//{
-			for (int i = 0; i < _playerFilter.EntitiesCount; i++)
-			{
-				_playerFilter.Components1[i].Force.X = move.x;
-				_playerFilter.Components1[i].Force.Y = move.y;
-			}
-			//}
-		}
+        private EcsFilter<PlayerComponent> _playerFilter = null;
 
-	}
+        public void Initialize()
+        {
+            _player = _playerFilter.Components1[0];
+        }
+
+        public void Run()
+        {
+            Vector2 move = TCKInput.GetAxis("Joystick");
+            _player.Force.X = move.x;
+            _player.Force.Y = move.y;
+        }
+
+        public void Destroy()
+        {
+            _player = null;
+        }
+    }
 }

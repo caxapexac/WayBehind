@@ -13,18 +13,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 1006894093068076, guid: df93f97d5ecf47446a37aefeec2ca382,
     type: 2}
-  Spawn: {fileID: 21300000, guid: a12b9a8f47ec7174588275a4b6228ce1, type: 3}
-  Enemy: {fileID: 21300000, guid: d018e9b26e0968a4e90d760b5b52afb7, type: 3}
-  Diamond: {fileID: 21300000, guid: 53cadf5c74c028949bad446539c45aa6, type: 3}
-  Obstacle: {fileID: 21300000, guid: 634a7bcf1e1dd364ab71c7c82b94adb5, type: 3}
-  Water: {fileID: 21300000, guid: a65be495946bd1846920c6d89fdb0ed6, type: 3}
-  Grass: {fileID: 21300000, guid: 5aec56d1326bd574db3f1a5932cf4bf2, type: 3}
-  Swamp: {fileID: 21300000, guid: 855229380353ad143ba3cc04f66bcad5, type: 3}
-  Forest: {fileID: 21300000, guid: 701f81109db812f4e934981ed9fa8d48, type: 3}
-  FieldOfView: 120
+  Enemies:
+  - {fileID: 21300000, guid: d018e9b26e0968a4e90d760b5b52afb7, type: 3}
+  CameraSize: 5
+  FieldOfView: 100
   MapSize: 90
-  MapSeed: 7
-  HexSize: 0.64
-  SpeedMultipiler: 10
+  MapSaeed: 112263
+  HexSize: 0.32
+  SpeedMultipiler: 5
   CameraDistance: 0.7
   CameraSpeed: 2

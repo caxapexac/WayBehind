@@ -136,19 +136,18 @@
         <e p="Scripts" t="Include">
           <e p="Components" t="Include">
             <e p="EnemyComponent.cs" t="Include" />
-            <e p="HexBackgroundComponent.cs" t="Include" />
-            <e p="HexForegroundComponent.cs" t="Include" />
-            <e p="MapComponent.cs" t="Include" />
+            <e p="GameComponent.cs" t="Include" />
+            <e p="HexComponent.cs" t="Include" />
             <e p="PlayerComponent.cs" t="Include" />
           </e>
           <e p="Events" t="Include">
             <e p="CollisionEvent.cs" t="Include" />
-            <e p="TriggerBackgroundEvent.cs" t="Include" />
-            <e p="TriggerForegroundEvent.cs" t="Include" />
+            <e p="TriggerEvent.cs" t="Include" />
           </e>
           <e p="Misc" t="Include">
             <e p="GameStartup.cs" t="Include" />
-            <e p="HexList4D.cs" t="Include" />
+            <e p="HexaList3D.cs" t="Include" />
+            <e p="HexMath.cs" t="Include" />
             <e p="MapGenRandomNeighbours.cs" t="Include" />
             <e p="Utils.cs" t="Include" />
           </e>
@@ -157,16 +156,16 @@
             <e p="PlayerFeetColliderEvent.cs" t="Include" />
           </e>
           <e p="Systems" t="Include">
+            <e p="AISystem.cs" t="Include" />
             <e p="CameraSystem.cs" t="Include" />
-            <e p="FAISystem.cs" t="Include" />
-            <e p="FMovePlayerSystem.cs" t="Include" />
-            <e p="FWorldGenSystem.cs" t="Include" />
             <e p="InputKeyboardSystem.cs" t="Include" />
             <e p="InputStickSystem.cs" t="Include" />
-            <e p="PlayerInitSystem.cs" t="Include" />
+            <e p="MovePlayerSystem.cs" t="Include" />
+            <e p="WorldGenSystem.cs" t="Include" />
           </e>
           <e p="Temporary" t="Include">
             <e p="EXComponent.cs" t="Include" />
+            <e p="ExPlayerInitSystem.cs" t="Include" />
             <e p="EXSystem.cs" t="Include" />
           </e>
         </e>
