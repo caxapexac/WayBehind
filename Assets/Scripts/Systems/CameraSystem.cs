@@ -30,13 +30,16 @@ namespace Systems
             float distance = Vector2.Distance(_cameraTransform.position, _playerTransform.position);
             if (distance > CameraDistance)
             {
-                _cameraTransform.Translate((_playerTransform.localPosition - _cameraTransform.localPosition)
+                _cameraTransform.Translate(((Vector2)_playerTransform.localPosition - (Vector2)_cameraTransform.localPosition)
                                            * distance * CameraSpeed * Time.deltaTime);
             }
         }
 
         public void Destroy()
         {
+            _camera = null;
+            _cameraTransform = null;
+            _playerTransform = null;
         }
     }
 }

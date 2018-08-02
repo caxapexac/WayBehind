@@ -12,6 +12,7 @@ namespace Scriptable
         public int FieldOfView = 8;
         public int MapSize = 100;
         public int MapSaeed = 112263;
+        public bool IsTouchScreen = false;
 
         public float HexSize = 2;
         public float SpeedMultipiler = 1f;

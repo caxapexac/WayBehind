@@ -13,7 +13,6 @@ namespace Components
         }
 
         public Transform Transform;
-        //public Collider2D Collider;
         public Force Force;
         public int Hp;
         public int Exp;

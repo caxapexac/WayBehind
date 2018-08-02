@@ -9,7 +9,6 @@ namespace Systems
     public class InputStickSystem : IEcsInitSystem, IEcsRunSystem
     {
         private PlayerComponent _player;
-
         private EcsFilter<PlayerComponent> _playerFilter = null;
 
         public void Initialize()

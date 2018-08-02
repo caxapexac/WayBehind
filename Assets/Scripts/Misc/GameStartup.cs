@@ -38,13 +38,17 @@ namespace Misc
                     CameraDistance = _settings.CameraDistance,
                     CameraSpeed = _settings.CameraSpeed
                 })
-#if UNITY_EDITOR
-                .Add(new InputKeyboardSystem())
-#else
-                .Add(new InputStickSystem())
-#endif
                 .Add(new AISystem());
-            //
+
+            if (_settings.IsTouchScreen)
+            {
+                _updateSystems.Add(new InputStickSystem());
+            }
+            else
+            {
+                _updateSystems.Add(new InputKeyboardSystem());
+            }
+
             _updateSystems.Initialize();
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_updateSystems);

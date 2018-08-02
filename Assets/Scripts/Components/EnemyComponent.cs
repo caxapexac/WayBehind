@@ -2,6 +2,6 @@
 {
     sealed class EnemyComponent
     {
-
+        //TODO
     }
 }

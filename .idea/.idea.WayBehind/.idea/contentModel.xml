@@ -152,8 +152,8 @@
             <e p="Utils.cs" t="Include" />
           </e>
           <e p="MonoBehviours" t="Include">
+            <e p="PlayerBodyColliderEvent.cs" t="Include" />
             <e p="PlayerColliderEvent.cs" t="Include" />
-            <e p="PlayerFeetColliderEvent.cs" t="Include" />
           </e>
           <e p="Systems" t="Include">
             <e p="AISystem.cs" t="Include" />
@@ -165,7 +165,6 @@
           </e>
           <e p="Temporary" t="Include">
             <e p="EXComponent.cs" t="Include" />
-            <e p="ExPlayerInitSystem.cs" t="Include" />
             <e p="EXSystem.cs" t="Include" />
           </e>
         </e>

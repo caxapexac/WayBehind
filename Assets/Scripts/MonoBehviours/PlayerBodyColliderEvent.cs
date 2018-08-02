@@ -5,7 +5,10 @@ using UnityEngine;
 
 namespace MonoBehviours
 {
-    public class PlayerFeetColliderEvent : MonoBehaviour
+    /// <summary>
+    /// Diamonds, Swamps, Water
+    /// </summary>
+    public class PlayerBodyColliderEvent : MonoBehaviour
     {
         private EcsWorld _world;
 
@@ -16,15 +19,16 @@ namespace MonoBehviours
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            Debug.Log("TRIGGERED");
             TriggerEvent triggerEvent = _world.CreateEntityWith<TriggerEvent>();
             triggerEvent.OtherTransform = other.transform;
         }
 
-        private void OnCollisionStay2D(Collision2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
         }
 
-        private void OnCollisionExit2D(Collision2D other)
+        private void OnTriggerExit2D(Collider2D other)
         {
         }
     }

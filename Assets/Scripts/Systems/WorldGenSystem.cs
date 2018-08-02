@@ -22,7 +22,6 @@ namespace Systems
         private GameComponent _game;
         private PlayerComponent _player;
         private EcsWorld _world = null;
-        private EcsFilter<CollisionEvent> _collisionEvents = null;
         private EcsFilter<TriggerEvent> _triggerEvents = null;
 
         public void Initialize()
@@ -52,13 +51,6 @@ namespace Systems
                 UnrenderRing(_game.LastCoords, Fow + 1);
                 RenderRing(_game.PlayerCoords, Fow);
                 _game.LastCoords = _game.PlayerCoords;
-            }
-
-            //TODO
-            for (int i = 0; i < _collisionEvents.EntitiesCount; i++)
-            {
-                //HexaCoords coords = HexMath.Pix2Hex(_collisionEvents.Components1[i].ObstacleTransform.localPosition, HexSize);
-                _world.RemoveEntity(_collisionEvents.Entities[i]);
             }
 
             //TODO
@@ -182,15 +174,16 @@ namespace Systems
                     break;
                 case HexTypes.Obstacle:
                     hex.Parent = _game.Pools[(int) Pool.Obstacle].Get();
-                    //todo
+                    //todo value
                     break;
                 case HexTypes.Diamond:
                     hex.Parent = _game.Pools[(int) Pool.Diamond].Get();
-                    //todo
+                    //todo value
                     break;
                 case HexTypes.Enemy:
                     hex.Parent = _game.Pools[(int) Pool.Enemy].Get();
-                    //TODO sprite choosing
+                    hex.Parent.PoolTransform.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = Enemies[0];
+                    //TODO value
                     break;
                 case HexTypes.Empty:
                     //Debug.Log(coords.X + " " + coords.Y + " " + coords.W + " empty");
