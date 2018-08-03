@@ -11,6 +11,8 @@ namespace Misc
         public static string EnemyTag = "Enemy";
         public static string BackgroundTag = "Background";
         public static string ForegroundTag = "Foreground";
+        public static string CanvasTag = "Canvas";
+        public static string JoystickTag = "Joystick";
     }
 
     public static class Prefabs

@@ -1,11 +1,11 @@
 ﻿using Systems;
 using Leopotam.Ecs;
 using Scriptable;
-using Temporary;
 using UnityEngine;
 
-namespace Misc
+namespace MonoBehviours
 {
+    [DisallowMultipleComponent]
     public class GameStartup : MonoBehaviour
     {
         [SerializeField] private SettingsObject _settings;
@@ -26,11 +26,13 @@ namespace Misc
                     HexSize = _settings.HexSize,
                     MapSize = _settings.MapSize,
                     MapSaeed = _settings.MapSaeed,
-                    Enemies = _settings.Enemies
+                    Enemies = _settings.EnemiesSprites
                 })
                 .Add(new MovePlayerSystem()
                 {
-                    SpeedMultipiler = _settings.SpeedMultipiler
+                    SpeedMultipiler = _settings.SpeedMultipiler,
+                    
+
                 })
                 .Add(new CameraSystem()
                 {
@@ -48,6 +50,7 @@ namespace Misc
             {
                 _updateSystems.Add(new InputKeyboardSystem());
             }
+            
 
             _updateSystems.Initialize();
 #if UNITY_EDITOR

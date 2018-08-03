@@ -11,7 +11,6 @@ namespace Components
             Hp = 100;
             Force = new Force();
         }
-
         public Transform Transform;
         public Force Force;
         public int Hp;

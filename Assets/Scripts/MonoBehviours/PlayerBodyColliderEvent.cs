@@ -8,6 +8,7 @@ namespace MonoBehviours
     /// <summary>
     /// Diamonds, Swamps, Water
     /// </summary>
+    [DisallowMultipleComponent]
     public class PlayerBodyColliderEvent : MonoBehaviour
     {
         private EcsWorld _world;

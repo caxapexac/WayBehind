@@ -7,6 +7,7 @@ namespace MonoBehviours
 	/// <summary>
 	/// Obstacles, Enemies
 	/// </summary>
+	[DisallowMultipleComponent]
 	public class PlayerColliderEvent : MonoBehaviour
 	{
 		private EcsWorld _world;

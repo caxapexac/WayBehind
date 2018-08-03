@@ -27,6 +27,7 @@ namespace Systems
         public void Initialize()
         {
             _game = _world.CreateEntityWith<GameComponent>();
+            _game.HexSize = HexSize;
             _game.Pools = new FastList<PoolContainer>()
             {
                 PoolContainer.CreatePool(Prefabs.Grass),

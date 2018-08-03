@@ -145,13 +145,13 @@
             <e p="TriggerEvent.cs" t="Include" />
           </e>
           <e p="Misc" t="Include">
-            <e p="GameStartup.cs" t="Include" />
             <e p="HexaList3D.cs" t="Include" />
             <e p="HexMath.cs" t="Include" />
             <e p="MapGenRandomNeighbours.cs" t="Include" />
             <e p="Utils.cs" t="Include" />
           </e>
           <e p="MonoBehviours" t="Include">
+            <e p="GameStartup.cs" t="Include" />
             <e p="PlayerBodyColliderEvent.cs" t="Include" />
             <e p="PlayerColliderEvent.cs" t="Include" />
           </e>

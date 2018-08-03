@@ -5,6 +5,7 @@ using Leopotam.Ecs;
 namespace Systems
 {
 	[EcsInject]
+	// ReSharper disable once InconsistentNaming
 	public class AISystem : IEcsInitSystem, IEcsRunSystem 
 	{
 		private PlayerComponent _player;

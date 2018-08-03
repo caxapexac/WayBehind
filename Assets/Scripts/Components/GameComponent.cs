@@ -11,6 +11,8 @@ namespace Components
         {
             LastCoords = new HexaCoords(0, 0, 0);
         }
+
+        public float HexSize;
         public HexaList3D<HexComponent> Map;
         public FastList<PoolContainer> Pools; //use enum Pool to get access
         public HexaCoords LastCoords;
