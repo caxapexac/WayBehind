@@ -1,5 +1,7 @@
 ﻿using Components;
 using Leopotam.Ecs;
+using Misc;
+using TouchControlsKit;
 using UnityEngine;
 
 namespace Systems
@@ -13,6 +15,7 @@ namespace Systems
         public void Initialize()
         {
             _player = _playerFilter.Components1[0];
+            GameObject.FindGameObjectWithTag(Tags.JoystickTag).SetActive(false);
         }
 
         public void Run()

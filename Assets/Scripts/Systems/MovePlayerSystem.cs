@@ -53,6 +53,7 @@ namespace Systems
 //            Vector2 speedVector = new Vector2(x, y).normalized;
 //            float speedForce = (Mathf.Abs(x) + Mathf.Abs(y)) * 0.5f;
 //            _player.Transform.Translate(speedVector * speedForce * SpeedMultipiler * Time.deltaTime);
+            //USE DELTA TIME
             for (int j = 0; j < _collisionFilter.EntitiesCount; j++)
             {
                 _collisionFilter.Components1[j].OtherTransform = null;

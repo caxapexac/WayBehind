@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Background
   - Foreground
+  - Canvas
+  - Joystick
   layers:
   - Default
   - TransparentFX

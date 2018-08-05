@@ -15,7 +15,6 @@ namespace Systems
         public void Initialize()
         {
             _player = _playerFilter.Components1[0];
-            GameObject.FindGameObjectWithTag(Tags.JoystickTag).GetComponent<TCKJoystick>().isEnable = true;
         }
 
         public void Run()
