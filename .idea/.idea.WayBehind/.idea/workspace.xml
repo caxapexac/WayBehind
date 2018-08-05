@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="acbe007c-6e4e-4f0e-b1b8-8fbcf455f256" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/UIDependences.cs" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/UIDependences.cs.meta" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WayBehind/.idea/contentModel.xml" afterPath="$PROJECT_DIR$/.idea/.idea.WayBehind/.idea/contentModel.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WayBehind/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/.idea.WayBehind/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Canvas.prefab" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Canvas.prefab.meta" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/WorldScene.unity" afterPath="$PROJECT_DIR$/Assets/Scenes/WorldScene.unity" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/SettingsObject.cs" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/SettingsObject.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MonoBehviours/GameStartup.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/MonoBehviours/GameStartup.cs" />
-    </list>
+    <list default="true" id="acbe007c-6e4e-4f0e-b1b8-8fbcf455f256" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -334,12 +323,12 @@
       <workItem from="1533402950044" duration="614000" />
       <workItem from="1533489656631" duration="1991000" />
       <workItem from="1533491688932" duration="55000" />
-      <workItem from="1533491844183" duration="1359000" />
+      <workItem from="1533491844183" duration="1954000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166544000" />
+    <option name="totallyTimeSpent" value="167139000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
