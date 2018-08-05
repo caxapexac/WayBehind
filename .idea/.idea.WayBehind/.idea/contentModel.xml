@@ -132,6 +132,7 @@
         </e>
         <e p="ScriptableObjects" t="Include">
           <e p="SettingsObject.cs" t="Include" />
+          <e p="UIDependences.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
           <e p="Components" t="Include">

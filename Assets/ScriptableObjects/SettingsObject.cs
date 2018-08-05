@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scriptable
+namespace ScriptableObjects
 {
     [CreateAssetMenu]
     public class SettingsObject : ScriptableObject
@@ -17,14 +17,13 @@ namespace Scriptable
         
         
         [Space]
-        [Header("UI")]
+        [Header("Camera")]
         [Range(1, 50)]
         public float CameraSize = 8;
         [Range(0.1f, 10f)]
         public float CameraDistance;
         [Range(0.1f, 10f)]
         public float CameraSpeed;
-        public bool IsTouchScreen;
         
         
         [Space]
@@ -39,6 +38,12 @@ namespace Scriptable
         public Sprite[] EnemiesSprites;
 
 
+        [Space]
+        [Header("UI")]
+        public Sprite HeartSprite;
+        public bool IsTouchScreen;
+
+        
         private void RandomizeSeed()
         {
             MapSaeed = (int) (Random.value * 1000000);

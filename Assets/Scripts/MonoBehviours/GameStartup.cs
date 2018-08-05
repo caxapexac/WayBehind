@@ -1,6 +1,6 @@
 ﻿using Systems;
 using Leopotam.Ecs;
-using Scriptable;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace MonoBehviours
@@ -9,6 +9,7 @@ namespace MonoBehviours
     public class GameStartup : MonoBehaviour
     {
         [SerializeField] private SettingsObject _settings;
+        [SerializeField] private UIDependences _ui;
         private EcsWorld _world;
         private EcsSystems _updateSystems;
 
