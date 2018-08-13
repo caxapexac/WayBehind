@@ -6,12 +6,6 @@ namespace Misc
 {
     public struct HexaCoords
     {
-        /// <summary>
-        /// Create coords
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="w">0 = background, 1 = foreground</param>
         public HexaCoords(int x, int y, int w = 0)
         {
             X = x;
@@ -29,10 +23,14 @@ namespace Misc
         }
     }
 
+    /// <summary>
+    /// Хранилище гексагонов, расширяется в 4 стороны, имеет заданую глубину
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class HexaList3D<T> where T : class, new()
     {
         private FastList<FastList<T[]>>[] _map;
-        public int Depth;
+        public readonly int Depth;
         public int Radius;
 
         public HexaList3D(int radius, int depth, int capacity = 64)
@@ -48,6 +46,10 @@ namespace Misc
             Depth = depth;
         }
 
+        /// <summary>
+        /// Возвращает гексагон с данных координат с определенной глубины
+        /// </summary>
+        /// <param name="coords"></param>
         public T this[HexaCoords coords]
         {
             get { return this[coords.X, coords.Y, coords.W]; }
@@ -61,7 +63,6 @@ namespace Misc
                 T[] layers = Layers(x, y);
                 if (layers[w] == null)
                 {
-                    //Debug.Log(x + " " + y + " " + w + " get");
                     layers[w] = new T();
                 }
 
@@ -72,7 +73,6 @@ namespace Misc
                 T[] layers = Layers(x, y);
                 if (layers[w] == null)
                 {
-                    //Debug.Log(x + " " + y + " " + w + " set");
                     layers[w] = new T();
                 }
 
@@ -80,6 +80,11 @@ namespace Misc
             }
         }
 
+        /// <summary>
+        /// Возвращает все гексагоны с данных координат
+        /// </summary>
+        /// <param name="coords"></param>
+        /// <returns></returns>
         public T[] Layers(HexaCoords coords)
         {
             return Layers(coords.X, coords.Y);
@@ -105,6 +110,10 @@ namespace Misc
             return _map[d][x][y];
         }
 
+        /// <summary>
+        /// Заменяет гексагон в коорднинатах на дефолтный
+        /// </summary>
+        /// <param name="coords"></param>
         public void ClearAt(HexaCoords coords)
         {
             ClearAt(coords.X, coords.Y, coords.W);
@@ -116,6 +125,11 @@ namespace Misc
             this[x, y, w] = new T();
         }
 
+        /// <summary>
+        /// Проверяет на null ячейку по данным координатам
+        /// </summary>
+        /// <param name="coords"></param>
+        /// <returns></returns>
         public bool ExistAt(HexaCoords coords)
         {
             return ExistAt(coords.X, coords.Y, coords.W);
@@ -157,6 +171,13 @@ namespace Misc
             }
         }
 
+        /// <summary>
+        /// Возвращает координаты соседей гексагона в заданном радиусе
+        /// </summary>
+        /// <param name="coords"></param>
+        /// <param name="radius"></param>
+        /// <param name="depth"></param>
+        /// <returns></returns>
         public FastList<HexaCoords> NeighboursOf(HexaCoords coords, int radius = 1, int depth = -1)
         {
             if (depth != -1) coords.W = depth;
@@ -165,17 +186,17 @@ namespace Misc
 
         public FastList<HexaCoords> NeighboursOf(int x, int y, int w, int radius = 1)
         {
-            return NeighboursOf(x, y, x, y, w, radius);
+            return NextNeighbours(x, y, x, y, w, radius);
         }
 
-        private FastList<HexaCoords> NeighboursOf(int xo, int yo, int x, int y, int w, int radius = 1)
+        private FastList<HexaCoords> NextNeighbours(int xo, int yo, int x, int y, int w, int radius = 1)
         {
             if (radius == 0) return new FastList<HexaCoords>() {new HexaCoords(x, y, w)};
             FastList<HexaCoords> neighbours = new FastList<HexaCoords>(6);
             FastList<HexaCoords> nextNeighbours;
             if (ExistAt(x + 1, y, w))
             {
-                nextNeighbours = NeighboursOf(xo, yo, x + 1, y, w, radius - 1);
+                nextNeighbours = NextNeighbours(xo, yo, x + 1, y, w, radius - 1);
                 for (int i = 0; i < nextNeighbours.Count; i++)
                 {
                     if (!neighbours.Contains(nextNeighbours[i]) &&
@@ -188,7 +209,7 @@ namespace Misc
 
             if (ExistAt(x + 1, y - 1, w))
             {
-                nextNeighbours = NeighboursOf(xo, yo, x + 1, y - 1, w, radius - 1);
+                nextNeighbours = NextNeighbours(xo, yo, x + 1, y - 1, w, radius - 1);
                 for (int i = 0; i < nextNeighbours.Count; i++)
                 {
                     if (!neighbours.Contains(nextNeighbours[i]) &&
@@ -201,7 +222,7 @@ namespace Misc
 
             if (ExistAt(x, y + 1, w))
             {
-                nextNeighbours = NeighboursOf(xo, yo, x, y + 1, w, radius - 1);
+                nextNeighbours = NextNeighbours(xo, yo, x, y + 1, w, radius - 1);
                 for (int i = 0; i < nextNeighbours.Count; i++)
                 {
                     if (!neighbours.Contains(nextNeighbours[i]) &&
@@ -214,7 +235,7 @@ namespace Misc
 
             if (ExistAt(x, y - 1, w))
             {
-                nextNeighbours = NeighboursOf(xo, yo, x, y - 1, w, radius - 1);
+                nextNeighbours = NextNeighbours(xo, yo, x, y - 1, w, radius - 1);
                 for (int i = 0; i < nextNeighbours.Count; i++)
                 {
                     if (!neighbours.Contains(nextNeighbours[i]) &&
@@ -227,7 +248,7 @@ namespace Misc
 
             if (ExistAt(x - 1, y + 1, w))
             {
-                nextNeighbours = NeighboursOf(xo, yo, x - 1, y + 1, w, radius - 1);
+                nextNeighbours = NextNeighbours(xo, yo, x - 1, y + 1, w, radius - 1);
                 for (int i = 0; i < nextNeighbours.Count; i++)
                 {
                     if (!neighbours.Contains(nextNeighbours[i]) &&
@@ -240,7 +261,7 @@ namespace Misc
 
             if (ExistAt(x - 1, y, w))
             {
-                nextNeighbours = NeighboursOf(xo, yo, x - 1, y, w, radius - 1);
+                nextNeighbours = NextNeighbours(xo, yo, x - 1, y, w, radius - 1);
                 for (int i = 0; i < nextNeighbours.Count; i++)
                 {
                     if (!neighbours.Contains(nextNeighbours[i]) &&

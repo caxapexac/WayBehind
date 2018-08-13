@@ -11,15 +11,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77436a2e451305c419cdebefe5c01f8e, type: 3}
   m_Name: SettingsDefault
   m_EditorClassIdentifier: 
+  UseSeed: 0
+  MapSaeed: 112264
+  MapSize: 80
+  FieldOfView: 17
+  HexSize: 0.29
+  CameraSize: 5
+  CameraDistance: 0.8
+  CameraSpeed: 2
   PlayerPrefab: {fileID: 1006894093068076, guid: df93f97d5ecf47446a37aefeec2ca382,
     type: 2}
+  Hp: 20
+  SpeedMultipiler: 3
+  LerpSpeed: 10
+  LerpSlowing: 3
+  GrassSpeed: 1
+  WaterSpeed: 0.5
+  ForestSpeed: 0.7
+  SwampSpeed: 0.4
   Enemies:
   - {fileID: 21300000, guid: d018e9b26e0968a4e90d760b5b52afb7, type: 3}
-  CameraSize: 5
-  FieldOfView: 100
-  MapSize: 90
-  MapSaeed: 112263
-  HexSize: 0.32
-  SpeedMultipiler: 5
-  CameraDistance: 0.7
-  CameraSpeed: 2
+  HeartSprite: {fileID: 0}
+  IsTouchScreen: 1

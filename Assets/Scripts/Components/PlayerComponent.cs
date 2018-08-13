@@ -7,15 +7,20 @@ namespace Components
     {
         public PlayerComponent()
         {
+            Force = new Vector2();
+            Slowing = 0;
+            Hp = 1;
             Exp = 0;
-            Hp = 100;
-            Force = new Force();
+            Kills = 0;
         }
 
         public Transform Transform;
-        //public Collider2D Collider;
-        public Force Force;
+        public Vector2 Force;
+        public Vector2 CurrentForce;
+        public float CurrentSlowing;
+        public float Slowing;
         public int Hp;
         public int Exp;
+        public int Kills;
     }
 }

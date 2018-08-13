@@ -1,4 +1,5 @@
 ﻿using System;
+using LeopotamGroup.Math;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,6 +12,16 @@ namespace Misc
         public static string EnemyTag = "Enemy";
         public static string BackgroundTag = "Background";
         public static string ForegroundTag = "Foreground";
+        public static string CanvasTag = "Canvas";
+        public static string JoystickTag = "Joystick";
+    }
+
+    public static class Names
+    {
+        public static string Diamonds = "Diamonds";
+        public static string Killed = "Killed";
+        public static string HpBar = "HpBar";
+        
     }
 
     public static class Prefabs
@@ -25,8 +36,21 @@ namespace Misc
         public static string Obstacle = "Prefabs/ObstaclePrefab";
         public static string Diamond = "Prefabs/DiamondPrefab";
         public static string Enemy = "Prefabs/EnemyPrefab";
-    }
 
+        public static int Count = 7;
+    }
+    
+    public enum HexProperties
+    {
+        HP,
+        IQ,
+        Speed,
+        AgroSpeed,
+        JumpSpeed,
+        AgroRadius,
+        Flying,
+    }
+    
     public enum Pool
     {
         //back
@@ -51,6 +75,26 @@ namespace Misc
         {
             Array values = Enum.GetValues(typeof(T));
             return (T) values.GetValue((int) Mathf.Round(Random.value * (values.Length - 1)));
+        }
+    }
+
+    static class RotateExtension
+    {
+        public static void LookAt2D(this Transform me, Vector2 target)
+        {
+            Vector2 dir = target - (Vector2)me.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            me.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+
+        public static void LookAt2D(this Transform me, Transform target)
+        {
+            me.LookAt2D(target.position);
+        }
+
+        public static void LookAt2D(this Transform me, GameObject target)
+        {
+            me.LookAt2D(target.transform.position);
         }
     }
 }

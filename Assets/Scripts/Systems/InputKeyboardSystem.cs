@@ -1,23 +1,32 @@
 ﻿using Components;
 using Leopotam.Ecs;
+using Misc;
+using TouchControlsKit;
 using UnityEngine;
 
 namespace Systems
 {
     [EcsInject]
-    public class InputKeyboardSystem : IEcsRunSystem
+    public class InputKeyboardSystem : IEcsInitSystem, IEcsRunSystem
     {
-        EcsFilter<PlayerComponent> _playerFilter = null;
+        private PlayerComponent _player;
+        private EcsFilterSingle<PlayerComponent> _playerFilter = null;
+
+        public void Initialize()
+        {
+            _player = _playerFilter.Data;
+            GameObject.FindGameObjectWithTag(Tags.JoystickTag).SetActive(false);
+        }
 
         public void Run()
         {
-            var x = Input.GetAxis("Horizontal");
-            var y = Input.GetAxis("Vertical");
-            for (int i = 0; i < _playerFilter.EntitiesCount; i++)
-            {
-                _playerFilter.Components1[i].Force.X = x;
-                _playerFilter.Components1[i].Force.Y = y;
-            }
+            _player.Force.x = Input.GetAxis("Horizontal");;
+            _player.Force.y = Input.GetAxis("Vertical");;
+        }
+
+        public void Destroy()
+        {
+            _player = null;
         }
     }
 }

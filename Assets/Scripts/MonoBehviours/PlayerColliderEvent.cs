@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace MonoBehviours
 {
+	/// <summary>
+	/// Obstacles, Enemies
+	/// </summary>
+	[DisallowMultipleComponent]
 	public class PlayerColliderEvent : MonoBehaviour
 	{
 		private EcsWorld _world;
@@ -15,9 +19,8 @@ namespace MonoBehviours
 
 		void OnCollisionEnter2D(Collision2D other)
 		{
-			//Debug.Log("TOUCH");
-//			var collisionEvent = _world.CreateEntityWith<CollisionEvent>();
-//			collisionEvent.ObstacleTransform = other.transform;
+			var collisionEvent = _world.CreateEntityWith<CollisionEvent>();
+			collisionEvent.Sender = other.transform;
 		}
 
 		private void OnCollisionStay2D(Collision2D other)

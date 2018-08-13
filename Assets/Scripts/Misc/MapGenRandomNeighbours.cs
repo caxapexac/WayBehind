@@ -1,4 +1,6 @@
-﻿using Components;
+﻿using System;
+using System.Security.Cryptography;
+using Components;
 using LeopotamGroup.Collections;
 using LeopotamGroup.Math;
 using UnityEngine;
@@ -8,10 +10,10 @@ namespace Misc
 {
     public static class MapGenRandomNeighbours
     {
-        public static void GenerateMap(int saeed, int radius, int depth, out HexaList3D<HexComponent> map)
+        public static HexaList3D<HexComponent> GenerateMap(int saeed, int radius, int depth)
         {
-            Random.InitState(saeed);
-            map = new HexaList3D<HexComponent>(radius, depth);
+            if (saeed != 0) Random.InitState(saeed);
+            HexaList3D<HexComponent> map = new HexaList3D<HexComponent>(radius, depth);
             FillStructure(map, 0, HexTypes.Grass);
             FillStructure(map, 1, HexTypes.Empty);
             map[0, 0, 1] = new HexComponent() {HexType = HexTypes.Spawn};
@@ -23,7 +25,8 @@ namespace Misc
             GenerateStructure(map, 1, HexTypes.Obstacle, HexTypes.Empty, 70, 2, 0.1f, 0.1f);
             GenerateStructure(map, 1, HexTypes.Diamond, HexTypes.Empty, 100, 1, 0f, 1f);
             GenerateStructure(map, 1, HexTypes.Diamond, HexTypes.Obstacle, 100, 1, 0.6f, 0.3f);
-            GenerateStructure(map, 1, HexTypes.Enemy, HexTypes.Empty, 100, 1, 0.01f, 0.01f);
+            GenerateEnemy(map, 1, HexTypes.Enemy, HexTypes.Empty, 200);
+            return map;
         }
 
         private static void FillStructure(HexaList3D<HexComponent> map, int depth, HexTypes type)
@@ -65,6 +68,30 @@ namespace Misc
             }
         }
 
+        private static void GenerateEnemy(HexaList3D<HexComponent> map, int depth, HexTypes type, HexTypes badType, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                HexaCoords coords;
+                do
+                {
+                    coords = HexMath.RandomPosition(map.Radius, depth);
+                } while (map[coords].HexType != badType);
+                map[coords] = new HexComponent()
+                {
+                    HexType = type,
+                };
+                map[coords].Properties[HexProperties.HP] = 3;
+                map[coords].Properties[HexProperties.IQ] = 100;
+                map[coords].Properties[HexProperties.Speed] = 2;
+                map[coords].Properties[HexProperties.AgroSpeed] = 3;
+                map[coords].Properties[HexProperties.JumpSpeed] = 5;
+                map[coords].Properties[HexProperties.AgroRadius] = (int)(Random.value * 6) + 1;
+                map[coords].Properties[HexProperties.Flying] = Random.value > 0.5 ? 1 : 0;
+            }
+        }
+
+        [Obsolete]
         public static void GenerateHex(HexaList3D<HexComponent> map, HexaCoords coords)
         {
             //island-type generation:
@@ -126,7 +153,7 @@ namespace Misc
                 }
                 else if (r > 0.98f)
                 {
-                    typeF = HexTypes.Enemy;
+                    typeF = HexTypes.Diamond;
                 }
                 else if (r > 0.95f)
                 {
@@ -147,6 +174,11 @@ namespace Misc
                 HexType = typeF,
                 Parent = null,
             };
+        }
+
+        public static void GenerateChunk()
+        {
+            //TODO
         }
     }
 }

@@ -1,0 +1,12 @@
+{
+    "name": "Leopotam.Ecs.Ui.Editor",
+    "references": [
+        "Leopotam.Ecs.Ui"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
