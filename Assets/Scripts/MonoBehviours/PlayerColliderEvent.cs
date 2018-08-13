@@ -19,9 +19,8 @@ namespace MonoBehviours
 
 		void OnCollisionEnter2D(Collision2D other)
 		{
-			Debug.Log("TOUCHED");
 			var collisionEvent = _world.CreateEntityWith<CollisionEvent>();
-			collisionEvent.OtherTransform = other.transform;
+			collisionEvent.Sender = other.transform;
 		}
 
 		private void OnCollisionStay2D(Collision2D other)

@@ -1,5 +1,7 @@
-﻿using Systems;
+﻿using System.Collections.Generic;
+using Systems;
 using LeopotamGroup.Pooling;
+using Misc;
 using UnityEngine;
 
 namespace Components
@@ -23,16 +25,11 @@ namespace Components
         {
             Parent = null;
             HexType = HexTypes.Empty;
-        }
-
-        public HexComponent(HexComponent original)
-        {
-            Parent = original.Parent;
-            HexType = original.HexType;
+            Properties = new Dictionary<HexProperties, int>();
         }
 
         public HexTypes HexType;
         public IPoolObject Parent;
-        public object Properties; //TODO
+        public Dictionary<HexProperties, int> Properties;
     }
 }

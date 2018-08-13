@@ -1,5 +1,6 @@
 ﻿using Systems;
 using Leopotam.Ecs;
+using Leopotam.Ecs.Ui.Systems;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace MonoBehviours
     public class GameStartup : MonoBehaviour
     {
         [SerializeField] private SettingsObject _settings;
-        [SerializeField] private UIDependences _ui;
+        [SerializeField] private EcsUiEmitter _uiEmitter;
         private EcsWorld _world;
         private EcsSystems _updateSystems;
 
@@ -20,39 +21,17 @@ namespace MonoBehviours
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
 #endif
             _updateSystems = new EcsSystems(_world)
-                .Add(new WorldGenSystem()
-                {
-                    PlayerPrefab = _settings.PlayerPrefab,
-                    Fow = _settings.FieldOfView,
-                    HexSize = _settings.HexSize,
-                    MapSize = _settings.MapSize,
-                    MapSaeed = _settings.MapSaeed,
-                    Enemies = _settings.EnemiesSprites
-                })
-                .Add(new MovePlayerSystem()
-                {
-                    SpeedMultipiler = _settings.SpeedMultipiler,
-                    
-
-                })
-                .Add(new CameraSystem()
-                {
-                    CameraSize = _settings.CameraSize,
-                    CameraDistance = _settings.CameraDistance,
-                    CameraSpeed = _settings.CameraSpeed
-                })
-                .Add(new AISystem());
-
-            if (_settings.IsTouchScreen)
-            {
-                _updateSystems.Add(new InputStickSystem());
-            }
-            else
-            {
-                _updateSystems.Add(new InputKeyboardSystem());
-            }
-            
-
+                .Add(_uiEmitter)
+                .Add(new WorldGenSystem(_settings, _uiEmitter))
+                .Add(new PlayerMoveSystem())
+                .Add(new PlayerAttackSystem())
+                .Add(new PlayerPickSystem())
+                .Add(new CameraSystem())
+                .Add(new EnemyMoveSystem())
+                .Add(new EnemyAttackSystem())
+                .Add(_settings.IsTouchScreen ? (IEcsSystem) new InputStickSystem() : new InputKeyboardSystem())
+                .Add(new EventCleanerSystem())
+                .Add(new EcsUiCleaner());
             _updateSystems.Initialize();
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_updateSystems);
@@ -66,7 +45,7 @@ namespace MonoBehviours
 
         private void OnDisable()
         {
-            _updateSystems.Destroy();
+            _updateSystems.Dispose();
         }
     }
 }

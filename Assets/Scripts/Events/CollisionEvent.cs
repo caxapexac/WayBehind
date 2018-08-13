@@ -4,7 +4,7 @@ namespace Events
 {
     sealed class CollisionEvent
     {
-        public Transform OtherTransform;
+        public Transform Sender;
     }
 }
 

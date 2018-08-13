@@ -10,18 +10,16 @@ namespace Systems
     public class InputStickSystem : IEcsInitSystem, IEcsRunSystem
     {
         private PlayerComponent _player;
-        private EcsFilter<PlayerComponent> _playerFilter = null;
+        private EcsFilterSingle<PlayerComponent> _playerFilter = null;
 
         public void Initialize()
         {
-            _player = _playerFilter.Components1[0];
+            _player = _playerFilter.Data;
         }
 
         public void Run()
         {
-            Vector2 move = TCKInput.GetAxis("Joystick");
-            _player.Force.X = move.x;
-            _player.Force.Y = move.y;
+            _player.Force = TCKInput.GetAxis("Joystick");
         }
 
         public void Destroy()

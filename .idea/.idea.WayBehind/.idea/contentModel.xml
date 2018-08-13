@@ -23,6 +23,44 @@
               <e p="EcsWorldStats.cs" t="Include" />
             </e>
           </e>
+          <e p="ecs-ui-develop" t="Include">
+            <e p="Editor" t="Include">
+              <e p="Widgets" t="Include">
+                <e p="EcsUiNonVisualWidgetInspector.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Runtime" t="Include">
+              <e p="Actions" t="Include">
+                <e p="EcsUiActionBase.cs" t="Include" />
+                <e p="EcsUiClickAction.cs" t="Include" />
+                <e p="EcsUiDragAction.cs" t="Include" />
+                <e p="EcsUiDropAction.cs" t="Include" />
+                <e p="EcsUiEnterExitAction.cs" t="Include" />
+                <e p="EcsUiInputAction.cs" t="Include" />
+                <e p="EcsUiNoAction.cs" t="Include" />
+                <e p="EcsUiScrollViewAction.cs" t="Include" />
+              </e>
+              <e p="Components" t="Include">
+                <e p="EcsUiBeginDragEvent.cs" t="Include" />
+                <e p="EcsUiClickEvent.cs" t="Include" />
+                <e p="EcsUiDragEvent.cs" t="Include" />
+                <e p="EcsUiDropEvent.cs" t="Include" />
+                <e p="EcsUiEndDragEvent.cs" t="Include" />
+                <e p="EcsUiEnterEvent.cs" t="Include" />
+                <e p="EcsUiExitEvent.cs" t="Include" />
+                <e p="EcsUiInputChangeEvent.cs" t="Include" />
+                <e p="EcsUiInputEndEvent.cs" t="Include" />
+                <e p="EcsUiScrollViewEvent.cs" t="Include" />
+              </e>
+              <e p="Systems" t="Include">
+                <e p="EcsUiCleaner.cs" t="Include" />
+                <e p="EcsUiEmitter.cs" t="Include" />
+              </e>
+              <e p="Widgets" t="Include">
+                <e p="EcsUiNonVisualWidget.cs" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="ecs-unityintegration-develop" t="Include">
             <e p="Editor" t="Include">
               <e p="EcsEntity.cs" t="Include" />
@@ -32,10 +70,15 @@
                 <e p="Quaternion.cs" t="Include" />
                 <e p="Vector3.cs" t="Include" />
               </e>
+              <e p="Templates" t="Include">
+                <e p="InitSystem.cs.txt" t="Include" />
+                <e p="RunSystem.cs.txt" t="Include" />
+                <e p="Startup.cs.txt" t="Include" />
+                <e p="TemplateGenerator.cs" t="Include" />
+              </e>
             </e>
             <e p="Runtime" t="Include">
               <e p="EditorHelpers.cs" t="Include" />
-              <e p="UnityPrefabComponent.cs" t="Include" />
             </e>
           </e>
           <e p="Leo-Collections" t="Include">
@@ -132,7 +175,6 @@
         </e>
         <e p="ScriptableObjects" t="Include">
           <e p="SettingsObject.cs" t="Include" />
-          <e p="UIDependences.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
           <e p="Components" t="Include">
@@ -143,6 +185,7 @@
           </e>
           <e p="Events" t="Include">
             <e p="CollisionEvent.cs" t="Include" />
+            <e p="HexDisposeEvent.cs" t="Include" />
             <e p="TriggerEvent.cs" t="Include" />
           </e>
           <e p="Misc" t="Include">
@@ -153,24 +196,26 @@
           </e>
           <e p="MonoBehviours" t="Include">
             <e p="GameStartup.cs" t="Include" />
-            <e p="PlayerBodyColliderEvent.cs" t="Include" />
             <e p="PlayerColliderEvent.cs" t="Include" />
+            <e p="PlayerTriggerEvent.cs" t="Include" />
           </e>
           <e p="Systems" t="Include">
-            <e p="AISystem.cs" t="Include" />
             <e p="CameraSystem.cs" t="Include" />
+            <e p="EnemyAttackSystem.cs" t="Include" />
+            <e p="EnemyMoveSystem.cs" t="Include" />
+            <e p="EventCleanerSystem.cs" t="Include" />
             <e p="InputKeyboardSystem.cs" t="Include" />
             <e p="InputStickSystem.cs" t="Include" />
-            <e p="MovePlayerSystem.cs" t="Include" />
+            <e p="PlayerAttackSystem.cs" t="Include" />
+            <e p="PlayerMoveSystem.cs" t="Include" />
+            <e p="PlayerPickSystem.cs" t="Include" />
             <e p="WorldGenSystem.cs" t="Include" />
-          </e>
-          <e p="Temporary" t="Include">
-            <e p="EXComponent.cs" t="Include" />
-            <e p="EXSystem.cs" t="Include" />
           </e>
         </e>
       </e>
       <e p="Leopotam.Ecs.csproj" t="IncludeRecursive" />
+      <e p="Leopotam.Ecs.Ui.csproj" t="IncludeRecursive" />
+      <e p="Leopotam.Ecs.Ui.Editor.csproj" t="IncludeRecursive" />
       <e p="Leopotam.Ecs.UnityIntegration.csproj" t="IncludeRecursive" />
       <e p="Leopotam.Ecs.UnityIntegration.Editor.csproj" t="IncludeRecursive" />
       <e p="Library" t="ExcludeRecursive" />

@@ -10,18 +10,18 @@ namespace Systems
     public class InputKeyboardSystem : IEcsInitSystem, IEcsRunSystem
     {
         private PlayerComponent _player;
-        private EcsFilter<PlayerComponent> _playerFilter = null;
+        private EcsFilterSingle<PlayerComponent> _playerFilter = null;
 
         public void Initialize()
         {
-            _player = _playerFilter.Components1[0];
+            _player = _playerFilter.Data;
             GameObject.FindGameObjectWithTag(Tags.JoystickTag).SetActive(false);
         }
 
         public void Run()
         {
-            _player.Force.X = Input.GetAxis("Horizontal");;
-            _player.Force.Y = Input.GetAxis("Vertical");;
+            _player.Force.x = Input.GetAxis("Horizontal");;
+            _player.Force.y = Input.GetAxis("Vertical");;
         }
 
         public void Destroy()

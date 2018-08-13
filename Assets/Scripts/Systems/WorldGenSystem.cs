@@ -2,9 +2,11 @@
 using Components;
 using Events;
 using Leopotam.Ecs;
+using Leopotam.Ecs.Ui.Systems;
 using LeopotamGroup.Collections;
 using LeopotamGroup.Pooling;
 using Misc;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Systems
@@ -12,23 +14,26 @@ namespace Systems
     [EcsInject]
     public class WorldGenSystem : IEcsInitSystem, IEcsRunSystem
     {
-        public float HexSize;
-        public int MapSize;
-        public int MapSaeed;
-        public int Fow;
-        public GameObject PlayerPrefab;
-        public Sprite[] Enemies;
-
+        private HexaCoords _lastCoords;
+        private SettingsObject _settings;
+        private EcsUiEmitter _uiEmitter;
         private GameComponent _game;
         private PlayerComponent _player;
         private EcsWorld _world = null;
-        private EcsFilter<TriggerEvent> _triggerEvents = null;
+        private EcsFilter<HexDisposeEvent> _hexDisposeFilter = null;
+
+        public WorldGenSystem(SettingsObject settings, EcsUiEmitter uiEmitter)
+        {
+            _settings = settings;
+            _uiEmitter = uiEmitter;
+        }
 
         public void Initialize()
         {
             _game = _world.CreateEntityWith<GameComponent>();
-            _game.HexSize = HexSize;
-            _game.Pools = new FastList<PoolContainer>()
+            _game.S = _settings;
+            _game.UI = _uiEmitter;
+            _game.Pools = new FastList<PoolContainer>(Prefabs.Count)
             {
                 PoolContainer.CreatePool(Prefabs.Grass),
                 PoolContainer.CreatePool(Prefabs.Water),
@@ -38,45 +43,28 @@ namespace Systems
                 PoolContainer.CreatePool(Prefabs.Diamond),
                 PoolContainer.CreatePool(Prefabs.Enemy),
             };
-            MapGenRandomNeighbours.GenerateMap(MapSaeed, MapSize, 2, out _game.Map);
+            _game.Map = MapGenRandomNeighbours.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.MapSize, 2);
             _player = _world.CreateEntityWith<PlayerComponent>();
-            _player.Transform = GameObject.Instantiate(PlayerPrefab).transform;
-            RenderFull(new HexaCoords(0, 0, 0), Fow);
+            _player.Transform = GameObject.Instantiate(_game.S.PlayerPrefab).transform;
+            _player.Hp = _game.S.Hp;
+            _lastCoords = new HexaCoords(0, 0);
+            RenderFull(new HexaCoords(0, 0), _game.S.FieldOfView);
         }
 
         public void Run()
         {
-            _game.PlayerCoords = HexMath.Pix2Hex(_player.Transform.localPosition, HexSize);
-            if (_game.LastCoords.X != _game.PlayerCoords.X || _game.LastCoords.Y != _game.PlayerCoords.Y)
+            _game.PlayerCoords = HexMath.Pixel2Hexel(_player.Transform.localPosition, _game.S.HexSize);
+            if (_lastCoords.X != _game.PlayerCoords.X || _lastCoords.Y != _game.PlayerCoords.Y)
             {
-                UnrenderRing(_game.LastCoords, Fow + 1);
-                RenderRing(_game.PlayerCoords, Fow);
-                _game.LastCoords = _game.PlayerCoords;
+                UnrenderRing(_lastCoords, _game.S.FieldOfView + 1);
+                RenderRing(_game.PlayerCoords, _game.S.FieldOfView);
+                _lastCoords = _game.PlayerCoords;
             }
 
-            //TODO
-            for (int i = 0; i < _triggerEvents.EntitiesCount; i++)
+            for (int i = 0; i < _hexDisposeFilter.EntitiesCount; i++)
             {
-                HexaCoords coords =
-                    HexMath.Pix2Hex(_triggerEvents.Components1[i].OtherTransform.localPosition, HexSize);
-                coords.W = 1;
-                var hexComponent = _game.Map[coords];
-                if (hexComponent != null)
-                {
-                    switch (hexComponent.HexType)
-                    {
-                        case HexTypes.Diamond:
-                            _player.Exp += 1;
-                            //Debug.Log(coords.X + " " + coords.Y + " " + coords.W);
-                            RemoveHex(hexComponent, coords);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                _triggerEvents.Components1[i].OtherTransform = null;
-                _world.RemoveEntity(_triggerEvents.Entities[i]);
+                RemoveHex(_hexDisposeFilter.Components1[i].Coords);
+                _world.RemoveEntity(_hexDisposeFilter.Entities[i]);
             }
         }
 
@@ -130,7 +118,7 @@ namespace Systems
                 {
                     coords.X += HexMath.Directions[i, 0];
                     coords.Y += HexMath.Directions[i, 1];
-                    if (HexMath.HexDistance(playerCoords, coords) >= Fow)
+                    if (HexMath.HexDistance(playerCoords, coords) >= _game.S.FieldOfView)
                     {
                         HideHex(coords);
                     }
@@ -148,6 +136,7 @@ namespace Systems
             HexComponent[] layers = _game.Map.Layers(coords);
             for (int i = 0; i < layers.Length; i++)
             {
+                coords.W = i;
                 if (layers[i] != null) RenderLayer(coords, layers[i]);
             }
         }
@@ -182,9 +171,16 @@ namespace Systems
                     //todo value
                     break;
                 case HexTypes.Enemy:
+                    if (hex.Parent != null) throw new Exception();
                     hex.Parent = _game.Pools[(int) Pool.Enemy].Get();
-                    hex.Parent.PoolTransform.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = Enemies[0];
-                    //TODO value
+                    hex.Parent.PoolTransform.GetComponentInChildren<SpriteRenderer>().sprite = _game.S.Enemies[0];//todo
+                    _game.Map[coords] = new HexComponent() { HexType = HexTypes.Empty};
+                    EnemyComponent enemy = _world.CreateEntityWith<EnemyComponent>();
+                    enemy.Hex = hex;
+                    enemy.LastCoords = coords;
+                    enemy.Head = hex.Parent.PoolTransform;
+                    enemy.Body = hex.Parent.PoolTransform.GetChild(0);
+                    enemy.Target = HexMath.Hexel2Pixel(coords, _game.S.HexSize);
                     break;
                 case HexTypes.Empty:
                     //Debug.Log(coords.X + " " + coords.Y + " " + coords.W + " empty");
@@ -195,7 +191,7 @@ namespace Systems
                     throw new ArgumentOutOfRangeException();
             }
 
-            hex.Parent.PoolTransform.localPosition = HexMath.Hex2Pix(coords, HexSize);
+            hex.Parent.PoolTransform.localPosition = HexMath.Hexel2Pixel(coords, _game.S.HexSize);
             hex.Parent.PoolTransform.gameObject.SetActive(true);
         }
 
@@ -210,15 +206,17 @@ namespace Systems
 
         private void HideLayer(HexaCoords coords, HexComponent hex)
         {
-            if (hex.Parent == null) return;
+            if (hex.Parent == null || hex.HexType == HexTypes.Enemy) return;
             _game.Pools[(int) hex.HexType].Recycle(hex.Parent);
             hex.Parent = null;
         }
 
-        private void RemoveHex(HexComponent hexComponent, HexaCoords coords)
+        private void RemoveHex(HexaCoords coords)
         {
-            _game.Pools[(int) hexComponent.HexType].Recycle(hexComponent.Parent);
-            hexComponent.Parent = null;
+            //todo fading coroutines
+            HexComponent hex = _game.Map[coords];
+            _game.Pools[(int) hex.HexType].Recycle(hex.Parent);
+            hex.Parent = null;
             _game.Map.ClearAt(coords);
         }
 
