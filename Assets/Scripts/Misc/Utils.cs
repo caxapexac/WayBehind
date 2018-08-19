@@ -43,6 +43,7 @@ namespace Misc
     public enum HexProperties
     {
         HP,
+        MaxHP,
         IQ,
         Speed,
         AgroSpeed,

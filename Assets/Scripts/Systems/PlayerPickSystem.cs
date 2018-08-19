@@ -13,6 +13,7 @@ namespace Systems
 		private GameComponent _game;
 		private PlayerComponent _player;
 		private Text _diamondsText;
+		private Slider _hpBar;
 		private EcsWorld _world = null;
 		private EcsFilterSingle<GameComponent> _gameFilter = null;
 		private EcsFilterSingle<PlayerComponent> _playerFilter = null;
@@ -23,6 +24,7 @@ namespace Systems
 			_game = _gameFilter.Data;
 			_player = _playerFilter.Data;
 			_diamondsText = _game.UI.GetNamedObject(Names.Diamonds).GetComponent<Text>();
+			_hpBar = _game.UI.GetNamedObject(Names.HpBar).GetComponent<Slider>();
 		}
 	
 		public void Run()
@@ -37,6 +39,8 @@ namespace Systems
 				{
 					case HexTypes.Diamond:
 						_player.Exp += 1;
+						_player.Hp += 1;
+						_hpBar.value = _player.Hp;
 						_diamondsText.text = _player.Exp.ToString();
 						HexDisposeEvent hexDispose = _world.CreateEntityWith<HexDisposeEvent>();
 						hexDispose.Coords = coords;

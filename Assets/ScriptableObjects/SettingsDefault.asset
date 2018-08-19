@@ -11,11 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77436a2e451305c419cdebefe5c01f8e, type: 3}
   m_Name: SettingsDefault
   m_EditorClassIdentifier: 
-  UseSeed: 0
-  MapSaeed: 112264
-  MapSize: 80
-  FieldOfView: 17
-  HexSize: 0.29
+  UseSeed: 1
+  UseTextures: 1
+  MapSaeed: 112265
+  Octaves: 5
+  Smoothing: 0.389
+  Persistance: 0.5
+  MapSize: 52
+  FieldOfView: 49
+  EnemyCount: 0
+  HexSize: 0.28
   CameraSize: 5
   CameraDistance: 0.8
   CameraSpeed: 2

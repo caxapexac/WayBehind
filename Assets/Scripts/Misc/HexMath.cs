@@ -145,6 +145,7 @@ namespace Misc
         /// <returns></returns>
         public static HexaCoords RandomPosition(HexaCoords center, int radius, int depth = 0)
         {
+            //todo fix down-left moving
             HexaCoords coords = RandomPosition(radius, depth);
             coords.X += center.X;
             coords.Y += center.Y;
@@ -162,11 +163,11 @@ namespace Misc
             x = Random.Range(-radius, radius);
             if (x > 0)
             {
-                y = Mathf.RoundToInt(Random.Range(-radius, radius - x));
+                y = Mathf.RoundToInt(Random.Range(-radius, radius - x) + 0.5f);
             }
             else
             {
-                y = Mathf.RoundToInt(Random.Range(-radius - x, radius));
+                y = Mathf.RoundToInt(Random.Range(-radius - x, radius) + 0.5f);
             }
         }
     }

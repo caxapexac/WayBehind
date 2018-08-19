@@ -8,6 +8,7 @@ using LeopotamGroup.Pooling;
 using Misc;
 using ScriptableObjects;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Systems
 {
@@ -43,7 +44,11 @@ namespace Systems
                 PoolContainer.CreatePool(Prefabs.Diamond),
                 PoolContainer.CreatePool(Prefabs.Enemy),
             };
-            _game.Map = MapGenRandomNeighbours.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.MapSize, 2);
+            //_game.Map = MapGenRandomNeighbours.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.MapSize, 2);
+            //_game.Map = MapGenSquareFractalNoise.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.Octaves, _game.S.MapSize, 2, _game.S.HexSize);
+            //_game.Map = MapGenHexCloudNoise.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.Octaves, _game.S.MapSize, 2, _game.S.HexSize);
+            _game.Map = MapGenHexPerlinNoise.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.Octaves,
+                _game.S.MapSize, _game.S.Smoothing, _game.S.Persistance, 2, _game.S.EnemyCount, _game.S.UseTextures, _game.S.HexSize);
             _player = _world.CreateEntityWith<PlayerComponent>();
             _player.Transform = GameObject.Instantiate(_game.S.PlayerPrefab).transform;
             _player.Hp = _game.S.Hp;
@@ -173,8 +178,10 @@ namespace Systems
                 case HexTypes.Enemy:
                     if (hex.Parent != null) throw new Exception();
                     hex.Parent = _game.Pools[(int) Pool.Enemy].Get();
-                    hex.Parent.PoolTransform.GetComponentInChildren<SpriteRenderer>().sprite = _game.S.Enemies[0];//todo
-                    _game.Map[coords] = new HexComponent() { HexType = HexTypes.Empty};
+                    hex.Parent.PoolTransform.GetComponentInChildren<SpriteRenderer>().sprite =
+                        _game.S.Enemies[0]; //todo
+                    hex.Parent.PoolTransform.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+                    _game.Map[coords] = new HexComponent() {HexType = HexTypes.Empty};
                     EnemyComponent enemy = _world.CreateEntityWith<EnemyComponent>();
                     enemy.Hex = hex;
                     enemy.LastCoords = coords;
@@ -189,6 +196,12 @@ namespace Systems
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+
+            if (hex.Color > 0f)
+            {
+                hex.Parent.PoolTransform.GetComponent<SpriteRenderer>().color =
+                    new Color(hex.Color, hex.Color, hex.Color);
             }
 
             hex.Parent.PoolTransform.localPosition = HexMath.Hexel2Pixel(coords, _game.S.HexSize);

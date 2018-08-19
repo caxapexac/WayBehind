@@ -94,86 +94,92 @@ namespace Misc
         [Obsolete]
         public static void GenerateHex(HexaList3D<HexComponent> map, HexaCoords coords)
         {
-            //island-type generation:
-
-            //background
-            FastList<HexaCoords> neighbours = map.NeighboursOf(coords, 2, 0);
-            int water = 0;
-            for (int i = 0; i < neighbours.Count; i++)
-            {
-                HexaCoords neighbour = neighbours[i];
-                if (map[neighbour].HexType == HexTypes.Water) water++;
-            }
-
-            HexTypes typeB;
-            if (water > 9)
-            {
-                typeB = HexTypes.Water;
-            }
-            else if (water > 6)
-            {
-                typeB = Random.value > 0.9999f ? HexTypes.Grass : HexTypes.Water;
-            }
-            else if (water > 3)
-            {
-                typeB = Random.value > 0.999f ? HexTypes.Grass : HexTypes.Water;
-            }
-            else if (water > 2)
-            {
-                typeB = Random.value > 0.99f ? HexTypes.Grass : HexTypes.Water;
-            }
-            else
-            {
-                typeB = Random.value > 0.05f ? HexTypes.Grass : HexTypes.Water;
-            }
-
             map[coords] = new HexComponent()
             {
-                HexType = typeB,
+                HexType = HexTypes.Swamp,
                 Parent = null,
             };
-
-            //foreground
-            coords.W = 1;
-            neighbours = map.NeighboursOf(coords, 2);
-            int notEmpty = 0;
-            for (int i = 0; i < neighbours.Count; i++)
-            {
-                HexaCoords neighbour = neighbours[i];
-                if ((map[neighbour]).HexType != HexTypes.Empty) notEmpty++;
-            }
-
-            HexTypes typeF;
-            if (notEmpty == 0 && typeB != HexTypes.Water)
-            {
-                float r = Random.value;
-                if (r > 0.99f)
-                {
-                    typeF = HexTypes.Obstacle;
-                }
-                else if (r > 0.98f)
-                {
-                    typeF = HexTypes.Diamond;
-                }
-                else if (r > 0.95f)
-                {
-                    typeF = HexTypes.Diamond;
-                }
-                else
-                {
-                    typeF = HexTypes.Empty;
-                }
-            }
-            else
-            {
-                typeF = HexTypes.Empty;
-            }
-
-            map[coords] = new HexComponent()
-            {
-                HexType = typeF,
-                Parent = null,
-            };
+            
+//            //island-type generation:
+//
+//            //background
+//            FastList<HexaCoords> neighbours = map.NeighboursOf(coords, 2, 0);
+//            int water = 0;
+//            for (int i = 0; i < neighbours.Count; i++)
+//            {
+//                HexaCoords neighbour = neighbours[i];
+//                if (map[neighbour].HexType == HexTypes.Water) water++;
+//            }
+//
+//            HexTypes typeB;
+//            if (water > 9)
+//            {
+//                typeB = HexTypes.Water;
+//            }
+//            else if (water > 6)
+//            {
+//                typeB = Random.value > 0.9999f ? HexTypes.Grass : HexTypes.Water;
+//            }
+//            else if (water > 3)
+//            {
+//                typeB = Random.value > 0.999f ? HexTypes.Grass : HexTypes.Water;
+//            }
+//            else if (water > 2)
+//            {
+//                typeB = Random.value > 0.99f ? HexTypes.Grass : HexTypes.Water;
+//            }
+//            else
+//            {
+//                typeB = Random.value > 0.05f ? HexTypes.Grass : HexTypes.Water;
+//            }
+//
+//            map[coords] = new HexComponent()
+//            {
+//                HexType = typeB,
+//                Parent = null,
+//            };
+//
+//            //foreground
+//            coords.W = 1;
+//            neighbours = map.NeighboursOf(coords, 2);
+//            int notEmpty = 0;
+//            for (int i = 0; i < neighbours.Count; i++)
+//            {
+//                HexaCoords neighbour = neighbours[i];
+//                if ((map[neighbour]).HexType != HexTypes.Empty) notEmpty++;
+//            }
+//
+//            HexTypes typeF;
+//            if (notEmpty == 0 && typeB != HexTypes.Water)
+//            {
+//                float r = Random.value;
+//                if (r > 0.99f)
+//                {
+//                    typeF = HexTypes.Obstacle;
+//                }
+//                else if (r > 0.98f)
+//                {
+//                    typeF = HexTypes.Diamond;
+//                }
+//                else if (r > 0.95f)
+//                {
+//                    typeF = HexTypes.Diamond;
+//                }
+//                else
+//                {
+//                    typeF = HexTypes.Empty;
+//                }
+//            }
+//            else
+//            {
+//                typeF = HexTypes.Empty;
+//            }
+//
+//            map[coords] = new HexComponent()
+//            {
+//                HexType = typeF,
+//                Parent = null,
+//            };
         }
 
         public static void GenerateChunk()

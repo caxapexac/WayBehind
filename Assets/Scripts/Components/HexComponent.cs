@@ -28,6 +28,7 @@ namespace Components
             Properties = new Dictionary<HexProperties, int>();
         }
 
+        public float Color;
         public HexTypes HexType;
         public IPoolObject Parent;
         public Dictionary<HexProperties, int> Properties;

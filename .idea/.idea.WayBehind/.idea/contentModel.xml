@@ -7,6 +7,11 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AdditionalExamples" t="Include">
+          <e p="CloudyNoise" t="Include">
+            <e p="CloudyNoiseTest.cs" t="Include" />
+          </e>
+        </e>
         <e p="Libs" t="Include">
           <e p="ecs-develop" t="Include">
             <e p="Core" t="Include">
@@ -189,15 +194,24 @@
             <e p="TriggerEvent.cs" t="Include" />
           </e>
           <e p="Misc" t="Include">
+            <e p="FractalNoise.cs" t="Include" />
             <e p="HexaList3D.cs" t="Include" />
+            <e p="HexCloudNoise.cs" t="Include" />
             <e p="HexMath.cs" t="Include" />
+            <e p="HexPerlinNoise.cs" t="Include" />
+            <e p="MapGenHexCloudNoise.cs" t="Include" />
+            <e p="MapGenHexPerlinNoise.cs" t="Include" />
             <e p="MapGenRandomNeighbours.cs" t="Include" />
+            <e p="MapGenSquareFractalNoise.cs" t="Include" />
+            <e p="PerlinNoise.cs" t="Include" />
             <e p="Utils.cs" t="Include" />
           </e>
           <e p="MonoBehviours" t="Include">
             <e p="GameStartup.cs" t="Include" />
             <e p="PlayerColliderEvent.cs" t="Include" />
             <e p="PlayerTriggerEvent.cs" t="Include" />
+            <e p="SliderTextUpdater.cs" t="Include" />
+            <e p="StartupSettings.cs" t="Include" />
           </e>
           <e p="Systems" t="Include">
             <e p="CameraSystem.cs" t="Include" />

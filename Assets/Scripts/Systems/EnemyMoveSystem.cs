@@ -70,12 +70,12 @@ namespace Systems
         private void ThinkAboutIt(EnemyComponent enemy)
         {
             HexaCoords enemyPos = HexMath.Pixel2Hexel(enemy.Head.transform.localPosition, _game.S.HexSize);
-            if (enemy.Force.magnitude > 0.1f)
+            if (enemy.Force.magnitude > 0.5f)
             {
                 Vector2 nextCoords = (Vector2) enemy.Head.localPosition + enemy.Force;
                 enemy.Head.localPosition = Vector2.Lerp(enemy.Head.localPosition, nextCoords,
                     enemy.Hex.Properties[HexProperties.JumpSpeed] * Time.deltaTime);
-                enemy.Force *= 0.9f;
+                enemy.Force *= 0.5f;
                 enemy.Target = nextCoords;
             }
             else if (HexMath.HexDistance(_playerCoords, enemyPos) <= enemy.Hex.Properties[HexProperties.AgroRadius])

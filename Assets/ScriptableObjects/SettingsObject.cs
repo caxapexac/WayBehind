@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
 
 namespace ScriptableObjects
-{
+{   
     [CreateAssetMenu]
     public class SettingsObject : ScriptableObject
     {
         [Header("Map")] [ContextMenuItem("Change seed", "RandomizeSeed")]
         public bool UseSeed;
+        public bool UseTextures;
         public int MapSaeed;
-        [Range(1, 500)]
+        [Range(1, 10)]
+        public int Octaves;
+        [Range(0.1f, 1f)]
+        public float Smoothing;
+        [Range(0.1f, 1f)]
+        public float Persistance;
+        [Range(1, 250)]
         public int MapSize;
-        [Range(1, 500)]
+        [Range(1, 250)]
         public int FieldOfView;
-        [Range(0.1f, 10f)]
+        [Range(0, 250)] 
+        public int EnemyCount;
+        [Range(0.1f, 1f)]
         public float HexSize;
-        
         
         [Space]
         [Header("Camera")]

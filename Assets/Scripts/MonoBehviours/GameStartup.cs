@@ -3,6 +3,7 @@ using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Systems;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MonoBehviours
 {
@@ -46,6 +47,11 @@ namespace MonoBehviours
         private void OnDisable()
         {
             _updateSystems.Dispose();
+        }
+
+        public void Menu()
+        {
+            SceneManager.LoadScene("SettingsScene");
         }
     }
 }

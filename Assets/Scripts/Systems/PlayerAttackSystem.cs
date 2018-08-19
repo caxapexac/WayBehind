@@ -3,6 +3,7 @@ using Events;
 using Leopotam.Ecs;
 using Misc;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Systems
@@ -43,14 +44,24 @@ namespace Systems
         private void Attack(EnemyComponent enemy)
         {
             //HexaCoords coords = HexMath.Pixel2Hexel(enemy.Head.localPosition, _game.S.HexSize, 1);
-            enemy.Force = _player.CurrentForce;//enemy.Head.localPosition - _player.Transform.localPosition;
-            _player.CurrentSlowing = 0;
-            enemy.Hex.Properties[HexProperties.HP] -= 1;
-            if (Random.value > _player.CurrentForce.magnitude)
+            if (Random.value > _player.CurrentForce.magnitude - 0.3f)
             {
                 _player.Hp -= 1;
                 _hpBar.value = _player.Hp;
+                if (_player.Hp <= 0)
+                {
+                    _player.Transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
+                    
+                }
             }
+
+            enemy.Force = _player.CurrentForce; //enemy.Head.localPosition - _player.Transform.localPosition;
+            _player.CurrentForce = -Vector2.ClampMagnitude(_player.CurrentForce * 10, 1);
+            _player.CurrentSlowing = 0;
+            enemy.Hex.Properties[HexProperties.HP] -= 1;
+            enemy.Body.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red,
+                (float) (enemy.Hex.Properties[HexProperties.MaxHP] - enemy.Hex.Properties[HexProperties.HP]) /
+                enemy.Hex.Properties[HexProperties.MaxHP]);
         }
 
 

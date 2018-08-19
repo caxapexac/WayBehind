@@ -59,6 +59,7 @@ namespace Systems
                 }
             }
 
+            if (_player.Hp <= 0) _player.CurrentSlowing *= 0.1f;
             //todo
             _player.CurrentForce = Vector2.Lerp(_player.CurrentForce, _player.Force, _game.S.LerpSpeed * Time.deltaTime);
             _player.CurrentSlowing = MathFast.Lerp(_player.CurrentSlowing, _player.Slowing, _game.S.LerpSlowing * Time.deltaTime);
