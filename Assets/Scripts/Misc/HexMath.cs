@@ -3,6 +3,25 @@ using UnityEngine;
 
 namespace Misc
 {
+    public struct HexaCoords
+    {
+        public HexaCoords(int x, int y, int w = 0)
+        {
+            X = x;
+            Y = y;
+            W = w;
+        }
+
+        public int X;
+        public int Y;
+        public int W;
+
+        public int Z
+        {
+            get { return -X - Y; }
+        }
+    }
+    
     public class HexMath
     {
         private static float TwoThree = 2f / 3f;

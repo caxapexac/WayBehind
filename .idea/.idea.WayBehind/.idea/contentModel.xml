@@ -193,17 +193,20 @@
             <e p="HexDisposeEvent.cs" t="Include" />
             <e p="TriggerEvent.cs" t="Include" />
           </e>
-          <e p="Misc" t="Include">
+          <e p="Map" t="Include">
             <e p="FractalNoise.cs" t="Include" />
+            <e p="HexaList.cs" t="Include" />
             <e p="HexaList3D.cs" t="Include" />
             <e p="HexCloudNoise.cs" t="Include" />
-            <e p="HexMath.cs" t="Include" />
             <e p="HexPerlinNoise.cs" t="Include" />
             <e p="MapGenHexCloudNoise.cs" t="Include" />
             <e p="MapGenHexPerlinNoise.cs" t="Include" />
             <e p="MapGenRandomNeighbours.cs" t="Include" />
             <e p="MapGenSquareFractalNoise.cs" t="Include" />
             <e p="PerlinNoise.cs" t="Include" />
+          </e>
+          <e p="Misc" t="Include">
+            <e p="HexMath.cs" t="Include" />
             <e p="Utils.cs" t="Include" />
           </e>
           <e p="MonoBehviours" t="Include">

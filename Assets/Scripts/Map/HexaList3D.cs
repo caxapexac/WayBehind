@@ -4,24 +4,7 @@ using UnityEngine;
 
 namespace Misc
 {
-    public struct HexaCoords
-    {
-        public HexaCoords(int x, int y, int w = 0)
-        {
-            X = x;
-            Y = y;
-            W = w;
-        }
 
-        public int X;
-        public int Y;
-        public int W;
-
-        public int Z
-        {
-            get { return -X - Y; }
-        }
-    }
 
     /// <summary>
     /// Хранилище гексагонов, расширяется в 4 стороны, имеет заданую глубину
