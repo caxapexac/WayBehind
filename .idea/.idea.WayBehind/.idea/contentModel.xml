@@ -7,25 +7,164 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="AdditionalExamples" t="Include">
-          <e p="CloudyNoise" t="Include">
-            <e p="CloudyNoiseTest.cs" t="Include" />
+        <e p="__TEMP" t="Include">
+          <e p="AdditionalExamples" t="Include">
+            <e p="CloudyNoise" t="Include">
+              <e p="CloudyNoiseTest.cs" t="Include" />
+            </e>
+          </e>
+          <e p="OBSOLETE" t="Include">
+            <e p="Components" t="Include">
+              <e p="EnemyComponent.cs" t="Include" />
+              <e p="GameComponent.cs" t="Include" />
+              <e p="HexComponent.cs" t="Include" />
+              <e p="PlayerComponent.cs" t="Include" />
+            </e>
+            <e p="Events" t="Include">
+              <e p="CollisionEvent.cs" t="Include" />
+              <e p="HexDisposeEvent.cs" t="Include" />
+              <e p="TriggerEvent.cs" t="Include" />
+            </e>
+            <e p="Map" t="Include">
+              <e p="FractalNoise.cs" t="Include" />
+              <e p="HexaChunks3D.cs" t="Include" />
+              <e p="HexaList.cs" t="Include" />
+              <e p="HexaList3D.cs" t="Include" />
+              <e p="HexCloudNoise.cs" t="Include" />
+              <e p="HexPerlinNoise.cs" t="Include" />
+              <e p="MapGenHexCloudNoise.cs" t="Include" />
+              <e p="MapGenHexPerlinNoise.cs" t="Include" />
+              <e p="MapGenRandomNeighbours.cs" t="Include" />
+              <e p="MapGenSquareFractalNoise.cs" t="Include" />
+              <e p="PerlinNoise.cs" t="Include" />
+            </e>
+            <e p="Misc" t="Include">
+              <e p="HexMath.cs" t="Include" />
+              <e p="Utils.cs" t="Include" />
+            </e>
+            <e p="MonoBehviours" t="Include">
+              <e p="GameStartup.cs" t="Include" />
+              <e p="PlayerColliderEvent.cs" t="Include" />
+              <e p="PlayerTriggerEvent.cs" t="Include" />
+              <e p="SliderTextUpdater.cs" t="Include" />
+              <e p="StartupSettings.cs" t="Include" />
+            </e>
+            <e p="Systems" t="Include">
+              <e p="CameraSystem.cs" t="Include" />
+              <e p="EnemyAttackSystem.cs" t="Include" />
+              <e p="EnemyMoveSystem.cs" t="Include" />
+              <e p="EventCleanerSystem.cs" t="Include" />
+              <e p="InputKeyboardSystem.cs" t="Include" />
+              <e p="InputStickSystem.cs" t="Include" />
+              <e p="PlayerAttackSystem.cs" t="Include" />
+              <e p="PlayerMoveSystem.cs" t="Include" />
+              <e p="PlayerPickSystem.cs" t="Include" />
+              <e p="WorldGenSystem.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Client" t="Include">
+          <e p="ScriptableObjects" t="Include">
+            <e p="BiomeObject.cs" t="Include" />
+            <e p="BiomesGeneratorObject.cs" t="Include" />
+            <e p="MapNoiseObject.cs" t="Include" />
+            <e p="SettingsObject.cs" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="Algorithms" t="Include">
+              <e p="HexMath.cs" t="Include" />
+              <e p="Legacy" t="Include">
+                <e p="Extensions.cs" t="Include" />
+                <e p="Hashing.cs" t="Include" />
+                <e p="LerpCurves.cs" t="Include" />
+                <e p="ListExtensions.cs" t="Include" />
+                <e p="NumericMethods.cs" t="Include" />
+                <e p="PrefabPool.cs" t="Include" />
+                <e p="TransformMethods.cs" t="Include" />
+                <e p="VectorMethods.cs" t="Include" />
+              </e>
+              <e p="Noises" t="Include">
+                <e p="CloudArrayNoise.cs" t="Include" />
+                <e p="FractalArrayNoise.cs" t="Include" />
+                <e p="PerlinPointNoise.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Components" t="Include">
+              <e p="EnemyComponent.cs" t="Include" />
+              <e p="HexComponent.cs" t="Include" />
+              <e p="MapComponent.cs" t="Include" />
+              <e p="PlayerComponent.cs" t="Include" />
+              <e p="PoolsComponent.cs" t="Include" />
+              <e p="SpiritComponent.cs" t="Include" />
+            </e>
+            <e p="ComponentsOneFrame" t="Include">
+              <e p="CollisionEvent.cs" t="Include" />
+              <e p="InputEvent.cs" t="Include" />
+              <e p="RenderRequiredEvent.cs" t="Include" />
+              <e p="TriggerEvent.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="BiomesListEditor.cs" t="Include" />
+              <e p="MonoNoiseTesterEditor.cs" t="Include" />
+            </e>
+            <e p="Miscellaneous" t="Include">
+              <e p="Constants.cs" t="Include" />
+              <e p="Structs.cs" t="Include" />
+            </e>
+            <e p="MonoBehaviours" t="Include">
+              <e p="GameStartup.cs" t="Include" />
+              <e p="MonoColliderListener.cs" t="Include" />
+              <e p="MonoNoiseTester.cs" t="Include" />
+              <e p="MonoTriggerListener.cs" t="Include" />
+              <e p="StartupSettings.cs" t="Include" />
+            </e>
+            <e p="Systems" t="Include">
+              <e p="CameraSystem.cs" t="Include" />
+              <e p="EnemyAttackSystem.cs" t="Include" />
+              <e p="EnemyMoveSystem.cs" t="Include" />
+              <e p="InputKeyboardSystem.cs" t="Include" />
+              <e p="InputStickSystem.cs" t="Include" />
+              <e p="PlayerAttackSystem.cs" t="Include" />
+              <e p="PlayerInitSystem.cs" t="Include" />
+              <e p="PlayerMoveSystem.cs" t="Include" />
+              <e p="PlayerPickSystem.cs" t="Include" />
+              <e p="SpiritRenderSystem.cs" t="Include" />
+              <e p="WorldInitSystem.cs" t="Include" />
+              <e p="WorldRenderSystem.cs" t="Include" />
+            </e>
           </e>
         </e>
         <e p="Libs" t="Include">
           <e p="ecs-develop" t="Include">
-            <e p="Core" t="Include">
-              <e p="EcsSystems.cs" t="Include" />
-              <e p="EcsWorld.cs" t="Include" />
-            </e>
-            <e p="Utils" t="Include">
+            <e p="src" t="Include">
               <e p="EcsComponentMask.cs" t="Include" />
               <e p="EcsComponentPool.cs" t="Include" />
               <e p="EcsFilter.cs" t="Include" />
               <e p="EcsHelpers.cs" t="Include" />
               <e p="EcsInjections.cs" t="Include" />
-              <e p="EcsMultiThreading.cs" t="Include" />
-              <e p="EcsWorldStats.cs" t="Include" />
+              <e p="EcsSystems.cs" t="Include" />
+              <e p="EcsWorld.cs" t="Include" />
+            </e>
+          </e>
+          <e p="ecs-types-OBSOLETE_DONT_USE" t="Include">
+            <e p="src" t="Include">
+              <e p="Fixed.cs" t="Include" />
+              <e p="Float2.cs" t="Include" />
+              <e p="Float3.cs" t="Include" />
+              <e p="Float3x3.cs" t="Include" />
+              <e p="Float4.cs" t="Include" />
+              <e p="Float4x4.cs" t="Include" />
+              <e p="FloatBox3.cs" t="Include" />
+              <e p="HighFixed.cs" t="Include" />
+              <e p="Int2.cs" t="Include" />
+              <e p="Int3.cs" t="Include" />
+              <e p="Int4.cs" t="Include" />
+              <e p="IntBox2.cs" t="Include" />
+              <e p="MathApprox.cs" t="Include" />
+              <e p="MathFast.cs" t="Include" />
+              <e p="Quat.cs" t="Include" />
+              <e p="Rng.cs" t="Include" />
+              <e p="TypeHelpers.cs" t="Include" />
             </e>
           </e>
           <e p="ecs-ui-develop" t="Include">
@@ -58,7 +197,6 @@
                 <e p="EcsUiScrollViewEvent.cs" t="Include" />
               </e>
               <e p="Systems" t="Include">
-                <e p="EcsUiCleaner.cs" t="Include" />
                 <e p="EcsUiEmitter.cs" t="Include" />
               </e>
               <e p="Widgets" t="Include">
@@ -76,6 +214,9 @@
                 <e p="Vector3.cs" t="Include" />
               </e>
               <e p="Templates" t="Include">
+                <e p="Component.cs.txt" t="Include" />
+                <e p="ComponentFlag.cs.txt" t="Include" />
+                <e p="ComponentOneFrame.cs.txt" t="Include" />
                 <e p="InitSystem.cs.txt" t="Include" />
                 <e p="RunSystem.cs.txt" t="Include" />
                 <e p="Startup.cs.txt" t="Include" />
@@ -85,6 +226,19 @@
             <e p="Runtime" t="Include">
               <e p="EditorHelpers.cs" t="Include" />
             </e>
+          </e>
+          <e p="EZ Camera Shake" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="CameraShakeInstance.cs" t="Include" />
+              <e p="CameraShakePresets.cs" t="Include" />
+              <e p="CameraShaker.cs" t="Include" />
+              <e p="Utilities" t="Include">
+                <e p="CameraUtilities.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="FastNoise_CSharp-master" t="Include">
+            <e p="FastNoise.cs" t="Include" />
           </e>
           <e p="Leo-Collections" t="Include">
             <e p="FastList.cs" t="Include" />
@@ -111,62 +265,85 @@
             <e p="PoolObject.cs" t="Include" />
             <e p="RecycleAfterTime.cs" t="Include" />
           </e>
-          <e p="VictorsAssets" t="Include">
-            <e p="TouchControlsKit-Lite" t="Include">
-              <e p="Scripts" t="Include">
-                <e p="Editor" t="Include">
-                  <e p="CustomInspectors" t="Include">
-                    <e p="Controllers" t="Include">
-                      <e p="Base" t="Include">
-                        <e p="AxesBasedControllerEditor.cs" t="Include" />
-                        <e p="ControllerBaseEditor.cs" t="Include" />
-                      </e>
-                      <e p="TCKButtonEditor.cs" t="Include" />
-                      <e p="TCKJoystickEditor.cs" t="Include" />
-                      <e p="TCKTouchpadEditor.cs" t="Include" />
-                    </e>
-                  </e>
-                  <e p="Extensions" t="Include">
-                    <e p="SerializedPropertyExtensions.cs" t="Include" />
-                  </e>
-                  <e p="Initialize" t="Include">
-                    <e p="TCKInitialize.cs" t="Include" />
-                  </e>
-                  <e p="Utils" t="Include">
-                    <e p="TCKEditorChangeCheck.cs" t="Include" />
-                    <e p="TCKEditorHelper.cs" t="Include" />
-                    <e p="TCKEditorLayout.cs" t="Include" />
-                    <e p="TCKEditorStyle.cs" t="Include" />
-                    <e p="TCKPrefabCreator.cs" t="Include" />
-                  </e>
-                  <e p="Windows" t="Include">
-                    <e p="Tabs" t="Include">
-                      <e p="TCKAboutTab.cs" t="Include" />
-                    </e>
-                    <e p="TCKWindow.cs" t="Include" />
-                  </e>
-                </e>
-                <e p="Runtime" t="Include">
-                  <e p="Attributes" t="Include">
-                    <e p="ApplyMethodAttribute.cs" t="Include" />
-                    <e p="LabelAttribute.cs" t="Include" />
-                    <e p="LogicLabelAttribute.cs" t="Include" />
-                  </e>
-                  <e p="Camera" t="Include">
-                    <e p="GuiCamera.cs" t="Include" />
-                  </e>
+          <e p="TextMesh Pro" t="Include">
+            <e p="Resources" t="Include">
+              <e p="LineBreaking Following Characters.txt" t="Include" />
+              <e p="LineBreaking Leading Characters.txt" t="Include" />
+              <e p="Shaders" t="Include">
+                <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+                <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+                <e p="TMP_Bitmap.shader" t="Include" />
+                <e p="TMP_SDF Overlay.shader" t="Include" />
+                <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+                <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+                <e p="TMP_SDF-Mobile.shader" t="Include" />
+                <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+                <e p="TMP_SDF-Surface.shader" t="Include" />
+                <e p="TMP_SDF.shader" t="Include" />
+                <e p="TMP_Sprite.shader" t="Include" />
+                <e p="TMPro.cginc" t="Include" />
+                <e p="TMPro_Properties.cginc" t="Include" />
+                <e p="TMPro_Surface.cginc" t="Include" />
+              </e>
+            </e>
+            <e p="Sprites" t="Include">
+              <e p="EmojiOne Attribution.txt" t="Include" />
+            </e>
+          </e>
+          <e p="TouchControlsKit-Lite" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Editor" t="Include">
+                <e p="CustomInspectors" t="Include">
                   <e p="Controllers" t="Include">
-                    <e p="BaseData" t="Include">
-                      <e p="AxesBasedController.cs" t="Include" />
-                      <e p="ControllerBase.cs" t="Include" />
-                      <e p="Enums.cs" t="Include" />
+                    <e p="Base" t="Include">
+                      <e p="AxesBasedControllerEditor.cs" t="Include" />
+                      <e p="ControllerBaseEditor.cs" t="Include" />
                     </e>
-                    <e p="TCKButton.cs" t="Include" />
-                    <e p="TCKJoystick.cs" t="Include" />
-                    <e p="TCKTouchpad.cs" t="Include" />
+                    <e p="TCKButtonEditor.cs" t="Include" />
+                    <e p="TCKJoystickEditor.cs" t="Include" />
+                    <e p="TCKTouchpadEditor.cs" t="Include" />
                   </e>
-                  <e p="TCKInput.cs" t="Include" />
                 </e>
+                <e p="Extensions" t="Include">
+                  <e p="SerializedPropertyExtensions.cs" t="Include" />
+                </e>
+                <e p="Initialize" t="Include">
+                  <e p="TCKInitialize.cs" t="Include" />
+                </e>
+                <e p="Utils" t="Include">
+                  <e p="TCKEditorChangeCheck.cs" t="Include" />
+                  <e p="TCKEditorHelper.cs" t="Include" />
+                  <e p="TCKEditorLayout.cs" t="Include" />
+                  <e p="TCKEditorStyle.cs" t="Include" />
+                  <e p="TCKPrefabCreator.cs" t="Include" />
+                </e>
+                <e p="Windows" t="Include">
+                  <e p="Tabs" t="Include">
+                    <e p="TCKAboutTab.cs" t="Include" />
+                  </e>
+                  <e p="TCKWindow.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Runtime" t="Include">
+                <e p="Attributes" t="Include">
+                  <e p="ApplyMethodAttribute.cs" t="Include" />
+                  <e p="LabelAttribute.cs" t="Include" />
+                  <e p="LogicLabelAttribute.cs" t="Include" />
+                </e>
+                <e p="Camera" t="Include">
+                  <e p="GuiCamera.cs" t="Include" />
+                </e>
+                <e p="Controllers" t="Include">
+                  <e p="BaseData" t="Include">
+                    <e p="AxesBasedController.cs" t="Include" />
+                    <e p="ControllerBase.cs" t="Include" />
+                    <e p="Enums.cs" t="Include" />
+                  </e>
+                  <e p="TCKButton.cs" t="Include" />
+                  <e p="TCKJoystick.cs" t="Include" />
+                  <e p="TCKTouchpad.cs" t="Include" />
+                </e>
+                <e p="TCKInput.cs" t="Include" />
               </e>
             </e>
           </e>
@@ -178,59 +355,9 @@
             </e>
           </e>
         </e>
-        <e p="ScriptableObjects" t="Include">
-          <e p="SettingsObject.cs" t="Include" />
-        </e>
-        <e p="Scripts" t="Include">
-          <e p="Components" t="Include">
-            <e p="EnemyComponent.cs" t="Include" />
-            <e p="GameComponent.cs" t="Include" />
-            <e p="HexComponent.cs" t="Include" />
-            <e p="PlayerComponent.cs" t="Include" />
-          </e>
-          <e p="Events" t="Include">
-            <e p="CollisionEvent.cs" t="Include" />
-            <e p="HexDisposeEvent.cs" t="Include" />
-            <e p="TriggerEvent.cs" t="Include" />
-          </e>
-          <e p="Map" t="Include">
-            <e p="FractalNoise.cs" t="Include" />
-            <e p="HexaList.cs" t="Include" />
-            <e p="HexaList3D.cs" t="Include" />
-            <e p="HexCloudNoise.cs" t="Include" />
-            <e p="HexPerlinNoise.cs" t="Include" />
-            <e p="MapGenHexCloudNoise.cs" t="Include" />
-            <e p="MapGenHexPerlinNoise.cs" t="Include" />
-            <e p="MapGenRandomNeighbours.cs" t="Include" />
-            <e p="MapGenSquareFractalNoise.cs" t="Include" />
-            <e p="PerlinNoise.cs" t="Include" />
-          </e>
-          <e p="Misc" t="Include">
-            <e p="HexMath.cs" t="Include" />
-            <e p="Utils.cs" t="Include" />
-          </e>
-          <e p="MonoBehviours" t="Include">
-            <e p="GameStartup.cs" t="Include" />
-            <e p="PlayerColliderEvent.cs" t="Include" />
-            <e p="PlayerTriggerEvent.cs" t="Include" />
-            <e p="SliderTextUpdater.cs" t="Include" />
-            <e p="StartupSettings.cs" t="Include" />
-          </e>
-          <e p="Systems" t="Include">
-            <e p="CameraSystem.cs" t="Include" />
-            <e p="EnemyAttackSystem.cs" t="Include" />
-            <e p="EnemyMoveSystem.cs" t="Include" />
-            <e p="EventCleanerSystem.cs" t="Include" />
-            <e p="InputKeyboardSystem.cs" t="Include" />
-            <e p="InputStickSystem.cs" t="Include" />
-            <e p="PlayerAttackSystem.cs" t="Include" />
-            <e p="PlayerMoveSystem.cs" t="Include" />
-            <e p="PlayerPickSystem.cs" t="Include" />
-            <e p="WorldGenSystem.cs" t="Include" />
-          </e>
-        </e>
       </e>
       <e p="Leopotam.Ecs.csproj" t="IncludeRecursive" />
+      <e p="Leopotam.Ecs.Types.csproj" t="IncludeRecursive" />
       <e p="Leopotam.Ecs.Ui.csproj" t="IncludeRecursive" />
       <e p="Leopotam.Ecs.Ui.Editor.csproj" t="IncludeRecursive" />
       <e p="Leopotam.Ecs.UnityIntegration.csproj" t="IncludeRecursive" />

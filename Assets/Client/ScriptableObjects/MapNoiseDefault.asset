@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fc0dbdd0a248ccb49417e77fbf9135, type: 3}
+  m_Name: MapNoiseDefault
+  m_EditorClassIdentifier: 
+  Saeed: 3456
+  Size: 0.15
+  PixelPerUnit: 1000
+  HNoiseType: 1
+  HScale: 0.564158
+  HOctaves: 4
+  HPersistance: 0.53972906
+  HLacunarity: 0.7446253
+  TNoiseType: 1
+  TScale: 0.10997082
+  TOctaves: 4
+  TPersistance: 0.618427
+  TLacunarity: 0.95956755
+  MNoiseType: 0
+  MScale: 0.647198
+  MOctaves: 4
+  MPersistance: 0.49585003
+  MLacunarity: 0.66532236

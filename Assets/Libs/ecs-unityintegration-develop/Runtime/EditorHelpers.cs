@@ -2,7 +2,7 @@
 // The MIT License
 // Unity integration https://github.com/Leopotam/ecs-unityintegration
 // for ECS framework https://github.com/Leopotam/ecs
-// Copyright (c) 2018 Leopotam <leopotam@gmail.com>
+// Copyright (c) 2017-2018 Leopotam <leopotam@gmail.com>
 // ----------------------------------------------------------------------------
 
 #if UNITY_EDITOR
@@ -11,20 +11,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Leopotam.Ecs.UnityIntegration {
+    public static class EditorHelpers {
+        public static string GetCleanGenericTypeName (Type type) {
+            if (!type.IsGenericType) {
+                return type.Name;
+            }
+            var constraints = "";
+            foreach (var constr in type.GetGenericArguments ()) {
+                constraints += constraints.Length > 0 ? string.Format (", {0}", GetCleanGenericTypeName (constr)) : constr.Name;
+            }
+            return string.Format ("{0}<{1}>", type.Name.Substring (0, type.Name.LastIndexOf ("`")), constraints);
+        }
+    }
+
     public sealed class EcsEntityObserver : MonoBehaviour {
         public EcsWorld World;
-
         public int Id;
     }
 
     public sealed class EcsSystemsObserver : MonoBehaviour, IEcsSystemsDebugListener {
         EcsSystems _systems;
 
-        public static GameObject Create (EcsSystems systems, string name = null) {
+        public static GameObject Create (EcsSystems systems) {
             if (systems == null) {
                 throw new ArgumentNullException ("systems");
             }
-            var go = new GameObject (name != null ? string.Format ("[ECS-SYSTEMS {0}]", name) : "[ECS-SYSTEMS]");
+            var go = new GameObject (string.Format ("[{0}]", systems.Name ?? "[ECS-SYSTEMS]"));
             DontDestroyOnLoad (go);
             go.hideFlags = HideFlags.NotEditable;
             var observer = go.AddComponent<EcsSystemsObserver> ();
@@ -54,9 +66,7 @@ namespace Leopotam.Ecs.UnityIntegration {
 
     public sealed class EcsWorldObserver : MonoBehaviour, IEcsWorldDebugListener {
         EcsWorld _world;
-
         readonly Dictionary<int, GameObject> _entities = new Dictionary<int, GameObject> (1024);
-
         static object[] _componentsCache = new object[32];
 
         public static GameObject Create (EcsWorld world, string name = null) {
@@ -119,7 +129,7 @@ namespace Leopotam.Ecs.UnityIntegration {
             var entityName = entity.ToString ("D8");
             var count = _world.GetComponents (entity, ref _componentsCache);
             for (var i = 0; i < count; i++) {
-                entityName = string.Format ("{0}:{1}", entityName, _componentsCache[i].GetType ().Name);
+                entityName = string.Format ("{0}:{1}", entityName, EditorHelpers.GetCleanGenericTypeName (_componentsCache[i].GetType ()));
                 _componentsCache[i] = null;
             }
             _entities[entity].name = entityName;

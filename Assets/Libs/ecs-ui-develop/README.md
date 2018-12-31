@@ -3,7 +3,7 @@
 # Unity uGui extension for Entity Component System framework
 Easy bindings for events from Unity uGui to [ECS framework](https://github.com/Leopotam/ecs) - main goal of this extension.
 
-> Tested on unity 2018.2 (dependent on Unity engine) and contains assembly definition for compiling to separate assembly file for performance reason.
+> Tested on unity 2018.3 (dependent on Unity engine) and contains assembly definition for compiling to separate assembly file for performance reason.
 
 > Dependent on [ECS framework](https://github.com/Leopotam/ecs) - ECS framework should be imported to unity project first.
 
@@ -30,29 +30,6 @@ public class Startup : MonoBehaviour {
 }
 ```
 
-## EcsUiCleaner
-Ecs run-system that cleanup all ui events in world after processing. Should be added to `EcsSystems` after all systems that can process events from ui:
-```csharp
-public class Startup : MonoBehaviour {
-    // Field that should be initialized by instance of `EcsUiEmitter` assigned to Ui root GameObject.
-    [SerializeField]
-    EcsUiEmitter _uiEmitter;
-
-    EcsSystems _systems;
-
-    void Start () {
-        var world = new EcsWorld ();
-        _systems = new EcsSystems(world)
-            .Add (_uiEmitter);
-            // Additional initialization here...
-            .Add (new EcsUiCleaner ());
-        _systems.Initialize ();
-    }
-}
-```
-
-> **Important: if this system will not be added - generated ui events will be kept inside `ecs-world` forever.**
-
 # Actions
 MonoBehaviour components that should be added to uGui widgets to transfer events from them to `ecs-world` (`EcsUiClickAction`, `EcsUiDragAction` and others). Each action component contains reference to `EcsUiEmitter` in scene (if not inited - will try to find emitter automatically) and logical name `WidgetName` that can helps to detect source of event inside ecs-system.
 
@@ -74,8 +51,51 @@ public class TestUiClickEventSystem : IEcsRunSystem {
 }
 ```
 
+# Initialization
+```csharp
+public class Startup : MonoBehaviour {
+    // Field that should be initialized by instance of `EcsUiEmitter` assigned to Ui root GameObject.
+    [SerializeField]
+    EcsUiEmitter _uiEmitter;
+
+    EcsSystems _systems;
+
+    IEnumerator Start () {
+        // For correct registering named widgets at EcsUiEmitter.
+        yield return null;
+        var world = new EcsWorld ();
+        _systems = new EcsSystems(world);
+        _systems
+            .Add (_uiEmitter)
+            // Additional systems here...
+            .Initialize ();
+    }
+
+    void Update () {
+        if (_systems != null) {
+            // Process systems.
+            _systems.Run();
+            // Important: automatic clearing one-frame components (ui-events).
+            _world.RemoveOneFrameComponents ();
+        }
+    }
+
+    void OnDisable () {
+        _systems.Dispose ();
+        _systems = null;
+        _world.Dispose ();
+        _world = null;
+    }
+}
+```
+
 # Examples
 [Examples repo](https://github.com/Leopotam/ecs-ui.examples.git).
 
 # License
-The software released under the terms of the MIT license. Enjoy.
+The software released under the terms of the [MIT license](./LICENSE). Enjoy.
+
+# Donate
+Its free opensource software, but you can buy me a coffee:
+
+<a href="https://www.buymeacoffee.com/leopotam" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>

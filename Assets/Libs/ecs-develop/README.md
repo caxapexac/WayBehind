@@ -1,9 +1,9 @@
 [![gitter](https://img.shields.io/gitter/room/leopotam/ecs.svg)](https://gitter.im/leopotam/ecs)
 [![license](https://img.shields.io/github/license/Leopotam/ecs.svg)](https://github.com/Leopotam/ecs/blob/develop/LICENSE)
-# LeoECS - Another one Entity Component System framework
-Performance and zero memory allocation / small size, no dependencies on any game engine - main goals of this project.
+# LeoECS - Simple lightweight C# Entity Component System framework
+Performance, zero/small memory allocations/footprint, no dependencies on any game engine - main goals of this project.
 
-> Tested on unity 2018.1 (not dependent on it) and contains assembly definition for compiling to separate assembly file for performance reason.
+> Tested on unity 2018.3 (not dependent on it) and contains assembly definition for compiling to separate assembly file for performance reason.
 
 > **Important!** Dont forget to use `DEBUG` builds for development and `RELEASE` builds in production: all internal error checks / exception throwing works only in `DEBUG` builds and eleminated for performance reasons in `RELEASE`.
 
@@ -31,19 +31,34 @@ WeaponComponent myWeapon;
 int entityId = _world.CreateEntityWith<WeaponComponent> (out myWeapon);
 _world.RemoveEntity (entityId);
 ```
+Dont forget that `EcsWorld.CreateEntityWith` method has multiple overloaded versions:
+```csharp
+Component1 c1;
+Component2 c2;
+int entityId = _world.CreateEntityWith<Component1, Component2> (out c1, out c2);
+_world.RemoveEntity (entityId);
+```
 
 > **Important!** Entities without components on them will be automatically removed from `EcsWorld` right after finish execution of current system.
 
 ## System
-Сontainer for logic for processing filtered entities. User class should implements `IEcsInitSystem` or / and `IEcsRunSystem` interfaces:
+Сontainer for logic for processing filtered entities. User class should implements `IEcsPreInitSystem`, `IEcsInitSystem` or / and `IEcsRunSystem` interfaces:
 ```csharp
-class WeaponSystem : IEcsInitSystem {
+class WeaponSystem : IEcsPreInitSystem, IEcsInitSystem {
+    void IEcsPreInitSystem.PreInitialize () {
+        // Will be called once during world initialization and before IEcsInitSystem.Initialize.
+    }
+
     void IEcsInitSystem.Initialize () {
         // Will be called once during world initialization.
     }
 
     void IEcsInitSystem.Destroy () {
         // Will be called once during world destruction.
+    }
+
+    void IEcsPreInitSystem.PreDestroy () {
+        // Will be called once during world destruction and after IEcsInitSystem.Destroy.
     }
 }
 ```
@@ -59,7 +74,7 @@ class HealthSystem : IEcsRunSystem {
 # Data injection
 > **Important!** Will not work when LEOECS_DISABLE_INJECT preprocessor constant defined.
 
-With `[EcsInject]` attribute over `IEcsSystem` class all compatible `EcsWorld` and `EcsFilter<>` fields of instance of this class will be auto-initialized (auto-injected):
+With `[EcsInject]` attribute over `IEcsSystem` class all compatible `EcsWorld` and `EcsFilter<T>` fields of instance of this class will be auto-initialized (auto-injected):
 ```csharp
 [EcsInject]
 class HealthSystem : IEcsSystem {
@@ -68,11 +83,24 @@ class HealthSystem : IEcsSystem {
     EcsFilter<WeaponComponent> _weaponFilter = null;
 }
 ```
+Instance of any custom type can be injected to all systems through `EcsSystems.Inject` method:
+```csharp
+var systems = new EcsSystems (world)
+    .Add (new TestSystem1 ())
+    .Add (new TestSystem2 ())
+    .Add (new TestSystem3 ())
+    .Inject (a)
+    .Inject (b)
+    .Inject (c)
+    .Inject (d);
+systems.Initialize ();
+```
+Each system will be scanned for compatible fields (can contains all of them or no one) with proper initialization.
 
 # Special classes
 
-## EcsFilter<>
-Container for keep filtered entities with specified component list:
+## EcsFilter<T>
+Container for keeping filtered entities with specified component list:
 ```csharp
 [EcsInject]
 class WeaponSystem : IEcsInitSystem, IEcsRunSystem {
@@ -88,8 +116,7 @@ class WeaponSystem : IEcsInitSystem, IEcsRunSystem {
     void IEcsInitSystem.Destroy () { }
 
     void IEcsRunSystem.Run () {
-        // Important: foreach-loop cant be used for filtered entities!
-        for (var i = 0; i < _filter.EntitiesCount; i++) {
+        foreach (var i in _filter) {
             // Components1 array will be automatically filled with instances of type "WeaponComponent".
             var weapon = _filter.Components1[i];
             weapon.Ammo = System.Math.Max (0, weapon.Ammo - 1);
@@ -100,7 +127,7 @@ class WeaponSystem : IEcsInitSystem, IEcsRunSystem {
 
 All compatible entities will be stored at `filter.Entities` array, amount of them - at `filter.EntitiesCount`.
 
-> Important: `filter.Entities` cant be iterated with foreach-loop, for-loop should be used instead with filter.EntitiesCount value as upper-bound.
+> Important: `filter.Entities`, `filter.Components1`, `filter.Components2`, etc - can't be iterated with foreach-loop directly, use foreach-loop over `filter`, or for-loop with filter.EntitiesCount value as upper-bound.
 
 All components from filter `Include` constraint will be stored at `filter.Components1`, `filter.Components2`, etc - in same order as they were used in filter type declaration.
 
@@ -116,7 +143,7 @@ class TestSystem : IEcsSystem {
     EcsFilter<Component1, Component2> _filter;
 
     public Test() {
-        for (var i = 0; i < _filter.EntitiesCount; i++) {
+        foreach (var i in _filter) {
             // its valid code.
             var component1 = _filter.Components1[i];
 
@@ -152,6 +179,8 @@ class Startup : MonoBehaviour {
     void Update() {
         // process all dependent systems.
         _systems.Run ();
+        // optional behaviour for one-frame components.
+        _world.RemoveOneFrameComponents ();
     }
 
     void OnDisable() {
@@ -166,72 +195,113 @@ class Startup : MonoBehaviour {
 ```
 > Important: Do not forget to call `EcsSystems.Dispose` method when instance will not be used anymore.
 
-# Sharing data between systems
-If some component should be shared between systems `EcsFilterSingle<>` filter class can be used in this case:
+`EcsSystems` instance can be used as nested system (any types of `IEcsPreInitSystem`, `IEcsInitSystem` or `IEcsRunSystem` behaviours are supported):
 ```csharp
-class MySharedData {
-    public string PlayerName;
-    public int AchivementsCount;
-}
+// initialization
+var nestedSystems = new EcsSystems (_world)
+    .Add (new NestedSystem ());
+// dont call nestedSystems.Initialize() here, rootSystems will do it automatically.
 
+var rootSystems = new EcsSystems (_world)
+    .Add (nestedSystems);
+rootSystems.Initialize();
+
+// update loop
+// dont call nestedSystems.Run() here, rootSystems will do it automatically.
+rootSystems.Run();
+
+// destroying
+// dont call nestedSystems.Dispose() here, rootSystems will do it automatically.
+rootSystems.Dispose();
+```
+
+# Sharing data between systems
+If some data should be shared between systems - there are 3 ways to do it.
+## Custom `EcsWorld` class
+Useful for global singleton-like access to independent systems:
+```csharp
+class MyEcsWorld : EcsWorld {
+    readonly public MyData Data;
+
+    public MyEcsWorld(MyData data) {
+        Data = data;
+    }
+}
+var shared = new MyData();
+// fill it here.
+// ...
+var world = new MyEcsWorld (shared);
+var systems = new EcsSystems (world)
+    .Add (new System1 ())
+    .Add (new System2 ());
+systems.Initialize();
+```
+## Component with `EcsFilter`
+Custom component can be used for this and sharing with `EcsFilter`:
+```csharp
+class MyData {
+    // shared data.
+}
 [EcsInject]
-class ChangePlayerName : IEcsInitSystem {
-    EcsFilterSingle<MySharedData> _shared = null;
+class CreateSharedData : IEcsInitSystem {
+    // just to be sure that filter already created before component initialization.
+    EcsFilter<MyData> _shared = null;
+    EcsWorld _world = null;
 
     void IEcsInitSystem.Initialize () {
-        _shared.Data.PlayerName = "Jack";
+        var data = _world.CreateEntityWith<MyData>();
+        // fill data here.
     }
 
     void IEcsInitSystem.Destroy () { }
 }
 
 [EcsInject]
-class SpawnPlayerModel : IEcsInitSystem {
-    EcsFilterSingle<MySharedData> _shared = null;
+class ReadSharedData : IEcsRunSystem {
+    EcsFilter<MyData> _shared = null;
 
-    void IEcsInitSystem.Initialize () {
-        Debug.LogFormat("Player with name {0} should be spawn here", _shared.Data.PlayerName);
-    }
-
-    void IEcsInitSystem.Destroy () { }
-}
-
-class Startup : Monobehaviour {
-    EcsWorld _world;
-
-    EcsSystems _systems;
-
-    void OnEnable() {
-        _world = new MyWorld (_sharedData);
-        
-        // This method should be called before any system will be added to EcsSystems group.
-        var data = EcsFilterSingle<MySharedData>.Create(_world);
-        data.PlayerName = "Unknown";
-        data.AchivementsCount = 123;
-
-        _systems = new EcsSystems(_world)
-            .Add (ChangePlayerName())
-            .Add (SpawnPlayerModel());
-        // All EcsFilterSingle<MySharedData> fields already injected here and systems can be initialized correctly.
-        _systems.Initialize();
-    }
-
-    void OnDisable() {
-        // var data = _world.GetFilter<EcsFilterSingle<MySharedData>>().Data;
-        // Do not forget to cleanup all reference links inside shared components to another data here.
-        // ...
-
-        _systems.Dispose();
-        _systems = null;
-        _world.Dispose();
-        _world = null;
+    void IEcsRunSystem.Run () {
+        var data = _shared.Components1[0];
+        // read data here.
     }
 }
 ```
+## Dependency Injection
+> **Important!** Will not work when LEOECS_DISABLE_INJECT preprocessor constant defined.
 
-> Important: `EcsFilterSingle<>.Create(EcsWorld)` method should be called before any system will be added to EcsSystems group connected to same `EcsWorld` instance.
+External data can be shared for all systems at `EcsSystems`:
+```csharp
+class MyData {
+    // shared data.
+}
+[EcsInject]
+class ReadSharedData1 : IEcsRunSystem {
+    // will be automatically injected.
+    MyData _shared = null;
 
-Another way - creating custom world class with inheritance from `EcsWorld` and filling shared fields manually.
+    void IEcsRunSystem.Run () {
+        // read _shared fields here.
+    }
+}
+[EcsInject]
+class ReadSharedData2 : IEcsRunSystem {
+    // will be automatically injected.
+    MyData _shared = null;
+
+    void IEcsRunSystem.Run () {
+        // read _shared fields here.
+    }
+}
+//...
+var shared = new MyData();
+// fill it here.
+
+var systems = new EcsSystems (world)
+    .Add (new ReadSharedData1 ())
+    .Add (new ReadSharedData2 ())
+    .Inject (shared);
+systems.Initialize ();
+```
 
 # Examples
 [Snake game](https://github.com/Leopotam/ecs-snake)
@@ -239,14 +309,24 @@ Another way - creating custom world class with inheritance from `EcsWorld` and f
 [Pacman game](https://github.com/SH42913/pacmanecs)
 
 # Extensions
-[Engine independent types](https://github.com/Leopotam/ecs-types)
+
+[Reactive filters / systems](https://github.com/Leopotam/ecs-reactive)
+
+[Multithreading support](https://github.com/Leopotam/ecs-threads)
 
 [Unity integration](https://github.com/Leopotam/ecs-unityintegration)
 
 [Unity uGui event bindings](https://github.com/Leopotam/ecs-ui)
 
+[Engine independent types](https://github.com/Leopotam/ecs-types)
+
 # License
-The software released under the terms of the MIT license. Enjoy.
+The software released under the terms of the [MIT license](./LICENSE). Enjoy.
+
+# Donate
+Its free opensource software, but you can buy me a coffee:
+
+<a href="https://www.buymeacoffee.com/leopotam" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 # FAQ
 
@@ -256,7 +336,7 @@ There are no components limit, but for performance / memory usage reason better 
 
 ### I want to create alot of new entities with new components on start, how to speed up this process?
 
-In this case custom component creator can be used (for speed up 2x or more):
+In this case custom component creator with predefined capacity can be used (for speed up 2x or more):
 
 ```csharp
 class MyComponent { }
@@ -267,11 +347,28 @@ class Startup : Monobehaviour {
     void OnEnable() {
         var world = new MyWorld (_sharedData);
         
-        EcsWorld.RegisterComponentCreator<MyComponent> (() => new MyComponent());
+        EcsComponentPool<MyComponent>.Instance.SetCapacity (100000);
+        EcsComponentPool<MyComponent>.Instance.SetCreator (() => new MyComponent());
         
         _systems = new EcsSystems(world)
             .Add (MySystem());
         _systems.Initialize();
+    }
+}
+```
+
+### I want to shrink allocated caches for my components, how I can do it?
+
+In this case `EcsComponentPool<T>.Instance.Shrink` method can be used:
+
+```csharp
+class MyComponent1 { }
+class MyComponent2 { }
+
+class ShrinkComponents : Monobehaviour {
+    void OnEnable() {
+        EcsComponentPool<MyComponent1>.Instance.Shrink ();
+        EcsComponentPool<MyComponent2>.Instance.Shrink ();
     }
 }
 ```
@@ -298,91 +395,76 @@ void FixedUpdate() {
 }
 ```
 
+### I want to add reaction on add / remove entity / components in `EcsWorld`. How I can do it?
+
+It will add performance penalty and should be avoided. Anyway, **LEOECS_ENABLE_WORLD_EVENTS** preprocessor define can be used for this:
+```csharp
+class MyListener : IEcsWorldEventListener {
+    public void OnEntityCreated (int entity) { }
+    public void OnEntityRemoved (int entity) { }
+    public void OnComponentAdded (int entity, object component) { }
+    public void OnComponentRemoved (int entity, object component) { }
+    public void OnWorldDestroyed (EcsWorld world) { }
+}
+
+// at init code.
+var listener = new MyListener();
+_world.AddEventListener(listener);
+
+// at destroy code.
+_world.RemoveEventListener(listener);
+```
+
 ### I do not need dependency injection through `Reflection` (I heard, it's very slooooow! / I want to use my own way to inject). How I can do it?
 
 Builtin Reflection-based DI can be removed with **LEOECS_DISABLE_INJECT** preprocessor define:
 * No `EcsInject` attribute.
-* No automatic injection for `EcsWorld` and `EcsFilter<>` fields.
+* No automatic injection for `EcsWorld` and `EcsFilter<T>` fields.
 * Less code size.
 
-`EcsWorld` should be injected somehow (for example, through constructor of system), `EcsFilter<>` data can be requested through `EcsWorld.GetFilter<>` method.
+`EcsWorld` should be injected somehow (for example, through constructor of system), `EcsFilter<T>` data can be requested through `EcsWorld.GetFilter<T>` method.
 
-### I used reactive systems and filter events before, but now I can't find them. How I can get it back?
+### I do not like foreach-loops, I know that for-loops are faster. How I can use it?
 
-Reactive events support was removed for performance reason and for more clear execution flow of components processing by systems:
-* Less internal magic.
-* Less code size.
-* Small performance gain.
-* Less memory usage.
-
-If you really need them - better to stay on ["v20180422 release"](https://github.com/Leopotam/ecs/releases/tag/v20180422).
-
-### I need more than 4 components in filter, how i can do it?
-
-First of all - looks like there are problems in architecture and better to rethink it. Anyway, custom filter can be implemented it this way:
-
+Current implementation of foreach-loop fast enough (custom enumerator, no memory allocation), performance differences can be found on 10k items and more. Anyway, for-loop can be used instead foreach-loop as next in-place replacement without issues:
 ```csharp
-// Custom class should be inherited from EcsFilter.
-public class CustomEcsFilter<Inc1> : EcsFilter where Inc1 : class, new () {
-    public Inc1[] Components1;
-    bool _allow1;
+foreach (var i in _filter)
+```
+can be replaced with
+```csharp
+for (int i = 0, iMax = _filter.EntitiesCount; i < iMax; i++)
+```
 
-    // Access can be any, even non-public.
-    protected CustomEcsFilter () {
-        // We should check - is requested type should be not auto-filled in Components1 array.
-        _allow1 = !EcsComponentPool<Inc1>.Instance.IsIgnoreInFilter;
-        Components1 = _allow1 ? new Inc1[MinSize] : null;
+### I copy&paste my reset components code again and again. How I can do it in other manner?
 
-        // And set valid bit of required component at IncludeMask.
-        IncludeMask.SetBit (EcsComponentPool<Inc1>.Instance.GetComponentTypeIndex (), true);
+If you want to simplify your code and keep reset-code in one place, you can use `IEcsAutoResetComponent` interface for components:
+```csharp
+class MyComponent : IEcsAutoResetComponent {
+    public object LinkToAnotherComponent;
 
-        // Its recommended method for masks validation (will be auto-removed in RELEASE-mode).
-        ValidateMasks (1, 0);
-    }
-
-    // This method will be called for all new compatible entities.
-    public override void RaiseOnAddEvent (int entity) {
-        if (Entities.Length == EntitiesCount) {
-            Array.Resize (ref Entities, EntitiesCount << 1);
-            if (_allow1) {
-                Array.Resize (ref Components1, EntitiesCount << 1);
-            }
-        }
-        if (_allow1) {
-            Components1[EntitiesCount] = World.GetComponent<Inc1> (entity);
-        }
-        Entities[EntitiesCount++] = entity;
-    }
-
-    // This method will be removed for added before, but already non-compatible entities.
-    public override void RaiseOnRemoveEvent (int entity) {
-        for (var i = 0; i < EntitiesCount; i++) {
-            if (Entities[i] == entity) {
-                EntitiesCount--;
-                Array.Copy (Entities, i + 1, Entities, i, EntitiesCount - i);
-                if (_allow1) {
-                    Array.Copy (Components1, i + 1, Components1, i, EntitiesCount - i);
-                }
-                break;
-            }
-        }
-    }
-
-    // Even exclude filters can be declared in this way.
-    public class Exclude<Exc1, Exc2> : CustomEcsFilter<Inc1> where Exc1 : class, new () {
-        internal Exclude () {
-            // Update ExcludeMask for 2 denied types.
-            ExcludeMask.SetBit (EcsComponentPool<Exc1>.Instance.GetComponentTypeIndex (), true);
-            ExcludeMask.SetBit (EcsComponentPool<Exc2>.Instance.GetComponentTypeIndex (), true);
-            // And validate all masks (1 included type, 2 excluded type).
-            ValidateMasks (1, 2);
-        }
+    void IEcsAutoResetComponent.Reset() {
+        // Cleanup all marshal-by-reference fields here.
+        LinkToAnotherComponent = null;
     }
 }
 ```
+This method will be automatically called after component removing from entity and before recycling to component pool.
 
-> You can even add your own events inside `RaiseOnAddEvent` / `RaiseOnRemoveEvent` calls, but i do not recommend it and you will do it at your own peril.
+### I use components as events that works only one frame, then remove it at last system in execution sequence. It's boring, how I can automate it?
 
-### How it fast relative to Entitas?
+If you want to remove one-frame components without additional custom code, you can use `EcsOneFrame` attribute:
+```csharp
+[EcsOneFrame]
+class MyComponent { }
+```
+> Important: Do not forget to call `EcsWorld.RemoveOneFrameComponents` method once after all `EcsSystems.Run` calls.
 
-[Previous version](https://github.com/Leopotam/ecs/releases/tag/v20180422) was benchmarked at [this repo](https://github.com/echeg/unityecs_speedtest). Current version works in slightly different manner, better to grab last versions of ECS frameworks and check boths locally on your code.
+> Important: Do not forget that if one-frame component contains `marshal-by-reference` typed fields - this component should implements `IEcsAutoResetComponent` interface.
+
+### I used reactive systems and filter events before, but now I can't find them. How I can get it back?
+
+You can implement them by yourself with `EcsFilter.AddListener` / `EcsFilter.RemoveListener` methods or use default implementation, that can be found at [separate repo](https://github.com/Leopotam/ecs-reactive).
+
+### I need more than 4 components in filter, how i can do it?
+
+Check `EcsFilter<Inc1, Inc2, Inc3, Inc4>` class and create new class with more components in same manner.

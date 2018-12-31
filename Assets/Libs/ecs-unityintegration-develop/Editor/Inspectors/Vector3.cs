@@ -2,7 +2,7 @@
 // The MIT License
 // Unity integration https://github.com/Leopotam/ecs-unityintegration
 // for ECS framework https://github.com/Leopotam/ecs
-// Copyright (c) 2018 Leopotam <leopotam@gmail.com>
+// Copyright (c) 2017-2018 Leopotam <leopotam@gmail.com>
 // ----------------------------------------------------------------------------
 
 using System;
@@ -15,7 +15,7 @@ namespace Leopotam.Ecs.UnityIntegration.Editor.Inspectors {
             return typeof (Vector3);
         }
 
-        void IEcsComponentInspector.OnGUI (string label, object value) {
+        void IEcsComponentInspector.OnGUI (string label, object value, EcsWorld world, int entityId) {
             EditorGUILayout.Vector3Field (label, (Vector3) value);
         }
     }

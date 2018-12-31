@@ -1,5 +1,13 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------------
+// The MIT License
+// Unity integration https://github.com/Leopotam/ecs-unityintegration
+// for ECS framework https://github.com/Leopotam/ecs
+// Copyright (c) 2017-2018 Leopotam <leopotam@gmail.com>
+// ----------------------------------------------------------------------------
+
+using System;
 using System.IO;
+using System.Text;
 using UnityEditor;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
@@ -14,6 +22,9 @@ namespace Leopotam.Ecs.UnityIntegration.Editor.Prototypes {
         const string StartupTemplate = "Startup.cs.txt";
         const string InitSystemTemplate = "InitSystem.cs.txt";
         const string RunSystemTemplate = "RunSystem.cs.txt";
+        const string ComponentTemplate = "Component.cs.txt";
+        const string ComponentFlagTemplate = "ComponentFlag.cs.txt";
+        const string ComponentOneFrameTemplate = "ComponentOneFrame.cs.txt";
 
         [MenuItem ("Assets/Create/LeoECS/Create Startup template", false, 10)]
         static void CreateStartupTpl () {
@@ -22,30 +33,51 @@ namespace Leopotam.Ecs.UnityIntegration.Editor.Prototypes {
                 GetIcon (), name => CreateTemplateInternal (GetTemplateContent (StartupTemplate), name));
         }
 
-        [MenuItem ("Assets/Create/LeoECS/Create InitSystem template", false, 11)]
+        [MenuItem ("Assets/Create/LeoECS/Systems/Create InitSystem template", false, 11)]
         static void CreateInitSystemTpl () {
             CreateAndRenameAsset (
                 string.Format ("{0}/EcsInitSystem.cs", GetAssetPath ()),
                 GetIcon (), name => CreateTemplateInternal (GetTemplateContent (InitSystemTemplate), name));
         }
 
-        [MenuItem ("Assets/Create/LeoECS/Create RunSystem template", false, 12)]
+        [MenuItem ("Assets/Create/LeoECS/Systems/Create RunSystem template", false, 12)]
         static void CreateRunSystemTpl () {
             CreateAndRenameAsset (
                 string.Format ("{0}/EcsRunSystem.cs", GetAssetPath ()),
                 GetIcon (), name => CreateTemplateInternal (GetTemplateContent (RunSystemTemplate), name));
         }
 
+        [MenuItem ("Assets/Create/LeoECS/Components/Create Component (common) template", false, 13)]
+        static void CreateComponentTpl () {
+            CreateAndRenameAsset (
+                string.Format ("{0}/EcsComponent.cs", GetAssetPath ()),
+                GetIcon (), name => CreateTemplateInternal (GetTemplateContent (ComponentTemplate), name));
+        }
+
+        [MenuItem ("Assets/Create/LeoECS/Components/Create Component (no-data) template", false, 14)]
+        static void CreateComponentFlagTpl () {
+            CreateAndRenameAsset (
+                string.Format ("{0}/EcsComponentFlag.cs", GetAssetPath ()),
+                GetIcon (), name => CreateTemplateInternal (GetTemplateContent (ComponentFlagTemplate), name));
+        }
+
+        [MenuItem ("Assets/Create/LeoECS/Components/Create OneFrame Component template", false, 14)]
+        static void CreateOneFrameComponentTpl () {
+            CreateAndRenameAsset (
+                string.Format ("{0}/EcsOneFrameComponent.cs", GetAssetPath ()),
+                GetIcon (), name => CreateTemplateInternal (GetTemplateContent (ComponentOneFrameTemplate), name));
+        }
+
         public static string CreateTemplate (string proto, string fileName) {
             if (string.IsNullOrEmpty (fileName)) {
                 return "Invalid filename";
             }
-            var ns = EditorSettings.projectGenerationRootNamespace;
+            var ns = EditorSettings.projectGenerationRootNamespace.Trim ();
             if (string.IsNullOrEmpty (EditorSettings.projectGenerationRootNamespace)) {
                 ns = "Client";
             }
             proto = proto.Replace ("#NS#", ns);
-            proto = proto.Replace ("#SCRIPTNAME#", Path.GetFileNameWithoutExtension (fileName));
+            proto = proto.Replace ("#SCRIPTNAME#", SanitizeClassName (Path.GetFileNameWithoutExtension (fileName)));
             try {
                 File.WriteAllText (AssetDatabase.GenerateUniqueAssetPath (fileName), proto);
             } catch (Exception ex) {
@@ -53,6 +85,20 @@ namespace Leopotam.Ecs.UnityIntegration.Editor.Prototypes {
             }
             AssetDatabase.Refresh ();
             return null;
+        }
+
+        static string SanitizeClassName (string className) {
+            var sb = new StringBuilder ();
+            var needUp = true;
+            foreach (var c in className) {
+                if (char.IsLetterOrDigit (c)) {
+                    sb.Append (needUp ? char.ToUpperInvariant (c) : c);
+                    needUp = false;
+                } else {
+                    needUp = true;
+                }
+            }
+            return sb.ToString ();
         }
 
         static void CreateTemplateInternal (string proto, string fileName) {

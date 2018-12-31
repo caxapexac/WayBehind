@@ -46,21 +46,39 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: -16m
+    uniqueID: 506553453
+    locked: 0
+  - name: -8m
+    uniqueID: 3560065783
+    locked: 0
+  - name: -4m
+    uniqueID: 1200355505
+    locked: 0
+  - name: -2m
     uniqueID: 926194783
     locked: 0
-  - name: Drop
+  - name: -1m
     uniqueID: 2597423145
     locked: 0
-  - name: Player
+  - name: 0m
     uniqueID: 316818609
     locked: 0
-  - name: Foreground
+  - name: 1m
     uniqueID: 1397260905
     locked: 0
-  - name: Tree
+  - name: 2m
     uniqueID: 172407957
     locked: 0
-  - name: Sky
+  - name: 3m
+    uniqueID: 2211717619
+    locked: 0
+  - name: 4m
     uniqueID: 3888507607
+    locked: 0
+  - name: 8m
+    uniqueID: 2425612135
+    locked: 0
+  - name: 16m
+    uniqueID: 4209614293
     locked: 0

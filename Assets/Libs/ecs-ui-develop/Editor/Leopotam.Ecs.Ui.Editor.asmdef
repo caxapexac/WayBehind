@@ -3,10 +3,8 @@
     "references": [
         "Leopotam.Ecs.Ui"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "excludePlatforms": []
 }
