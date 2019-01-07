@@ -12,4 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29159e048f6a4dc6b1cb7336164c9894, type: 3}
   m_Name: BiomesGeneratorDefault
   m_EditorClassIdentifier: 
-  Data: []
+  Array:
+  - Row:
+    - {fileID: 11400000, guid: 0b648be4846b2724f8128d80a8406ce2, type: 2}
+    - {fileID: 11400000, guid: c229d591edfc699428910d1b33c3d99f, type: 2}
+    - {fileID: 11400000, guid: c229d591edfc699428910d1b33c3d99f, type: 2}
+    - {fileID: 11400000, guid: c229d591edfc699428910d1b33c3d99f, type: 2}
+    - {fileID: 11400000, guid: 413945e1ea07ced40bfab9b0f6b2e433, type: 2}
+    - {fileID: 11400000, guid: 413945e1ea07ced40bfab9b0f6b2e433, type: 2}
+    - {fileID: 11400000, guid: 413945e1ea07ced40bfab9b0f6b2e433, type: 2}
+  - Row:
+    - {fileID: 11400000, guid: 1346ae6182c313845919092d8c383afe, type: 2}
+    - {fileID: 11400000, guid: f80d21c5692a43d4a86f995962f6054e, type: 2}
+    - {fileID: 11400000, guid: 0e94522682d4e1e458b93bc467bff2f5, type: 2}
+  - Row:
+    - {fileID: 11400000, guid: e340dec1941b5ac48b65050d1fdf7c99, type: 2}
+    - {fileID: 11400000, guid: 13866aad4ebad3c4d986b6b1e2af96f1, type: 2}
+    - {fileID: 11400000, guid: f6a95309dd9522340a30d44c05da0893, type: 2}
+  - Row:
+    - {fileID: 11400000, guid: e340dec1941b5ac48b65050d1fdf7c99, type: 2}
+    - {fileID: 11400000, guid: 13866aad4ebad3c4d986b6b1e2af96f1, type: 2}
+    - {fileID: 11400000, guid: f6a95309dd9522340a30d44c05da0893, type: 2}
+  MissingSprite: {fileID: 21300000, guid: 6dc375341bdcdd641a2493071db85a2e, type: 3}

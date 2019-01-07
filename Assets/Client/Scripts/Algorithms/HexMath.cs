@@ -1,6 +1,7 @@
 ﻿using Client.Scripts.Miscellaneous;
 using LeopotamGroup.Math;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -8,24 +9,45 @@ namespace Client.Scripts.Algorithms
 {
     public static class HexMath
     {
-        private const float TwoThree = 2f / 3f;
-        private const float OneThree = 1f / 3f;
-        public static readonly float Sqrt3 = Mathf.Sqrt(3);
-        public static readonly float Sqrt3Two = Mathf.Sqrt(3) / 2;
-        public static readonly float Sqrt3Three = Mathf.Sqrt(3) / 3;
-
+        private const float TwoThree = 0.6666667f; // 2/3
+        private const float ThreeTwo = 1.5f; // 3/2
+        private const float OneThree = 0.333333343f; // 1/3
+        private const float Sqrt3 = 1.73205078f; // sqrt(3)
+        private const float Sqrt3Two = 0.8660254f; // sqrt(3)/2
+        private const float Sqrt3Three = 0.577350259f; // sqrt(3)/3
+        
         /// <summary>
-        /// Координаты соседних гексов, относительно центрального
+        /// Координаты соседних гексов, относительно x и y для кубических координат
         /// </summary>
-        public static int[,] Directions =
+        public static readonly int[,] HexDirs =
         {
+            {1, 0},
             {1, -1},
             {0, -1},
             {-1, 0},
             {-1, 1},
-            {0, 1},
-            {1, 0}
+            {0, 1}
         };
+
+        /// <summary>
+        /// Координаты соседних гексов, относительно x и y для offset координат
+        /// </summary>
+        public static readonly int[,,] OffsetDirs =
+        {
+            {
+                {+1, 0}, {+1, -1}, {0, -1},
+                {-1, -1}, {-1, 0}, {0, +1}
+            },
+            {
+                {+1, +1}, {+1, 0}, {0, -1},
+                {-1, 0}, {-1, +1}, {0, +1}
+            },
+        };
+        
+        public static float InnerRadius(float outerRadius)
+        {
+            return outerRadius * 0.866025404f;
+        }
 
         public static int GetZ(int x, int y)
         {
@@ -38,7 +60,7 @@ namespace Client.Scripts.Algorithms
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        public static int HexDistance(HexaCoords first, HexaCoords second)
+        public static int HexDistance(HexCoords first, HexCoords second)
         {
             return HexDistance(first.X, second.X, first.Y, second.Y);
         }
@@ -57,7 +79,7 @@ namespace Client.Scripts.Algorithms
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        public static float LinearDistance(HexaCoords first, HexaCoords second)
+        public static float LinearDistance(HexCoords first, HexCoords second)
         {
             return LinearDistance(first.X, second.X, first.Y, second.Y);
         }
@@ -70,29 +92,28 @@ namespace Client.Scripts.Algorithms
             return Mathf.Sqrt(x ^ 2 + y ^ 2 + z ^ 2);
         }
 
-        /// <summary>
-        /// Преобразование мировых координат в гексагональные
-        /// </summary>
-        /// <param name="vector"></param>
-        /// <param name="hexSize"></param>
-        /// <returns></returns>
-        public static HexaCoords Pixel2Hexel(Vector2 vector, float hexSize)
+
+        public static OffsetCoords Hexel2Offset(HexCoords coords)
         {
-            return Pixel2Hexel(vector.x, vector.y, hexSize);
+            var x = coords.X;
+            var y = coords.Y + (coords.X - (coords.X & 1)) / 2;
+            return new OffsetCoords(y, x); //maybe another
         }
 
-        public static HexaCoords Pixel2Hexel(float xPos, float yPos, float hexSize)
+        public static HexCoords Offset2Hexel(OffsetCoords coords)
+        {
+            int x = coords.Y;
+            int z = coords.X - (coords.Y - (coords.Y & 1)) / 2;
+            int y = -x - z;
+            return new HexCoords(x, y); //maybe another
+        }
+
+        public static HexCoords Pixel2Hexel(Vector2 vector, float hexSize)
         {
             int x;
             int y;
-            Pixel2Hexel(xPos, yPos, hexSize, out x, out y);
-            return new HexaCoords(x, y);
-        }
-
-        public static void Pixel2Hexel(float xPos, float yPos, float hexSize, out int x, out int y)
-        {
-            float hexX = TwoThree * xPos / hexSize;
-            float hexY = (-OneThree * xPos + Sqrt3Three * yPos) / hexSize;
+            float hexX = TwoThree * vector.x / hexSize;
+            float hexY = (-OneThree * vector.x + Sqrt3Three * vector.y) / hexSize;
             float hexZ = -hexX - hexY;
             float rX = Mathf.Round(hexX);
             float rY = Mathf.Round(hexY);
@@ -115,133 +136,99 @@ namespace Client.Scripts.Algorithms
                 x = (int)rX;
                 y = (int)rY;
             }
+            return new HexCoords(x, y);
         }
 
-        /// <summary>
-        /// Преобразование гексагональных координат в мировые
-        /// </summary>
-        /// <param name="coords"></param>
-        /// <param name="hexSize"></param>
-        /// <returns></returns>
-        public static Vector2 Hexel2Pixel(HexaCoords coords, float hexSize)
-        {
-            return Hexel2Pixel(coords.X, coords.Y, hexSize);
-        }
-
-        public static Vector2 Hexel2Pixel(int xPos, int yPos, float hexSize)
+        public static Vector2 Hexel2Pixel(HexCoords coords, float hexSize)
         {
             return new Vector2
             {
-                x = hexSize * 1.5f * xPos,
-                y = hexSize * (Sqrt3Two * xPos + Sqrt3 * yPos)
+                x = hexSize * 1.5f * coords.X,
+                y = hexSize * (Sqrt3Two * coords.X + Sqrt3 * coords.Y)
             };
         }
 
+        public static OffsetCoords Pixel2Offset(Vector2 vector, float hexSize)
+        {
+            return Hexel2Offset(Pixel2Hexel(vector, hexSize));
+        }
+
+        public static Vector2 Offset2Pixel(OffsetCoords coords, float hexSize)
+        {
+            float x = hexSize * ThreeTwo * coords.Y;
+            float y = (float)(hexSize * Sqrt3 * (coords.X + 0.5 * (coords.Y & 1)));
+            return new Vector2(x, y);
+        }
+        
+        public static Int2 Offset2Chunk(OffsetCoords coords, int chunkSize)
+        {
+            Int2 raw = new Int2(coords.X / chunkSize, coords.Y / chunkSize);
+            if (coords.X < 0)
+            {
+                raw.X--;
+            }
+            if (coords.Y < 0)
+            {
+                raw.Y--;
+            }
+            return raw;
+        }
+        
+        public static Int2 Offset2Chunk(OffsetCoords coords, int chunkSize, out int index)
+        {
+            index = MathFast.Abs(coords.X % chunkSize) + MathFast.Abs(coords.Y % chunkSize * chunkSize);
+            Int2 raw = new Int2(coords.X / chunkSize, coords.Y / chunkSize);
+            if (coords.X < 0)
+            {
+                raw.X--;
+            }
+            if (coords.Y < 0)
+            {
+                raw.Y--;
+            }
+            return raw;
+        }
+
+        public static OffsetCoords Chunk2Offset(Int2 coords, int chunkSize, int index)
+        {
+            return new OffsetCoords(coords.X * chunkSize + index % chunkSize,
+                coords.Y * chunkSize + index / chunkSize);
+        }
+
+        
         /// <summary>
         /// Случайные гексагональные координаты в заданном радиусе
         /// </summary>
         /// <param name="center"></param>
         /// <param name="radius"></param>
         /// <returns></returns>
-        public static HexaCoords RandomPosition(HexaCoords center, int radius)
+        public static HexCoords RandomPosition(HexCoords center, int radius)
         {
             //todo fix down-left moving
-            HexaCoords coords = RandomPosition(radius);
+            HexCoords coords = RandomPosition(radius);
             coords.X += center.X;
             coords.Y += center.Y;
             return coords;
         }
 
-        public static HexaCoords RandomPosition(int radius)
+        public static HexCoords RandomPosition(int radius)
         {
-            int x;
-            int y;
-            RandomPosition(radius, out x, out y);
-            return new HexaCoords(x, y);
+            int x = Random.Range(-radius, radius);
+            int y = x > 0
+                ? Mathf.RoundToInt(Random.Range(-radius, radius - x) + 0.5f)
+                : Mathf.RoundToInt(Random.Range(-radius - x, radius) + 0.5f);
+            return new HexCoords(x, y);
         }
 
-        public static void RandomPosition(int radius, out int x, out int y)
+        public static HexCoords HexNeighbour(HexCoords coords, int dirNum)
         {
-            x = Random.Range(-radius, radius);
-            if (x > 0)
-            {
-                y = Mathf.RoundToInt(Random.Range(-radius, radius - x) + 0.5f);
-            }
-            else
-            {
-                y = Mathf.RoundToInt(Random.Range(-radius - x, radius) + 0.5f);
-            }
+            return new HexCoords(coords.X + HexDirs[dirNum, 0], coords.Y + HexDirs[dirNum, 1]);
         }
 
-
-        /// <summary>
-        ///          Y
-        ///         /
-        ///        /
-        /// ------/------X
-        ///      /
-        ///     /
-        /// </summary>
-        /// <param name="chunkSize"></param>
-        /// <param name="coords"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="index"></param>
-        public static Int2 HexToChunk(int chunkSize, HexaCoords coords, out int index)
+        public static OffsetCoords OffsetNeighbour(OffsetCoords coords, int dirNum)
         {
-            Int2 pos = new Int2();
-            coords.X += coords.Y / 2;
-            pos.X = coords.X / chunkSize;
-            pos.Y = coords.Y / chunkSize;
-            if (coords.X < 0)
-            {
-                pos.X--;
-                coords.X++;
-            }
-            if (coords.Y < 0)
-            {
-                pos.Y--;
-                coords.Y++;
-            }
-            index = coords.X % chunkSize + coords.Y % chunkSize * chunkSize;
-            return pos;
-
-            //BUG checking required!
-        }
-
-        public static Int2 HexToChunk(int chunkSize, HexaCoords coords)
-        {
-            Int2 pos = new Int2();
-            coords.X += coords.Y / 2;
-            pos.X = coords.X / chunkSize;
-            pos.Y = coords.Y / chunkSize;
-            if (coords.X < 0) pos.X--;
-            if (coords.Y < 0) pos.Y--;
-            return pos;
-
-            //BUG checking required!
-        }
-
-        public static HexaCoords ChunkToHex(int chunkSize, Int2 coords, int index)
-        {
-            HexaCoords hex = new HexaCoords();
-
-            int xx = coords.X * chunkSize + index % chunkSize;
-            int yy = coords.Y * chunkSize + index / chunkSize;
-            hex.X = xx - yy / 2;
-            hex.Y = yy;
-
-            /*if (coords.X < 0)
-            {
-                x--;
-                coords.X++;
-            }
-            if (coords.Y < 0)
-            {
-                y--;
-                coords.Y++;
-            }*/
-            return hex;
+            return new OffsetCoords(coords.Y + OffsetDirs[coords.Y & 1, dirNum, 0],
+                coords.X + OffsetDirs[coords.Y & 1, dirNum, 1]);
         }
     }
 }

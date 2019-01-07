@@ -12,21 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fc0dbdd0a248ccb49417e77fbf9135, type: 3}
   m_Name: MapNoiseDefault
   m_EditorClassIdentifier: 
-  Saeed: 3456
-  Size: 0.15
-  PixelPerUnit: 1000
-  HNoiseType: 1
-  HScale: 0.564158
-  HOctaves: 4
-  HPersistance: 0.53972906
-  HLacunarity: 0.7446253
-  TNoiseType: 1
-  TScale: 0.10997082
-  TOctaves: 4
-  TPersistance: 0.618427
-  TLacunarity: 0.95956755
-  MNoiseType: 0
-  MScale: 0.647198
-  MOctaves: 4
-  MPersistance: 0.49585003
-  MLacunarity: 0.66532236
+  H: {fileID: 11400000, guid: edfd488a15f07ed46b942c74de141c19, type: 2}
+  T: {fileID: 11400000, guid: 76da4f64e0eb35b438babfe1f9f89911, type: 2}
+  M: {fileID: 11400000, guid: 23fced26b1b96d84fa31e15a98db432f, type: 2}

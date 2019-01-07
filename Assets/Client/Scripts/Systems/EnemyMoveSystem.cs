@@ -1,8 +1,8 @@
 ﻿using System;
-using Client.ScriptableObjects;
 using Client.Scripts.Algorithms;
 using Client.Scripts.Components;
 using Client.Scripts.Miscellaneous;
+using Client.Scripts.Scriptable;
 using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Systems;
 using UnityEngine;

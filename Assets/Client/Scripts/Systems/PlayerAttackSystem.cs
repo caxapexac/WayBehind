@@ -25,7 +25,7 @@ namespace Client.Scripts.Systems
 
         public void Initialize()
         {
-            _hpBar = _uiEmitter.GetNamedObject(Names.HpBar).GetComponent<Slider>();
+            //_hpBar = _uiEmitter.GetNamedObject(Names.HpBar).GetComponent<Slider>();
 
             //_hpBar.maxValue = _player.Hp;
             //_hpBar.value = _player.Hp;

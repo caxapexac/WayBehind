@@ -1,10 +1,12 @@
-﻿using Client.ScriptableObjects;
-using Client.Scripts.Algorithms;
+﻿using Client.Scripts.Algorithms;
+using Client.Scripts.Algorithms.Legacy;
+using Client.Scripts.Algorithms.Noises;
 using Client.Scripts.Components;
 using Client.Scripts.Miscellaneous;
+using Client.Scripts.MonoBehaviours;
+using Client.Scripts.Scriptable;
 using Leopotam.Ecs;
 using LeopotamGroup.Collections;
-using LeopotamGroup.Pooling;
 using UnityEngine;
 
 
@@ -13,216 +15,183 @@ namespace Client.Scripts.Systems
     [EcsInject]
     public class WorldRenderSystem : IEcsInitSystem, IEcsRunSystem
     {
+        private delegate void NoiseDelegate(HexComponent hex, MapNoiseObject noise);
+
+
+        private readonly NoiseDelegate _noiseFunction = PerlinPointNoise.SetupHex;
+
+
         private FastList<Int2> _loadedChunks;
-        private Camera _camera;
+
         private MapComponent<HexComponent> _map;
-        private PoolContainer _pool;
+
+        private OffsetCoords _lastPos;
 
         private EcsWorld _world = null;
-        private SettingsObject _settings = null;
         private EcsFilter<MapComponent<HexComponent>> _mapFilter = null;
+        private EcsFilter<PoolsComponent> _pools = null;
+        private EcsFilter<PlayerComponent> _player = null;
+        private SettingsObject _settings = null;
+        private MapNoiseObject _noiseSettings = null;
+        private Variables _variables = null;
 
         public void Initialize()
         {
             _loadedChunks = new FastList<Int2>();
-            _camera = Camera.main;
             _map = _mapFilter.Components1[0];
+            _lastPos = new OffsetCoords(int.MaxValue, int.MaxValue);
         }
 
         public void Run()
         {
-            if (_loadedChunks.Count > 0 && IsVisible(_loadedChunks[0]))
+            _variables.DebugChunksCount = _loadedChunks.Count; //todo
+            
+            for (int i = 0; i < _player.EntitiesCount; i++)
+            {
+                OffsetCoords playerPos = _map.PlayerPosition;
+
+                if (_lastPos.X == playerPos.X && _lastPos.Y == playerPos.Y) break;
+                _lastPos = playerPos;
+                RenderAll(HexMath.Offset2Chunk(_lastPos, _map.ChunkSize));
+                break; //Only the first player
+            }
+            if (_loadedChunks.Count > 1 && !IsVisible(_loadedChunks[0]))
             {
                 UnrenderChunk(_loadedChunks[0]);
-                _loadedChunks.RemoveAt(0);
             }
-        }
-
-        private bool IsVisible(Int2 chunk)
-        {
-            //todo move into less frequency
-            Vector2 pos1 = _camera.ViewportToWorldPoint(Vector3.zero);
-            pos1.x -= _settings.CameraBorders;
-            pos1.y -= _settings.CameraBorders;
-            Vector2 pos2 = _camera.ViewportToWorldPoint(Vector3.one);
-            pos2.x += _settings.CameraBorders;
-            pos2.y += _settings.CameraBorders;
-
-            //Vector2 pos3 = ;
-            HexaCoords center =
-                HexMath.Pixel2Hexel(_camera.ViewportToWorldPoint(new Vector2(0.5f, 0.5f)), _settings.HexSize);
-            HexMath.HexToChunk(_map.ChunkSize, center);
-            return false;
-        }
-
-        private void RenderChunk(Int2 chunk)
-        {
-            if (!_map.IsExistChunk(chunk))
+            if (_loadedChunks.Count > 200) //GC
             {
-                _map.Add(chunk);
-                GenerateChunk(chunk);
-            }
-
-            _loadedChunks.Add(chunk);
-        }
-
-        private void GenerateChunk(Int2 chunk)
-        {
-            for (int i = 0; i < _map.ChunkSize; i++)
-            {
-                float x;
-                float y;
-            }
-        }
-
-        private void UnrenderChunk(Int2 chunk)
-        { }
-
-        /*private void RenderFull(HexaCoords coords, int radius)
-        {
-            RenderHex(coords);
-            for (int i = 1; i <= radius; i++)
-            {
-                RenderRing(coords, i);
-            }        
-        }
-
-        private void RenderRing(HexaCoords coords, int radius)
-        {
-            coords.Y += radius;
-            for (int i = 0; i < 6; i++)
-            {
-                for (int j = 0; j < radius; j++)
+                while (!IsVisible(_loadedChunks[0]))
                 {
-                    coords.X += HexMath.Directions[i, 0];
-                    coords.Y += HexMath.Directions[i, 1];
-                    RenderHex(coords);
+                    UnrenderChunk(_loadedChunks[0]);
                 }
             }
-        }
-
-        private void UnrenderRing(HexaCoords playerCoords, int radius)
-        {
-            HexaCoords coords = new HexaCoords(playerCoords.X, playerCoords.Y + radius);
-            for (int i = 0; i < 6; i++)
+            if (_settings.RealTime)
             {
-                for (int j = 0; j < radius; j++)
+                for (int i = 0; i < _loadedChunks.Count; i++)
                 {
-                    coords.X += HexMath.Directions[i, 0];
-                    coords.Y += HexMath.Directions[i, 1];
-                    if (HexMath.HexDistance(playerCoords, coords) >= _game.S.FieldOfView)
+                    for (int k = 0; k < _map.ChunkSizeSqr; k++)
                     {
-                        HideHex(coords);
+                        HexComponent hex = _map[_loadedChunks[i], k];
+                        _noiseFunction(hex, _noiseSettings);
+                        hex.Parent.Draw();
                     }
                 }
             }
         }
 
-        private void RenderHex(HexaCoords coords)
+        private void RenderAll(Int2 playerPos)
         {
-            if (!_game.Map.ExistAt(coords))
+            int x = 0;
+            int y = 0;
+            int dx = 0;
+            int dy = -1;
+            int circle = 0;
+            while (true)
             {
-                MapGenRandomNeighbours.GenerateHex(_game.Map, coords);
-            }
-
-            HexComponent[] layers = _game.Map.Layers(coords);
-            for (int i = 0; i < layers.Length; i++)
-            {
-                coords.W = i;
-                if (layers[i] != null) RenderLayer(coords, layers[i]);
-            }
-        }
-
-        private void RenderLayer(HexaCoords coords, HexComponent hex)
-        {
-            if (hex.Parent != null) return;
-            switch (hex.HexType)
-            {
-                case HexTypes.Grass:
-                    hex.Parent = _game.HexPool[(int) Pool.Grass].Get();
-                    //speed 1
-                    break;
-                case HexTypes.Water:
-                    hex.Parent = _game.HexPool[(int) Pool.Water].Get();
-                    //speed 0.1f
-                    break;
-                case HexTypes.Forest:
-                    hex.Parent = _game.HexPool[(int) Pool.Forest].Get();
-                    //speed 0.5f
-                    break;
-                case HexTypes.Swamp:
-                    hex.Parent = _game.HexPool[(int) Pool.Swamp].Get();
-                    //speed 0.02f
-                    break;
-                case HexTypes.Obstacle:
-                    hex.Parent = _game.HexPool[(int) Pool.Obstacle].Get();
-                    //todo value
-                    break;
-                case HexTypes.Diamond:
-                    hex.Parent = _game.HexPool[(int) Pool.Diamond].Get();
-                    //todo value
-                    break;
-                case HexTypes.Enemy:
-                    if (hex.Parent != null) throw new Exception();
-                    hex.Parent = _game.HexPool[(int) Pool.Enemy].Get();
-                    hex.Parent.PoolTransform.GetComponentInChildren<SpriteRenderer>().sprite =
-                        _game.S.Enemies[0]; //todo
-                    hex.Parent.PoolTransform.GetComponentInChildren<SpriteRenderer>().color = Color.white;
-                    _game.Map[coords] = new HexComponent() {HexType = HexTypes.Empty};
-                    EnemyComponent enemy = _world.CreateEntityWith<EnemyComponent>();
-                    enemy.Hex = hex;
-                    enemy.LastCoords = coords;
-                    enemy.Head = hex.Parent.PoolTransform;
-                    enemy.Body = hex.Parent.PoolTransform.GetChild(0);
-                    enemy.Target = HexMath.Hexel2Pixel(coords, _game.S.HexSize);
-                    break;
-                case HexTypes.Empty:
-                    //Debug.Log(coords.X + " " + coords.Y + " " + coords.W + " empty");
-                    return;
-                case HexTypes.Spawn: //?
-                    return;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            if (hex.Color > 0f)
-            {
-                hex.Parent.PoolTransform.GetComponent<SpriteRenderer>().color =
-                    new Color(hex.Color, hex.Color, hex.Color);
-            }
-
-            hex.Parent.PoolTransform.localPosition = HexMath.Hexel2Pixel(coords, _game.S.HexSize);
-            hex.Parent.PoolTransform.gameObject.SetActive(true);
-        }
-
-        private void HideHex(HexaCoords coords)
-        {
-            HexComponent[] layers = _game.Map.Layers(coords);
-            for (int i = 0; i < layers.Length; i++)
-            {
-                if (layers[i] != null) HideLayer(coords, layers[i]);
+                Int2 ch = new Int2(playerPos.X + x, playerPos.Y + y);
+                EnsureChunk(ch);
+                if (IsVisible(ch))
+                {
+                    RenderChunk(ch);
+                }
+                else
+                {
+                    /*Debug.DrawLine(
+                        HexMath.Offset2Pixel(HexMath.Chunk2Offset(ch, _map.ChunkSize, 0), _variables.HexSize),
+                        HexMath.Offset2Pixel(_map.PlayerPosition, _variables.HexSize), Color.yellow, 5);*/
+                    if (_loadedChunks.Contains(ch))
+                    {
+                        UnrenderChunk(ch);
+                    }
+                    else if ((circle - 2) % 4 == 0)
+                    {
+                        break;
+                    }
+                    
+                }
+                if (x == y || (x < 0 && x == -y) || (x > 0 && x == 1 - y))
+                {
+                    int temp = dx;
+                    dx = -dy;
+                    dy = temp;
+                    circle++;
+                }
+                x += dx;
+                y += dy;
             }
         }
 
-        private void HideLayer(HexaCoords coords, HexComponent hex)
+        public void EnsureChunk(Int2 chunk)
         {
-            if (hex.Parent == null || hex.HexType == HexTypes.Enemy) return;
-            _game.HexPool[(int) hex.HexType].Recycle(hex.Parent);
-            hex.Parent = null;
+            if (!_map.IsExistChunk(chunk))
+            {
+                //Debug.Log(chunk.X + " " + chunk.Y + " Rendered");
+                _map.AddChunk(chunk);
+                for (int i = 0; i < _map.ChunkSizeSqr; i++)
+                {
+                    OffsetCoords coords = HexMath.Chunk2Offset(chunk, _map.ChunkSize, i);
+                    HexComponent hex = new HexComponent(HexMath.Offset2Pixel(coords, _variables.HexSize));
+                    _noiseFunction(hex, _noiseSettings);
+                    _map[chunk, i] = hex;
+                }
+            }
         }
 
-        private void RemoveHex(HexaCoords coords)
+        private void RenderChunk(Int2 chunk)
         {
-            //todo fading coroutines
-            HexComponent hex = _game.Map[coords];
-            _game.HexPool[(int) hex.HexType].Recycle(hex.Parent);
-            hex.Parent = null;
-            _game.Map.ClearAt(coords);
-        }*/
+            if (!_loadedChunks.Contains(chunk))
+            {
+                PrefabPool<MonoHex> pool = _pools.Components1[0].HexPool;
+                for (int i = 0; i < _map.ChunkSizeSqr; i++)
+                {
+                    MonoHex mono = pool.Get();
+                    mono.Hex = _map[chunk, i];
+                    mono.transform.parent = _pools.Components1[0].HexParent;
+                    mono.gameObject.SetActive(true);
+                }
+                _loadedChunks.Add(chunk);
+            }
+        }
+
+        private bool IsVisible(Int2 chunk)
+        {
+            Vector2 first = _map[chunk, 0].Position;
+            Vector2 last = _map[chunk, _map.ChunkSizeSqr - 1].Position;
+            //Vector2 pos = new Vector2((first.x + last.x) / 2, (first.y + last.y) / 2);
+            //Debug.DrawLine(first, last, Color.gray, 5);
+            //Debug.DrawLine(new Vector2(_variables.CameraMinBound.x, _variables.CameraMinBound.y), new Vector2(_variables.CameraMaxBound.x, _variables.CameraMaxBound.y), Color.green, 5);
+            return first.x > _variables.CameraMinBound.x
+                && first.x < _variables.CameraMaxBound.x
+                && first.y > _variables.CameraMinBound.y
+                && first.y < _variables.CameraMaxBound.y
+                || last.x > _variables.CameraMinBound.x
+                && last.x < _variables.CameraMaxBound.x
+                && last.y > _variables.CameraMinBound.y
+                && last.y < _variables.CameraMaxBound.y
+                || first.x > _variables.CameraMinBound.x
+                && first.x < _variables.CameraMaxBound.x
+                && last.y > _variables.CameraMinBound.y
+                && last.y < _variables.CameraMaxBound.y
+                || last.x > _variables.CameraMinBound.x
+                && last.x < _variables.CameraMaxBound.x
+                && first.y > _variables.CameraMinBound.y
+                && first.y < _variables.CameraMaxBound.y;
+        }
+
+        private void UnrenderChunk(Int2 chunk)
+        {
+            PrefabPool<MonoHex> pool = _pools.Components1[0].HexPool;
+            for (int i = 0; i < _map.ChunkSizeSqr; i++)
+            {
+                MonoHex mono = _map[chunk, i].Parent;
+                mono.gameObject.SetActive(false);
+                pool.Recycle(mono);
+            }
+            _loadedChunks.Remove(chunk);
+        }
 
         public void Destroy()
-        {
-            _camera = null;
-        }
+        { }
     }
 }

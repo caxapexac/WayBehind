@@ -1,18 +1,21 @@
 ﻿using System;
-using Client.ScriptableObjects;
+using Client.Scripts.Miscellaneous;
+using Client.Scripts.Scriptable;
 using Client.Scripts.Systems;
 using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Systems;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 
 namespace Client.Scripts.MonoBehaviours
 {
     /// Существует несколько систем координат
-    /// HexaCoords - uint координаты гексов x,y,z относительно центра мира 
-    
+    /// HexCoords - кубичские координаты x,y,z относительно центра мира (60°)
+    /// OffsetCoords - координаты x,y относительно центра мира (90° со сдвигом на четных гексах)
+    /// Int2 + index - положение внутри чанка по координатам x,y относительно центра мира
+    /// Pixel (Vector2) - координаты гекса относительно центра мира unity (90°)
+
     //  Работай без багов, аминь
     //            ______
     //           / ____ \   
@@ -31,16 +34,6 @@ namespace Client.Scripts.MonoBehaviours
     //  =========================        
     //  =========================  
 
-    #region EcsWorldsTips
-
-    //Юзаем EcsSystem.Inject(); вместо кастомного мира
-
-    //Все компоненты наследуем от IEcsAutoResetComponent
-
-    //Используем [EcsOneFrame] вместо ручного удаления в update
-
-    //Все передачи данных через фильтры
-
     //!    PlayerInitSystem
     //!    WorldInitSystem
     //!    CommandSystem
@@ -54,39 +47,20 @@ namespace Client.Scripts.MonoBehaviours
     //!    UserInputSystem
     //!    PickPlayerSystem
     //!    ScoreSystem
-
-    //оффтоп
-    //EventSystem.current.IsPointerOverGameObject() - проверить кнопка в гуе или нажатие на гект
-
-    //public const float outerRadius = 10f;
-
-    //public const float innerRadius = outerRadius * 0.866025404f;
-
-    //position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
-
-
-    public enum GameStates
-    {
-        Start,
-        Pause,
-        Restart,
-        Exit
-    }
-
-    #endregion
-
-
     [DisallowMultipleComponent]
     public class GameStartup : MonoBehaviour
     {
         [SerializeField] private SettingsObject _settings;
+        [SerializeField] private MapNoiseObject _noiseSettings;
         [SerializeField] private EcsUiEmitter _uiEmitter;
 
+        private Variables _variables;
         private EcsWorld _world;
         private EcsSystems _updateSystems;
 
         private void OnEnable()
         {
+            _variables = new Variables();
             _world = new EcsWorld();
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
@@ -94,10 +68,9 @@ namespace Client.Scripts.MonoBehaviours
             _updateSystems = new EcsSystems(_world)
                 .Add(_uiEmitter)
                 .Add(_settings.IsTouchScreen ? (IEcsSystem)new InputStickSystem() : new InputKeyboardSystem())
-                .Add(new CameraSystem())
                 .Add(new WorldInitSystem())
                 .Add(new PlayerInitSystem())
-                .Add(new WorldRenderSystem())
+                .Add(new CameraSystem())
 
                 //.Add(new SpiritRenderSystem())
                 .Add(new PlayerMoveSystem())
@@ -107,7 +80,13 @@ namespace Client.Scripts.MonoBehaviours
 
                 //.Add(new EnemyMoveSystem())
                 //.Add(new EnemyAttackSystem())
+                
+                .Add(new WorldRenderSystem())
+                .Add(new DebugUiSystem())
                 .Inject(_settings)
+                .Inject(_noiseSettings)
+                .Inject(_variables)
+                .Inject(Camera.main)
                 .Inject(_uiEmitter);
             _updateSystems.Initialize();
 #if UNITY_EDITOR

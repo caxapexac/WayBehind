@@ -1,10 +1,12 @@
 ﻿using System;
 using Client.Scripts.Algorithms.Legacy;
+using Client.Scripts.Components;
+using Client.Scripts.Scriptable;
 
 
 namespace Client.Scripts.Algorithms.Noises
 {
-    public class PerlinPointNoise
+    public static class PerlinPointNoise
     {
         private static double GetNoise(int x, int y)
         {
@@ -45,13 +47,13 @@ namespace Client.Scripts.Algorithms.Noises
             double v3 = SmoothNoise(integerX, integerY + 1);
             double v4 = SmoothNoise(integerX + 1, integerY + 1);
 
-            double i1 = LerpCurves.CosLerp(v1, v2, fractionalX);
-            double i2 = LerpCurves.CosLerp(v3, v4, fractionalX);
+            double i1 = Curves.CosLerp(v1, v2, fractionalX);
+            double i2 = Curves.CosLerp(v3, v4, fractionalX);
 
-            return LerpCurves.CosLerp(i1, i2, fractionalY);
+            return Curves.CosLerp(i1, i2, fractionalY);
         }
 
-        public double GenerateNoise(double x, double y, double xOffset)
+        public static double GenerateNoise(double x, double y, double xOffset)
         {
             double total = 0;
 
@@ -82,24 +84,47 @@ namespace Client.Scripts.Algorithms.Noises
             return total;
         }
 
-        public double GenerateNoise(double x, double y, double xOffset, double yOffset, double octaves,
-            double persistence, double frequency, double amplitude)
+        public static double GenerateNoise(float x, float y, double octaves,
+            double frequency, double amplitude, double persistance, double lacunarity)
         {
             double total = 0;
-
-            // рандомизация
-            x += (xOffset);
-            y += (yOffset);
-
             for (int i = 0; i < octaves; i++)
             {
                 total += CompileNoise(x * frequency, y * frequency) * amplitude;
-                amplitude *= persistence;
-                frequency *= 2;
+                amplitude *= persistance;
+                frequency *= lacunarity;
             }
-
             total = Math.Abs(total);
             return total;
+        }
+
+        public static void SetupHex(HexComponent hex, MapNoiseObject settings)
+        {
+            float x, y;
+            settings.H.GetOffset(out x, out y);
+            hex.H = GenerateNoise(hex.Position.x + x,
+                hex.Position.y + y,
+                settings.H.Octaves,
+                settings.H.Frequency,
+                settings.H.Amplitude,
+                settings.H.Persistance,
+                settings.H.Lacunarity);
+            settings.T.GetOffset(out x, out y);
+            hex.T = GenerateNoise(hex.Position.x + x,
+                hex.Position.y + y,
+                settings.T.Octaves,
+                settings.T.Frequency,
+                settings.T.Amplitude,
+                settings.T.Persistance,
+                settings.T.Lacunarity);
+            settings.M.GetOffset(out x, out y);
+            hex.M = GenerateNoise(hex.Position.x + x,
+                hex.Position.y + y,
+                settings.M.Octaves,
+                settings.M.Frequency,
+                settings.M.Amplitude,
+                settings.M.Persistance,
+                settings.M.Lacunarity);
         }
     }
 }

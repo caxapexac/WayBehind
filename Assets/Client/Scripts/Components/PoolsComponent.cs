@@ -1,18 +1,26 @@
-﻿using Leopotam.Ecs;
-using LeopotamGroup.Pooling;
+﻿using Client.Scripts.Algorithms.Legacy;
+using Client.Scripts.MonoBehaviours;
+using Leopotam.Ecs;
+using UnityEngine;
 
 
 namespace Client.Scripts.Components
 {
-    sealed class PoolsComponent : IEcsAutoResetComponent
+    public class PoolsComponent : IEcsAutoResetComponent
     {
-        public PoolContainer HexPool;
-        public PoolContainer EnemyPool;
+        public Transform HexParent;
+        public Transform SpiritParent;
+        public PrefabPool<MonoHex> HexPool;
+        public PrefabPool<MonoSpirit> SpiritPool;
 
         public void Reset()
         {
+            HexParent = null;
+            SpiritParent = null;
+            HexPool.Dispose();
+            SpiritPool.Dispose();
             HexPool = null;
-            EnemyPool = null;
+            SpiritPool = null;
         }
     }
 }

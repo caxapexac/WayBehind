@@ -5,9 +5,6 @@ using UnityEngine;
 
 namespace Client.Scripts.MonoBehaviours
 {
-    /// <summary>
-    /// Diamonds, Swamps, Water
-    /// </summary>
     [DisallowMultipleComponent]
     public class MonoTriggerListener : MonoBehaviour
     {

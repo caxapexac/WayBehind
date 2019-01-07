@@ -7,7 +7,7 @@ namespace Client.Scripts.Components
 {
     sealed class EnemyComponent : IEcsAutoResetComponent
     {
-        public HexaCoords LastCoords; //todo patrol
+        public HexCoords LastCoords; //todo patrol
         public Vector2 Force;
         public Vector2 Target;
 

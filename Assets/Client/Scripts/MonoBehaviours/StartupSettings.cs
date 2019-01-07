@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using Client.ScriptableObjects;
+using Client.Scripts.Scriptable;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 namespace Client.Scripts.MonoBehaviours
 {
     [Obsolete]
+    [DisallowMultipleComponent]
     public class StartupSettings : MonoBehaviour
     {
         [SerializeField] private SettingsObject _settings;

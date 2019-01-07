@@ -3,9 +3,9 @@
 
 namespace Client.Scripts.Miscellaneous
 {
-    public struct HexaCoords
+    public struct HexCoords
     {
-        public HexaCoords(int x, int y)
+        public HexCoords(int x, int y)
         {
             X = x;
             Y = y;
@@ -18,10 +18,49 @@ namespace Client.Scripts.Miscellaneous
         {
             get { return -X - Y; }
         }
+
+        public override string ToString()
+        {
+            return "Hex " + X + ", " + Y + ", " + Z;
+        }
+    }
+    
+    public struct OffsetCoords
+    {
+        public OffsetCoords(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public int X;
+        public int Y;
+        
+        public override string ToString()
+        {
+            return "Offset " + X + ", " + Y;
+        }
+    }
+    
+    public struct Int2
+    {
+        public Int2(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public int X;
+        public int Y;
+        
+        public override string ToString()
+        {
+            return "Chunk " + X + ", " + Y;
+        }
     }
 
 
-    public struct SimpleVector
+/*    public struct SimpleVector
     {
         public SimpleVector(float x, float y)
         {
@@ -38,18 +77,5 @@ namespace Client.Scripts.Miscellaneous
 
         public float X;
         public float Y;
-    }
-
-
-    public struct Int2
-    {
-        public Int2(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public int X;
-        public int Y;
-    }
+    }*/
 }

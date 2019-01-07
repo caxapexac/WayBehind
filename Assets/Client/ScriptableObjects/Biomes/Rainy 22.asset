@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d7d79a549b88145b9d06d876818fd7, type: 3}
+  m_Name: Rainy 22
+  m_EditorClassIdentifier: 
+  Name: 
+  LandMap:
+  - {fileID: 21300000, guid: 20c70d013a6a89d438324f79d1a48f5f, type: 3}
+  - {fileID: 21300000, guid: 06f68e56df4583f44bc437ab32d62469, type: 3}

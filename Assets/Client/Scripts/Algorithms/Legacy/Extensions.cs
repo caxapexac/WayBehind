@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 namespace Client.Scripts.Algorithms.Legacy
 {
+    //EventSystem.current.IsPointerOverGameObject() - проверить кнопку в гуе
+    
     public static class Extensions
     {
         public static Vector3 OnUnitCircle(this Random random, Vector3 position, float radius)

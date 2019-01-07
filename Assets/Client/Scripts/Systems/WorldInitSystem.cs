@@ -1,6 +1,10 @@
-﻿using Client.ScriptableObjects;
+﻿using Client.Scripts.Algorithms.Legacy;
 using Client.Scripts.Components;
+using Client.Scripts.Miscellaneous;
+using Client.Scripts.MonoBehaviours;
+using Client.Scripts.Scriptable;
 using Leopotam.Ecs;
+using UnityEngine;
 
 
 namespace Client.Scripts.Systems
@@ -10,30 +14,18 @@ namespace Client.Scripts.Systems
     {
         private EcsWorld _world = null;
         private SettingsObject _settings = null;
+        private MapNoiseObject _noiseSettings = null;
 
         public void Initialize()
         {
             MapComponent<HexComponent> map = _world.CreateEntityWith<MapComponent<HexComponent>>();
-
-
-            /*PoolsComponent pools = _world.CreateEntityWith<PoolsComponent>();
-            pools.EnemyPool = PoolContainer.CreatePool<>();
-            pools.HexPool = PoolContainer.CreatePool<>();
-            _game.HexPool = new FastList<PoolContainer>(Prefabs.Count)
-
-            //_game.Map = MapGenRandomNeighbours.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.MapSize, 2);
-            //_game.Map = MapGenSquareFractalNoise.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.Octaves, _game.S.MapSize, 2, _game.S.HexSize);
-            //_game.Map = MapGenHexCloudNoise.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.Octaves, _game.S.MapSize, 2, _game.S.HexSize);
-            _game.Map = MapGenHexPerlinNoise.GenerateMap(_game.S.UseSeed ? _game.S.MapSaeed : 0, _game.S.Octaves,
-                _game.S.MapSize, _game.S.Smoothing, _game.S.Persistance, 2, _game.S.EnemyCount, _game.S.UseTextures,
-                _game.S.HexSize);
-            _player = _world.CreateEntityWith<PlayerComponent>();
-            _player.Transform = GameObject.Instantiate(_game.S.PlayerPrefab).transform;
-            _player.Hp = _game.S.Hp;
-            _lastCoords = new HexaCoords(0, 0);
-            RenderFull(new HexaCoords(0, 0), _game.S.FieldOfView);*/
+            map.PlayerPosition = new OffsetCoords(0, 0);
+            PoolsComponent pools = _world.CreateEntityWith<PoolsComponent>();
+            pools.HexParent = Object.Instantiate(Resources.Load<GameObject>(Prefabs.Empty)).transform;
+            pools.HexParent.name = "MAP";
+            pools.SpiritPool = new PrefabPool<MonoSpirit>(Prefabs.Spirit);
+            pools.HexPool = new PrefabPool<MonoHex>(Prefabs.Hex);
         }
-
 
         public void Destroy()
         { }

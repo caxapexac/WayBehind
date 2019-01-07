@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4291635040893836}
   - component: {fileID: 4243670770178166091}
   - component: {fileID: 915046445825869495}
+  - component: {fileID: 7691192515618990703}
   m_Layer: 0
   m_Name: SpiritPrefab
   m_TagString: Foreground
@@ -70,6 +71,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7691192515618990703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859305006075840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a795fe251443768d93f2730a4f5a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1989149245392516
 GameObject:
   m_ObjectHideFlags: 0

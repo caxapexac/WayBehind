@@ -24,8 +24,8 @@ namespace Client.Scripts.Systems
 
         public void Initialize()
         {
-            _diamondsText = _uiEmitter.GetNamedObject(Names.Diamonds).GetComponent<Text>();
-            _hpBar = _uiEmitter.GetNamedObject(Names.HpBar).GetComponent<Slider>();
+            //_diamondsText = _uiEmitter.GetNamedObject(Names.Diamonds).GetComponent<Text>();
+            //_hpBar = _uiEmitter.GetNamedObject(Names.HpBar).GetComponent<Slider>();
         }
 
         public void Run()

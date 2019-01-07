@@ -1,45 +1,65 @@
 ﻿using System.Collections.Generic;
 using Client.Scripts.Algorithms;
 using Client.Scripts.Miscellaneous;
+using UnityEngine;
 
 
 namespace Client.Scripts.Components
 {
     /// <summary>
-    /// Хранилище гексагонов, расширяется во все стороны, имеет заданую глубину и размер чанка
-    /// Граница мира = -2147483647..2147483647 чанков во все стороны
+    /// Хранилище чанков гексагонов с автоматической отложенной процедурной генерацией
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MapComponent<T> where T : class, new()
+    public class MapComponent<T> where T : class
     {
+        public OffsetCoords PlayerPosition;
+
         private readonly Dictionary<Int2, T[]> _map;
 
-        public readonly int ChunkSize = 16;
+        private readonly int _capacity = 64;
 
-        private const int Capacity = 64;
+        public readonly int ChunkSize = 4;
+
+        public readonly int ChunkSizeSqr = 16;
 
         public MapComponent()
         {
-            _map = new Dictionary<Int2, T[]>(Capacity);
+            _map = new Dictionary<Int2, T[]>(_capacity);
         }
 
         /// <summary>
         /// Возвращает гексагон с данных координат
         /// </summary>
         /// <param name="coords"></param>
-        public T this[HexaCoords coords]
+        public T this[HexCoords coords]
         {
             get
             {
                 int index;
-                Int2 chunk = HexMath.HexToChunk(ChunkSize, coords, out index);
-                return this[chunk, index];
+                Int2 chunk = HexMath.Offset2Chunk(HexMath.Hexel2Offset(coords), ChunkSize, out index);
+                return _map[chunk][index];
             }
             set
             {
                 int index;
-                Int2 chunk = HexMath.HexToChunk(ChunkSize, coords, out index);
-                this[chunk, index] = value;
+                Int2 chunk = HexMath.Offset2Chunk(HexMath.Hexel2Offset(coords), ChunkSize, out index);
+                _map[chunk][index] = value;
+            }
+        }
+
+        public T this[OffsetCoords coords]
+        {
+            get
+            {
+                int index;
+                Int2 chunk = HexMath.Offset2Chunk(coords, ChunkSize, out index);
+                return _map[chunk][index];
+            }
+            set
+            {
+                int index;
+                Int2 chunk = HexMath.Offset2Chunk(coords, ChunkSize, out index);
+                _map[chunk][index] = value;
             }
         }
 
@@ -49,34 +69,24 @@ namespace Client.Scripts.Components
             set { _map[chunk][index] = value; }
         }
 
-        public void Add(Int2 pos)
+        public void AddChunk(Int2 chunk)
         {
-            _map.Add(pos, new T[ChunkSize]);
+            _map.Add(chunk, new T[ChunkSizeSqr]);
         }
 
-        /// <summary>
-        /// Заменяет гексагон в коорднинатах на дефолтный
-        /// </summary>
-        /// <param name="coords"></param>
-        public void ClearAt(HexaCoords coords)
+        public bool IsExistChunk(HexCoords coords)
         {
-            this[coords] = new T();
+            return _map.ContainsKey(HexMath.Offset2Chunk(HexMath.Hexel2Offset(coords), ChunkSize));
         }
 
-        /// <summary>
-        /// Проверяет на null ячейку по данным координатам
-        /// </summary>
-        /// <param name="coords"></param>
-        /// <returns></returns>
-        public bool IsExistChunk(HexaCoords coords)
+        public bool IsExistChunk(OffsetCoords coords)
         {
-            int cx, cy, index;
-            return IsExistChunk(HexMath.HexToChunk(ChunkSize, coords));
+            return _map.ContainsKey(HexMath.Offset2Chunk(coords, ChunkSize));
         }
 
-        public bool IsExistChunk(Int2 coords)
+        public bool IsExistChunk(Int2 chunk)
         {
-            return _map.ContainsKey(coords);
+            return _map.ContainsKey(chunk);
         }
     }
 }

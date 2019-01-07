@@ -1,5 +1,5 @@
-﻿using Client.ScriptableObjects;
-using Client.Scripts.Components;
+﻿using Client.Scripts.Components;
+using Client.Scripts.Scriptable;
 using Leopotam.Ecs;
 using LeopotamGroup.Pooling;
 

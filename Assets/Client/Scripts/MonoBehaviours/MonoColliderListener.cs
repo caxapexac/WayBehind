@@ -5,9 +5,6 @@ using UnityEngine;
 
 namespace Client.Scripts.MonoBehaviours
 {
-    /// <summary>
-    /// Obstacles, Enemies
-    /// </summary>
     [DisallowMultipleComponent]
     public class MonoColliderListener : MonoBehaviour
     {

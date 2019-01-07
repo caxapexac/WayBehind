@@ -3,33 +3,13 @@
 
 namespace Client.Scripts.Miscellaneous
 {
-    [Obsolete]
-    public static class Tags
-    {
-        public static string CameraTag = "MainCamera";
-        public static string PlayerTag = "Player";
-        public static string EnemyTag = "Enemy";
-        public static string BackgroundTag = "Background";
-        public static string ForegroundTag = "Foreground";
-        public static string CanvasTag = "Canvas";
-        public static string JoystickTag = "Joystick";
-    }
-
-
-    public static class Names
-    {
-        public static string Diamonds = "Diamonds";
-        public static string Killed = "Killed";
-        public static string HpBar = "HpBar";
-    }
-
-
     public static class Prefabs
     {
-        public static string Hex = "Prefabs/HexPrefab";
-        public static string Player = "Prefabs/PlayerPrefab";
-        public static string Property = "Prefabs/PropertyPrefab";
-        public static string Spirit = "Prefabs/SpiritPrefab";
+        public const string Hex = "Prefabs/HexPrefab";
+        public const string Spirit = "Prefabs/SpiritPrefab";
+        public const string Player = "Prefabs/PlayerPrefab";
+        public const string Property = "Prefabs/PropertyPrefab";
+        public const string Empty = "Prefabs/EmptyPrefab";
     }
 
 
@@ -81,5 +61,26 @@ namespace Client.Scripts.Miscellaneous
         Fractal,
         Simplex,
         Heighbours
+    }
+    
+    /*public enum GameStates
+    {
+        Start,
+        Pause,
+        Restart,
+        Exit
+    }*/
+    
+    public static class Names
+    {
+        public static string Diamonds = "Diamonds";
+        public static string Killed = "Killed";
+        public static string HpBar = "HpBar";
+        
+        public static string PlayerPosVector = "PlayerPosVector";
+        public static string PlayerPosChunk = "PlayerPosChunk";
+        public static string PlayerPosOffset = "PlayerPosOffset";
+        public static string PlayerPosHexel = "PlayerPosHexel";
+        public static string LoadedChunks = "LoadedChunks";
     }
 }
