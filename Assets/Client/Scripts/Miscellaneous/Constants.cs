@@ -11,7 +11,19 @@ namespace Client.Scripts.Miscellaneous
         public const string Property = "Prefabs/PropertyPrefab";
         public const string Empty = "Prefabs/EmptyPrefab";
     }
-
+    
+    public static class Names
+    {
+        public static string Diamonds = "Diamonds";
+        public static string Killed = "Killed";
+        public static string HpBar = "HpBar";
+        
+        public static string PlayerPosVector = "PlayerPosVector";
+        public static string PlayerPosChunk = "PlayerPosChunk";
+        public static string PlayerPosOffset = "PlayerPosOffset";
+        public static string PlayerPosHexel = "PlayerPosHexel";
+        public static string LoadedChunks = "LoadedChunks";
+    }
 
     public enum HexTypes
     {
@@ -38,30 +50,6 @@ namespace Client.Scripts.Miscellaneous
         AgroRadius,
         Flying,
     }
-
-
-    public enum Pool
-    {
-        //back
-        Grass = 0,
-        Water = 1,
-        Forest = 2,
-        Swamp = 3,
-
-        //fore
-        Obstacle = 4,
-        Diamond = 5,
-        Enemy = 6,
-    }
-
-
-    public enum NoiseTypes
-    {
-        Perlin,
-        Fractal,
-        Simplex,
-        Heighbours
-    }
     
     /*public enum GameStates
     {
@@ -70,17 +58,5 @@ namespace Client.Scripts.Miscellaneous
         Restart,
         Exit
     }*/
-    
-    public static class Names
-    {
-        public static string Diamonds = "Diamonds";
-        public static string Killed = "Killed";
-        public static string HpBar = "HpBar";
-        
-        public static string PlayerPosVector = "PlayerPosVector";
-        public static string PlayerPosChunk = "PlayerPosChunk";
-        public static string PlayerPosOffset = "PlayerPosOffset";
-        public static string PlayerPosHexel = "PlayerPosHexel";
-        public static string LoadedChunks = "LoadedChunks";
-    }
+
 }

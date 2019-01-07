@@ -41,29 +41,11 @@ namespace Client.Scripts.MonoBehaviours
                 + "|"
                 + Mathf.Round((float)(Hex.M * 100));*/
             int row = (int)(Hex.T * Biomes.Array.Length);
-            if (row >= Biomes.Array.Length)
-            {
-                Debug.Log("T" + Hex.T + " " + Biomes.Array.Length + " " + row);
-                Body.sprite = Biomes.MissingSprite;
-                return;
-            }
             int col = (int)(Hex.M * Biomes.Array[row].Row.Length);
-            if (col >= Biomes.Array[row].Row.Length)
-            {
-                Debug.Log("M" + Hex.M + " " + Biomes.Array[row].Row.Length + " " + col);
-                Body.sprite = Biomes.MissingSprite;
-                return;
-            }
             BiomeObject biome = Biomes.Array[row].Row[col];
             int index = (int)(Hex.H * biome.LandMap.Length);
-            if (index >= biome.LandMap.Length)
-            {
-                Debug.Log("H" + Hex.H + " " + biome.LandMap.Length + " " + index);
-                Body.sprite = Biomes.MissingSprite;
-                return;
-            }
             Sprite sprite = biome.LandMap.Length > 0
-                ? biome.LandMap[biome.LandMap.Length - 1 - index]
+                ? biome.LandMap[biome.LandMap.Length - 1 - index] //reversed
                 : Biomes.MissingSprite;
             Body.sprite = sprite;
         }

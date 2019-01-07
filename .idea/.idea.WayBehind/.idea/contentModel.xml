@@ -8,11 +8,6 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="__TEMP" t="Include">
-          <e p="AdditionalExamples" t="Include">
-            <e p="CloudyNoise" t="Include">
-              <e p="CloudyNoiseTest.cs" t="Include" />
-            </e>
-          </e>
           <e p="Editor" t="Include">
             <e p="Catlike Coding" t="Include">
               <e p="Catlike Coding Readme.txt" t="Include" />
@@ -80,6 +75,7 @@
               <e p="Legacy" t="Include">
                 <e p="Curves.cs" t="Include" />
                 <e p="Extensions.cs" t="Include" />
+                <e p="FPSDisplay.cs" t="Include" />
                 <e p="Hashing.cs" t="Include" />
                 <e p="ListExtensions.cs" t="Include" />
                 <e p="NumericMethods.cs" t="Include" />
@@ -91,6 +87,7 @@
                 <e p="CloudArrayNoise.cs" t="Include" />
                 <e p="FractalArrayNoise.cs" t="Include" />
                 <e p="PerlinPointNoise.cs" t="Include" />
+                <e p="TEMPCloudArrayNoise.cs" t="Include" />
               </e>
             </e>
             <e p="Components" t="Include">
@@ -107,7 +104,6 @@
               <e p="RenderRequiredEvent.cs" t="Include" />
               <e p="TriggerEvent.cs" t="Include" />
             </e>
-            <e p="Editor" t="Include" />
             <e p="Miscellaneous" t="Include">
               <e p="Constants.cs" t="Include" />
               <e p="Structs.cs" t="Include" />

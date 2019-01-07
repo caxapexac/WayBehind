@@ -58,7 +58,7 @@ namespace Client.Scripts.MonoBehaviours
         private EcsWorld _world;
         private EcsSystems _updateSystems;
 
-        private void OnEnable()
+        private void Start()
         {
             _variables = new Variables();
             _world = new EcsWorld();

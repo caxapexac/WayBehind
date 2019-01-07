@@ -2,6 +2,7 @@
 using Client.Scripts.Algorithms.Legacy;
 using Client.Scripts.Components;
 using Client.Scripts.Scriptable;
+using UnityEngine;
 
 
 namespace Client.Scripts.Algorithms.Noises
@@ -95,6 +96,14 @@ namespace Client.Scripts.Algorithms.Noises
                 frequency *= lacunarity;
             }
             total = Math.Abs(total);
+            if (total > 1d)
+            {
+                return 1d;
+            }
+            if (total < 0)
+            {
+                return 0;
+            }
             return total;
         }
 

@@ -17,7 +17,7 @@ namespace Client.Scripts.Systems
         private Text _playerPosChunk;
         private Text _playerPosOffset;
         private Text _playerPosHexel;
-        private Text LoadedChunks;
+        private Text _loadedChunks;
         private MapComponent<HexComponent> _map;
         
         private EcsWorld _world = null;
@@ -35,7 +35,7 @@ namespace Client.Scripts.Systems
             _playerPosChunk = _uiEmitter.GetNamedObject(Names.PlayerPosChunk).GetComponent<Text>();
             _playerPosOffset = _uiEmitter.GetNamedObject(Names.PlayerPosOffset).GetComponent<Text>();
             _playerPosHexel = _uiEmitter.GetNamedObject(Names.PlayerPosHexel).GetComponent<Text>();
-            LoadedChunks = _uiEmitter.GetNamedObject(Names.LoadedChunks).GetComponent<Text>();
+            _loadedChunks = _uiEmitter.GetNamedObject(Names.LoadedChunks).GetComponent<Text>();
             _map = _mapFilter.Components1[0];
         }
         
@@ -52,7 +52,7 @@ namespace Client.Scripts.Systems
                 _playerPosOffset.text = offset.ToString();
                 _playerPosHexel.text = hex.ToString();
             }
-            LoadedChunks.text = "Chunks loaded " + _variables.DebugChunksCount;
+            _loadedChunks.text = "Chunks loaded " + _variables.DebugChunksCount;
         }
 
         public void Destroy()
