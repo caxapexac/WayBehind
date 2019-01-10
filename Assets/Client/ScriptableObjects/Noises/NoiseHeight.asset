@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Saeed: 305116
   Octaves: 4
-  Frequency: 0.14000000059604645
-  Lacunarity: 1.2300000190734863
-  Amplitude: 0.9100000262260437
-  Persistance: 0.2930000126361847
+  Frequency: 0.07000000029802322
+  Lacunarity: 1
+  Amplitude: 0.7730000019073486
+  Persistance: 0.453000009059906

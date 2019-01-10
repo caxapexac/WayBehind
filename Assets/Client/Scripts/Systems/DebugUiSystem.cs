@@ -29,6 +29,8 @@ namespace Client.Scripts.Systems
         private EcsUiEmitter _uiEmitter = null;
         private Variables _variables = null;
         
+        
+        
         public void Initialize()
         {
             _playerPosVector = _uiEmitter.GetNamedObject(Names.PlayerPosVector).GetComponent<Text>();

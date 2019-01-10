@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Magic
   LandMap:
-  - {fileID: 21300000, guid: efc9a4f819be2074182c0997fcf58a0c, type: 3}
-  - {fileID: 21300000, guid: 94e885024c4d4ea429890fadabe0e666, type: 3}
-  - {fileID: 21300000, guid: 74de4531e4f128d418fba130dbc5a423, type: 3}
+  - {fileID: 21300000, guid: 809f9fee01813a44e882131901f718ab, type: 3}
+  - {fileID: 21300000, guid: 20c70d013a6a89d438324f79d1a48f5f, type: 3}
+  - {fileID: 21300000, guid: 06f68e56df4583f44bc437ab32d62469, type: 3}

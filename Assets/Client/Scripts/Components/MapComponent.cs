@@ -20,11 +20,12 @@ namespace Client.Scripts.Components
 
         public readonly int ChunkSize = 4;
 
-        public readonly int ChunkSizeSqr = 16;
+        public readonly int ChunkSizeSqr;
 
         public MapComponent()
         {
             _map = new Dictionary<Int2, T[]>(_capacity);
+            ChunkSizeSqr = ChunkSize * ChunkSize;
         }
 
         /// <summary>

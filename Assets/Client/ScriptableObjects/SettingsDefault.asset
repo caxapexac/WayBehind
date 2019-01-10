@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Difficulty: 0
   RealTime: 1
-  CameraSize: 9.8
+  CameraSize: 3.7
   CameraDistance: 0.3
   CameraSpeed: 3.22
   StartHp: 0
