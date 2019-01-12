@@ -7,6 +7,6 @@ namespace Client.Scripts.Scriptable
     public class BiomeObject : ScriptableObject
     {
         public string Name;
-        public Sprite[] LandMap; //change to know slowing, enemies, mountains etc
+        public HexObject[] Heights; //change to know slowing, enemies, mountains etc
     }
 }

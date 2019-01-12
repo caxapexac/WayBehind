@@ -43,11 +43,11 @@ namespace Client.Scripts.MonoBehaviours
             int row = (int)(Hex.T * Biomes.Array.Length);
             int col = (int)(Hex.M * Biomes.Array[row].Row.Length);
             BiomeObject biome = Biomes.Array[row].Row[col];
-            int index = (int)(Hex.H * biome.LandMap.Length);
-            Sprite sprite = biome.LandMap.Length > 0
-                ? biome.LandMap[biome.LandMap.Length - 1 - index] //reversed
+            int index = (int)(Hex.H * biome.Heights.Length);
+/*            Sprite sprite = biome.Heights.Length > 0
+                ? biome.Heights[biome.Heights.Length - 1 - index] //reversed
                 : Biomes.MissingSprite;
-            Body.sprite = sprite;
+            Body.sprite = sprite;*///todo
         }
     }
 }

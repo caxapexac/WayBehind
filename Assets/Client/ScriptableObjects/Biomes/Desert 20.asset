@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Desert 20
   m_EditorClassIdentifier: 
   Name: 
-  LandMap:
+  Heads:
+  - {fileID: 21300000, guid: efc9a4f819be2074182c0997fcf58a0c, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  Bodies:
   - {fileID: 21300000, guid: dc2dad3ad9f9ae04981a0b02ab9f137a, type: 3}
-  - {fileID: 21300000, guid: 8121f37ef6d748546bec023cae5931a4, type: 3}
   - {fileID: 21300000, guid: 65bbfd9de66bb294090e638544230bf2, type: 3}
+  - {fileID: 21300000, guid: 8121f37ef6d748546bec023cae5931a4, type: 3}
+  Feet: []

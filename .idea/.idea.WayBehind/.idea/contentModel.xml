@@ -121,6 +121,7 @@
             <e p="Scriptable" t="Include">
               <e p="BiomeObject.cs" t="Include" />
               <e p="BiomeStorageObject.cs" t="Include" />
+              <e p="HexObject.cs" t="Include" />
               <e p="MapNoiseObject.cs" t="Include" />
               <e p="NoiseObject.cs" t="Include" />
               <e p="SettingsObject.cs" t="Include" />

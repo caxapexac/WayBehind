@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SettingsDefault
   m_EditorClassIdentifier: 
   Difficulty: 0
-  RealTime: 1
+  RealTime: 0
   CameraSize: 3.7
   CameraDistance: 0.3
   CameraSpeed: 3.22

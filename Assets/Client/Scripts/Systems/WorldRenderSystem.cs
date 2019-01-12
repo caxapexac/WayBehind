@@ -45,7 +45,7 @@ namespace Client.Scripts.Systems
         public void Run()
         {
             _variables.DebugChunksCount = _loadedChunks.Count; //todo
-            
+
             for (int i = 0; i < _player.EntitiesCount; i++)
             {
                 OffsetCoords playerPos = _map.PlayerPosition;
@@ -108,7 +108,6 @@ namespace Client.Scripts.Systems
                     {
                         break;
                     }
-                    
                 }
                 if (x == y || (x < 0 && x == -y) || (x > 0 && x == 1 - y))
                 {
@@ -158,6 +157,7 @@ namespace Client.Scripts.Systems
         {
             Vector2 first = _map[chunk, 0].Position;
             Vector2 last = _map[chunk, _map.ChunkSizeSqr - 1].Position;
+
             //Vector2 pos = new Vector2((first.x + last.x) / 2, (first.y + last.y) / 2);
             //Debug.DrawLine(first, last, Color.gray, 5);
             //Debug.DrawLine(new Vector2(_variables.CameraMinBound.x, _variables.CameraMinBound.y), new Vector2(_variables.CameraMaxBound.x, _variables.CameraMaxBound.y), Color.green, 5);

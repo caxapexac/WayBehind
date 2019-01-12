@@ -82,7 +82,7 @@ namespace Client.Scripts.MonoBehaviours
                 //.Add(new EnemyAttackSystem())
                 
                 .Add(new WorldRenderSystem())
-                .Add(new DebugUiSystem())
+                //.Add(new DebugUiSystem())
                 .Inject(_settings)
                 .Inject(_noiseSettings)
                 .Inject(_variables)

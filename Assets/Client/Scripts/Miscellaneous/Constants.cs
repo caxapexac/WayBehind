@@ -25,19 +25,6 @@ namespace Client.Scripts.Miscellaneous
         public static string LoadedChunks = "LoadedChunks";
     }
 
-    public enum HexTypes
-    {
-        Grass,
-        Water,
-        Forest,
-        Swamp,
-        Obstacle,
-        Diamond,
-        Enemy,
-        Empty,
-        Spawn,
-    }
-
 
     public enum HexProperties
     {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NoiseMoisure
   m_EditorClassIdentifier: 
   Saeed: 884921
-  Octaves: 5
+  Octaves: 2
   Frequency: 0.05000000074505806
   Lacunarity: 0.18000000715255737
   Amplitude: 0.8640000224113464

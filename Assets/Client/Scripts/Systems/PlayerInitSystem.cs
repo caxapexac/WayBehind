@@ -15,7 +15,7 @@ namespace Client.Scripts.Systems
         private EcsWorld _world = null;
         private SettingsObject _settings = null;
         private Variables _variables = null;
-        private EcsFilter<MapComponent<HexComponent>> _map;
+        private EcsFilter<MapComponent<HexComponent>> _map = null;
 
         public void Initialize()
         {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NoiseTemperature
   m_EditorClassIdentifier: 
   Saeed: 303998
-  Octaves: 5
+  Octaves: 1
   Frequency: 0.1599999964237213
   Lacunarity: 0.5400000214576721
   Amplitude: 0.7789999842643738
